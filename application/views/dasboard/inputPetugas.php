@@ -3,13 +3,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Simple Tables
-            <small>preview of simple tables</small>
+            Add Petugas
+            
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Simple</li>
+            <li><a href="#">Petugas</a></li>
+            <li class="active">Add Petugas</li>
           </ol>
         </section>
       
@@ -21,22 +21,35 @@
 				 <!-- general form elements -->
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Input Data Petugas</h3>
+                  <h3 class="box-title">Form Data Petugas</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form">
+                <form role="form" action="<?php echo base_url() ?>admin/register_act" method="post" enctype="multipart/form-data">
                   <div class="box-body">
+					<div class="form-group">
+                      <label for="exampleInputEmail1">No.KTP</label>
+                      <input name="ktp" type="text" class="form-control" id="exampleInput" placeholder="Nomor KTP" required>
+                    </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nama</label>
                       <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Lengkap" required>
                     </div>
+					<div class="form-group">
+						<label>Jenis Kelamin</label>
+						<select name="jenkel" class="form-control select2" style="width: 100%;">
+						  <option>-Pilih</option>
+						  <option value="L">Laki-laki</option>
+						  <option value="P" >Perempuan</option>
+						  
+						</select>
+					</div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Alamat</label>
                       <input name="alamat" type="text" class="form-control" id="exampleInput" placeholder="Alamat" required>
                     </div>
 					 <div class="form-group">
-                      <label for="exampleInputEmail1">No.Hp</label>
-                      <input name="hp" type="text" class="form-control" id="exampleInput" placeholder="Nomor Handphone" required>
+                      <label for="exampleInputEmail1">No.Telephone</label>
+                      <input name="hp" type="text" class="form-control" id="exampleInput" placeholder="Nomor HP/Telephone" required>
                     </div>
 					 <div class="form-group">
                       <label for="exampleInputEmail1">Email</label>
@@ -45,6 +58,10 @@
 					<div class="form-group">
                       <label for="exampleInputEmail1">Bagian</label>
                       <input name="bagian" type="text" class="form-control" id="exampleInput" placeholder="Bagian Pekerjaan" required>
+                    </div>
+					<div class="form-group">
+                      <label for="exampleInputEmail1">Password</label>
+                      <input name="passwd" type="pasword" class="form-control" id="exampleInput" placeholder="Password" required>
                     </div>
 
                  

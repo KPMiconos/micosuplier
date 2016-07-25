@@ -10,8 +10,7 @@
 		public function daftar($data){
 			$this->db->reconnect();
 			
-			$query=$this->db->query("CALL sp_input_petugas('$data[ktp]','$data[nama]','$data[lahir]','$data[jenkel]','$data[hp]','$data[email]'
-			,'$data[alamat]','$data[pekerjaan]','$data[passwd]')");
+			$query=$this->db->query("CALL sp_input_petugas('$data[ktp]','$data[nama]','$data[jenkel]','$data[alamat]','$data[hp]','$data[email]','$data[bagian]','$data[passwd]')");
 			
 			
 		}

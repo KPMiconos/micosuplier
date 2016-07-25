@@ -65,8 +65,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> View Service</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Add Service</a></li>
+                <li><a href="<?php echo base_url() ?>admin/listService"><i class="fa fa-circle-o"></i> View Service</a></li>
+                <li><a href="<?php echo base_url() ?>admin/addService"><i class="fa fa-circle-o"></i> Add Service</a></li>
+				<li><a href="<?php echo base_url() ?>admin/listUnsolved"><i class="fa fa-circle-o"></i> Solving</a></li>
               </ul>
             </li>
 			<li class="treeview">
@@ -75,14 +76,18 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> List Produk</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Add Produk</a></li>
+                <li><a href="<?php echo base_url() ?>admin/listProduk"><i class="fa fa-circle-o"></i> List Produk</a></li>
+                <li><a href="<?php echo base_url() ?>admin/addProduk"><i class="fa fa-circle-o"></i> Add Produk</a></li>
               </ul>
             </li>
-           
-            
            <li class="">
               <a href="#">
+                <i class="fa fa-expeditedssl"></i> <span>Privilege</span>
+              </a>
+            </li>
+             
+           <li class="">
+              <a href="<?php echo base_url() ?>admin/logout">
                 <i class="fa fa-power-off"></i> <span>Logout</span>
                
               </a>

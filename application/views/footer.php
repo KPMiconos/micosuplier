@@ -1,52 +1,90 @@
-<footer class="main-footer">
-        <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.0
-        </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-      </footer>
 
-     
-      
-    </div><!-- ./wrapper -->
+    <footer class="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h2>About Superlist</h2>
 
-    <!-- jQuery 2.1.4 -->
-    <script src="<?php echo base_url() ?>assets/js/jQuery-2.1.4.min.js"></script>
-	<!-- ChartJS 1.0.1 -->
-    <script src="<?php echo base_url() ?>assets/js/Chart.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-      $.widget.bridge('uibutton', $.ui.button);
-    </script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
-    <!-- Morris.js charts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="<?php echo base_url() ?>assets/js/morris.min.js"></script>
-    <!-- Sparkline -->
-    <script src="<?php echo base_url() ?>assets/js/jquery.sparkline.min.js"></script>
-    <!-- jvectormap -->
-    <script src="<?php echo base_url() ?>assets/js/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/js/jquery-jvectormap-world-mill-en.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="<?php echo base_url() ?>assets/js/jquery.knob.js"></script>
-    <!-- daterangepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/js/daterangepicker.js"></script>
-    <!-- datepicker -->
-    <script src="<?php echo base_url() ?>assets/js/bootstrap-datepicker.js"></script>
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="<?php echo base_url() ?>assets/js/bootstrap3-wysihtml5.all.min.js"></script>
-    <!-- Slimscroll -->
-    <script src="<?php echo base_url() ?>assets/js/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="<?php echo base_url() ?>assets/js/fastclick.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="<?php echo base_url() ?>assets/js/app.min.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="<?php echo base_url() ?>assets/js/dashboard.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="<?php echo base_url() ?>assets/js/demo.js"></script>
-  </body>
+                    <p>Superlist is directory template built upon Bootstrap and SASS to bring great experience in creation of directory.</p>
+                </div><!-- /.col-* -->
+
+                <div class="col-sm-4">
+                    <h2>Contact Information</h2>
+
+                    <p>
+                        Your Street 123, Melbourne, Australia<br>
+                        +1-123-456-789, <a href="#">sample@example.com</a>
+                    </p>
+                </div><!-- /.col-* -->
+
+                <div class="col-sm-4">
+                    <h2>Stay Connected</h2>
+
+                    <ul class="social-links nav nav-pills">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                    </ul><!-- /.header-nav-social -->
+                </div><!-- /.col-* -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div><!-- /.footer-top -->
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-left">
+                &copy; 2016 All rights reserved. Created by <a href="#">Aviators</a>.
+            </div><!-- /.footer-bottom-left -->
+
+            <div class="footer-bottom-right">
+                <ul class="nav nav-pills">
+                    <li><a href="index-2.html">Home</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
+                    <li><a href="contact-1.html">Contact</a></li>
+                </ul><!-- /.nav -->
+            </div><!-- /.footer-bottom-right -->
+        </div><!-- /.container -->
+    </div>
+</footer><!-- /.footer -->
+
+</div><!-- /.page-wrapper -->
+
+<script src="<?php echo base_url() ?>assets/js/jquery.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/js/map.js" type="text/javascript"></script>
+
+<script src="<?php echo base_url() ?>assets/js/collapse.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/js/carousel.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/js/transition.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/js/dropdown.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/js/tooltip.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/js/tab.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/js/alert.js" type="text/javascript"></script>
+
+<script src="<?php echo base_url() ?>assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+<script src="<?php echo base_url() ?>assets/js/jquery.flot.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/js/jquery.flot.spline.js" type="text/javascript"></script>
+
+<script src="<?php echo base_url() ?>assets/js/bootstrap-select.min.js" type="text/javascript"></script>
+
+<script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing" type="text/javascript"></script>
+
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/infobox.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/markerclusterer.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-google-map.js"></script>
+
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/owl.carousel.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/fileinput.min.js"></script>
+
+<script src="<?php echo base_url() ?>assets/js/superlist.js" type="text/javascript"></script>
+
+</body>
+
+<!-- Mirrored from preview.byaviators.com/template/superlist/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jul 2016 09:49:07 GMT -->
 </html>
