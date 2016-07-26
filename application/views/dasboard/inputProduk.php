@@ -24,7 +24,7 @@
 						<h3 class="box-title">Form Add Produk</h3>
 					</div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="<?php echo base_url() ?>admin/addSolving_act" method="post" enctype="multipart/form-data">
+                <form role="form" action="<?php echo base_url() ?>admin/addProduk_act" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					
 					 <div class="form-group">

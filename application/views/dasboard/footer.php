@@ -14,7 +14,7 @@
 	<!-- ChartJS 1.0.1 -->
     <script src="<?php echo base_url() ?>assets/js/Chart.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!--script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       $.widget.bridge('uibutton', $.ui.button);
@@ -46,10 +46,11 @@
     <script src="<?php echo base_url() ?>assets/js/fastclick.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url() ?>assets/js/app.min.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="<?php echo base_url() ?>assets/js/dashboard.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="<?php echo base_url() ?>assets/js/demo.js"></script>
+	<!-- AdminLTE for demo purposes -->
+    <!--script src="<?php echo base_url() ?>assets/js/demo.js"></script>
+	  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <!--script src="<?php echo base_url() ?>assets/js/dashboard.js"></script>
+    
 	<!-- Bootstrap-select -->
     <script src="<?php echo base_url() ?>assets/js/select2.min.js"></script>
 	<script type="text/javascript">

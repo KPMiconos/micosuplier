@@ -1,14 +1,22 @@
 <?php 
-class Produk extends CI_Model{
+class Penjualan extends CI_Model{
 	
 	 public function __construct(){
                 // Call the CI_Model constructor
                 parent::__construct();
 	 }
-	 public function addProduk($data){
-		 $this->db->reconnect();		
-		$query=$this->db->query("CALL sp_input_produk('$data[suplier]','$data[nama]','$data[harga]','$data[deskripsi]','$data[nm_gbr]')");
-	
+	 public function addPenjualan($data){
+		 //echo $data['email'],">",$data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$data['id'],">",$data['qty'],">",$data['price'];
+		$idTransaksi=$data['idTransaksi'];
+		$this->db->reconnect();		
+		$query=$this->db->query("CALL sp_pembelian('$data[idTransaksi]','$data[email]','$data[idCustomer]','$data[total]','$data[tgl]')");
+		foreach($this->cart->contents() as $item){
+			//echo $data['email'],">",$data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$item['id'],">",$item['qty'],">",$item['price'];
+				$this->db->query("CALL sp_detail_pembelian('$data[idTransaksi]','$item[id]','$item[qty]','$item[price]')");
+				 //echo $data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$data['id'],">",$data['qty'],">",$data['price'];
+				
+		}	
+		$this->cart->destroy();
 	 }
 	 
 	public function list_produk(){

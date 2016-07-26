@@ -17,7 +17,7 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="active treeview">
-              <a href="home.html">
+              <a href="<?php echo base_url()?>admin">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa pull-right"></i>
               </a>
               
@@ -78,6 +78,16 @@
               <ul class="treeview-menu">
                 <li><a href="<?php echo base_url() ?>admin/listProduk"><i class="fa fa-circle-o"></i> List Produk</a></li>
                 <li><a href="<?php echo base_url() ?>admin/addProduk"><i class="fa fa-circle-o"></i> Add Produk</a></li>
+              </ul>
+            </li>
+			<li class="treeview">
+              <a href="#">
+                <i class="fa fa-line-chart"></i> <span>Penjualan</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="<?php echo base_url() ?>admin/listPenjualan"><i class="fa fa-circle-o"></i> List Penjualan</a></li>
+                <li><a href="<?php echo base_url() ?>admin/addPenjualan"><i class="fa fa-circle-o"></i> Add Penjualan</a></li>
               </ul>
             </li>
            <li class="">

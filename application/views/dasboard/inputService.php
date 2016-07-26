@@ -46,7 +46,7 @@
                     </div>
 					<div class="form-group">
 						<label>Status</label>
-						<select name="status" class="form-control select2" style="width: 100%;">
+						<select name="status" class="form-control selecttree" >
 						  <option>-Pilih</option>
 						  <option value="1">Open</option>
 						  <option value="2" >On going</option>

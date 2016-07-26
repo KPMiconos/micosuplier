@@ -38,17 +38,90 @@
                       <th>Email</th>
                       <th>No.Telephone</th>
                       <th>Bagian</th>
+					  <th>Action</th>
                     </tr>
 					<?php
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
                     <tr>
-                      <td><?php echo $baris->id_petugas?></td>
+                      <td><a href="<?php echo base_url(),"admin/viewPetugas/",$baris->id_petugas?>"><?php echo $baris->id_petugas?></a></td>
                       <td><?php echo $baris->nama?></td>
                       <td><?php echo $baris->email?></td>
                       <td><span class="label label-success"><?php echo $baris->hp?></span></td>
                       <td><?php echo $baris->jabatan?></td>
+					  <td>
+					   <div class="btn-group btn-group-lg">
+					   <a href="<?php echo base_url(),"admin/deletePetugas/",$baris->id_petugas?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
+						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_petugas ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
+						<a href="<?php echo base_url(),"admin/viewPetugas/",$baris->id_petugas?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+						
+						</div>
+					</td>
+					<!-- Modal -->
+					<div class="modal fade" id="myModal<?php echo $baris->id_petugas ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Edit Data Petugas</h4>
+						  </div>
+						  <div class="modal-body">
+						   <form role="form" action="<?php echo base_url() ?>admin/updatePetugas" method="post" enctype="multipart/form-data">
+							  <div class="box-body">
+								<div class="form-group">
+								  <label for="exampleInputEmail1">No.KTP</label>
+								  <input name="ktp" type="text" class="form-control" id="exampleInput" placeholder="Nomor KTP" value="<?php echo $baris->id_petugas ?>" required>
+								</div>
+								<div class="form-group">
+								  <label for="exampleInputEmail1">Nama</label>
+								  <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Lengkap" value="<?php echo $baris->nama ?>" required>
+								</div>
+								<div class="form-group">
+									<label>Jenis Kelamin</label>
+									<select name="jenkel" class="form-control select2" style="width: 100%;">
+									  <option>-Pilih</option>
+									  <option value="L" <?php if($baris->jenkel=="L") echo "selected" ?> >Laki-laki</option>
+									  <option value="P" <?php if($baris->jenkel=="P") echo "selected" ?> >Perempuan</option>
+									  
+									</select>
+								</div>
+								<div class="form-group">
+								  <label for="exampleInputPassword1">Alamat</label>
+								  <input name="alamat" type="text" class="form-control" id="exampleInput" placeholder="Alamat" value="<?php echo $baris->alamat ?>" required>
+								</div>
+								 <div class="form-group">
+								  <label for="exampleInputEmail1">No.Telephone</label>
+								  <input name="hp" type="text" class="form-control" id="exampleInput" placeholder="Nomor HP/Telephone" value="<?php echo $baris->hp ?>" required>
+								</div>
+								 <div class="form-group">
+								  <label for="exampleInputEmail1">Email</label>
+								  <input name="email" type="email" class="form-control" id="exampleInput" placeholder="Email" value="<?php echo $baris->email ?>" required>
+								</div>
+								<div class="form-group">
+								  <label for="exampleInputEmail1">Bagian</label>
+								  <input name="bagian" type="text" class="form-control" id="exampleInput" placeholder="Bagian Pekerjaan" value="<?php echo $baris->jabatan ?>" required>
+								</div>
+								<div class="form-group">
+								  <label for="exampleInputEmail1">Password</label>
+								  <input name="passwd" type="password" class="form-control" id="exampleInput" placeholder="Password" required>
+								</div>
+
+							 
+							  </div><!-- /.box-body -->
+
+							  <div class="box-footer">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							  </div>
+							</form>
+						  </div>
+						  
+						</div>
+					  </div>
+					</div>
                     </tr>
+						  
+				
+            
                    
 					<?php }}
 								else{

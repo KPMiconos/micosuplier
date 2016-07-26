@@ -24,5 +24,35 @@
 				return 0;
 			}
 	}
+	public function list_pembelian($id){
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_list_pembelian($id)");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+	}
+	public function view_customer($id){
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_view_perCustomer('$id')");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+	}
 }
 ?>

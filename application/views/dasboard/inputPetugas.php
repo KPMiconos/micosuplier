@@ -61,7 +61,7 @@
                     </div>
 					<div class="form-group">
                       <label for="exampleInputEmail1">Password</label>
-                      <input name="passwd" type="pasword" class="form-control" id="exampleInput" placeholder="Password" required>
+                      <input name="passwd" type="password" class="form-control" id="exampleInput" placeholder="Password" required>
                     </div>
 
                  
