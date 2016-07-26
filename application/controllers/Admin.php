@@ -247,11 +247,37 @@ class Admin extends CI_Controller {
 		}
 		
 	}
+	public function updateSuplier(){
+		$data = array(
+				'idSuplier' => $this->input->post('idSuplier'),
+				'nama' => $this->input->post('nama'),
+				'alamat' => $this->input->post('alamat'),
+				'hp' => $this->input->post('hp'),
+				'email' => $this->input->post('email'),
+				'hp' => $this->input->post('hp'),
+				'deskripsi' => $this->input->post('deskripsi')
+				
+            );
+		$this->load->model('suplier');
+		$query=$this->suplier->update($data);
+		
+		if($query==0){
+			redirect("admin/listSuplier");
+		}else{
+		
+			redirect("admin/addSuplier");
+		}
+	}
 	//delete function
 	public function deletePetugas($id){
 		$this->load->model('petugas');
 		$query=$this->petugas->delete($id);
 		redirect("admin/listPetugas");
+	}
+	public function deleteSuplier($id){
+		$this->load->model('suplier');
+		$query=$this->suplier->delete($id);
+		redirect("admin/listSuplier");
 	}
 	//Searching
 	public function cariProduk(){
@@ -306,10 +332,10 @@ class Admin extends CI_Controller {
 		$query=$this->suplier->addSuplier($data);
 		
 		if($query==0){
-			redirect("/");
+			redirect("admin/listSuplier");
 		}else{
 		
-			redirect("home/addSuplier");
+			redirect("admin/addSuplier");
 		}
 	}
 	

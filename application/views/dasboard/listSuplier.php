@@ -17,7 +17,7 @@
         <section class="content">
          
           <div class="row">
-            <div class="col-xs-10 col-lg-10">
+            <div class="col-xs-12 col-lg-10">
               <div class="box">
                 <div class="box-header">
                   <a href="<?php echo base_url() ?>admin/addSuplier"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
@@ -44,15 +44,15 @@
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
                     <tr>
-                      <td><?php echo $baris->id_suplier ?></td>
+                      <td><?php echo "SM1607",$baris->id_suplier ?></td>
                       <td><?php echo $baris->nama_suplier ?></td>
                       <td><?php echo $baris->email ?></td>
                       <td><span class="label label-success"><?php echo $baris->hp ?></span></td>
-                      <td><?php echo word_limiter($baris->deskripsi,10),"..." ?></td>
+                      <td style="width:200px;"><?php echo word_limiter($baris->deskripsi,5) ?></td>
 					  <td>
 					   <div class="btn-group btn-group-lg">
-					   <a href="#"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
-						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
+					   <a href="<?php echo base_url(),"admin/deleteSuplier/",$baris->id_suplier ?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
+						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_suplier ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
 						<a href="<?php echo base_url(),"admin/viewSuplier/",$baris->id_suplier?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
 						
 						</div>
@@ -60,38 +60,42 @@
                     </tr>
 					
 					<!-- Modal -->
-					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal fade" id="myModal<?php echo $baris->id_suplier ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
 						<div class="modal-content">
 						  <div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">Edit List Suplier</h4>
+							<h4 class="modal-title" id="myModalLabel">Edit Data Suplier</h4>
 						  </div>
 						  <div class="modal-body">
 						   <!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>admin/addSuplier_act" method="post" enctype="multipart/form-data">
+							<form role="form" action="<?php echo base_url() ?>admin/updateSuplier" method="post" enctype="multipart/form-data">
 							  <div class="box-body">
-								
+								<div class="form-group">
+								  <label for="exampleInputEmail1">No.ID</label>
+								  <input name="id" type="text" class="form-control" id="exampleInput" placeholder="No.Id Suplier" value="<?php echo "SM1607",$baris->id_suplier ?>" disabled>
+								  <input name="idSuplier" type="hidden" value="<?php echo $baris->id_suplier ?>">
+								</div>
 								<div class="form-group">
 								  <label for="exampleInputEmail1">Nama</label>
-								  <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Suplier" required>
+								  <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Suplier" value="<?php echo $baris->nama_suplier ?>" required>
 								</div>
 								
 								<div class="form-group">
 								  <label for="exampleInputPassword1">Alamat</label>
-								  <input name="alamat" type="text" class="form-control" id="exampleInput" placeholder="Alamat" required>
+								  <input name="alamat" type="text" class="form-control" id="exampleInput" placeholder="Alamat" value="<?php echo $baris->alamat ?>" required>
 								</div>
 								 <div class="form-group">
 								  <label for="exampleInputEmail1">No.Telephone</label>
-								  <input name="hp" type="text" class="form-control" id="exampleInput" placeholder="Nomor Handphone" required>
+								  <input name="hp" type="text" class="form-control" id="exampleInput" placeholder="Nomor Handphone" value="<?php echo $baris->hp ?>" required>
 								</div>
 								 <div class="form-group">
 								  <label for="exampleInputEmail1">Email</label>
-								  <input name="email" type="email" class="form-control" id="exampleInput" placeholder="Email" required>
+								  <input name="email" type="email" class="form-control" id="exampleInput" placeholder="Email" value="<?php echo $baris->email ?>" required>
 								</div>
 								<div class="form-group">
 								  <label for="exampleInputEmail1">Deskripsi</label>
-								   <textarea name="deskripsi" class="form-control" rows="3" placeholder="Deskripsi Suplier"></textarea>
+								   <textarea name="deskripsi" class="form-control" rows="3" placeholder="Deskripsi Suplier"  ><?php echo $baris->deskripsi ?></textarea>
 								</div>
 							
 

@@ -40,8 +40,16 @@ class Suplier extends CI_Model{
 				return 0;
 			}
 	}
-	
-	
+	public function update($data){
+		$this->db->reconnect();		
+		$query=$this->db->query("CALL sp_updateSuplier('$data[idSuplier]','$data[nama]','$data[alamat]','$data[hp]','$data[email]','$data[deskripsi]')");
+		
+			
+	}
+	public function delete($id){
+		$this->db->reconnect();		
+		$query=$this->db->query("CALL sp_deleteSuplier('$id')");
+	}
 	
 }
 

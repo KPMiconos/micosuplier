@@ -22,8 +22,20 @@
               <!-- Profile Image -->
               <div class="box box-primary">
                 <div class="box-body box-profile">
-                  <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url() ?>assets/images/default/suplier.png" alt="User profile picture">
-                  <h3 class="profile-username text-center"><?php echo $baris->nama_suplier ?></h3>
+				<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal"  > 
+                  <img data-toggle="tooltip" data-placement="right" title="Edit Photo Profile"  class="profile-user-img img-responsive img-circle" 
+				  src="
+					 
+					<?php
+						if(empty($baris->photo_link)){
+							echo base_url(),"assets/images/default/suplier.png";
+						}else{
+							echo base_url(),"assets/images/petugas/",$baris->photo_link;
+						}
+						?>"
+					alt="User profile picture">
+                 </a>
+				  <h3 class="profile-username text-center"><?php echo $baris->nama_suplier ?></h3>
                   
 
                   <ul class="list-group list-group-unbordered">
@@ -40,8 +52,33 @@
 
                   <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
                 </div><!-- /.box-body -->
+				
               </div><!-- /.box -->
-
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Upload Photo Profile</h4>
+					  </div>
+					  <div class="modal-body">
+						 <form action="<?php echo base_url() ?>admin/uploadImgSuplier_act" method="post" enctype="multipart/form-data">
+						 
+						<div class="form-group">
+							<label for="exampleInputFile">File input</label>
+							
+							<input name="filefoto" type="file" id="exampleInputFile">
+							<p class="help-block">Besar file maksimal 1 MB, format jpg,png,gif </p>
+						</div>
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary">Upload</button>
+						</div>
+						<input type="hidden" name="idSuplier" value="<?php echo $baris->id_suplier ?>">
+					   </form>
+					  </div>
+						</div>
+					</div>
+				</div>
              </div><!-- /.col -->
             <div class="col-md-9">
               <div class="nav-tabs-custom">
@@ -69,9 +106,64 @@
                          <p class="col-sm-2 pull-left" style="margin-left:20px;"><strong>Deskripsi</strong></p>
                         <p class="col-sm-6 pull-left">: <?php echo $baris->deskripsi ?></p>
                       </div>
-                    
+                    <div class="box-footer">
+                    <button data-toggle="modal" data-target="#myModal1" class="btn btn-primary">Edit</button>
+                  </div>
                       
                     </div>
+					<!-- Modal -->
+					<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Edit Data Suplier</h4>
+						  </div>
+						  <div class="modal-body">
+						   <!-- form start -->
+							<form role="form" action="<?php echo base_url() ?>admin/updateSuplier" method="post" enctype="multipart/form-data">
+							  <div class="box-body">
+								<div class="form-group">
+								  <label for="exampleInputEmail1">No.ID</label>
+								  <input name="id" type="text" class="form-control" id="exampleInput" placeholder="No.Id Suplier" value="<?php echo "SM1607",$baris->id_suplier ?>" disabled>
+								  <input name="idSuplier" type="hidden" value="<?php echo $baris->id_suplier ?>">
+								</div>
+								<div class="form-group">
+								  <label for="exampleInputEmail1">Nama</label>
+								  <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Suplier" value="<?php echo $baris->nama_suplier ?>" required>
+								</div>
+								
+								<div class="form-group">
+								  <label for="exampleInputPassword1">Alamat</label>
+								  <input name="alamat" type="text" class="form-control" id="exampleInput" placeholder="Alamat" value="<?php echo $baris->alamat ?>" required>
+								</div>
+								 <div class="form-group">
+								  <label for="exampleInputEmail1">No.Telephone</label>
+								  <input name="hp" type="text" class="form-control" id="exampleInput" placeholder="Nomor Handphone" value="<?php echo $baris->hp ?>" required>
+								</div>
+								 <div class="form-group">
+								  <label for="exampleInputEmail1">Email</label>
+								  <input name="email" type="email" class="form-control" id="exampleInput" placeholder="Email" value="<?php echo $baris->email ?>" required>
+								</div>
+								<div class="form-group">
+								  <label for="exampleInputEmail1">Deskripsi</label>
+								   <textarea name="deskripsi" class="form-control" rows="3" placeholder="Deskripsi Suplier"  ><?php echo $baris->deskripsi ?></textarea>
+								</div>
+							
+
+							 
+							  </div><!-- /.box-body -->
+
+							  <div class="box-footer">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							  </div>
+							</form>
+						  </div>
+						  
+						</div>
+					  </div>
+					</div>
+                  
                  <?php }}else{
 			echo "data tidak ada";
 		} ?>
@@ -106,14 +198,14 @@
                     </tr>
 					<?php
 							if(!empty($isi)){
-							foreach($produk as $baris){ ?>
+							foreach($produk as $baris2){ ?>
                     <tr>
-                      <td><?php echo $baris->id_produk ?></td>
-					  <td><img src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->image_link ?>"></td>
-                      <td><?php echo $baris->nama_produk ?></td>
-                      <td><a href="<?php echo base_url(),"admin/viewSuplier/", $baris->id_suplier ?>"><?php echo $baris->nama_suplier ?></a></td>
-                      <td><span class="label label-success">Rp <?php echo $baris->harga ?></span></td>
-                      <td><?php echo word_limiter($baris->deskripsi,10),"..." ?></td>
+                      <td><?php echo $baris2->id_produk ?></td>
+					  <td><img src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris2->image_link ?>"></td>
+                      <td><?php echo $baris2->nama_produk ?></td>
+                      <td><a href="<?php echo base_url(),"admin/viewSuplier/", $baris2->id_suplier ?>"><?php echo $baris2->nama_suplier ?></a></td>
+                      <td><span class="label label-success">Rp <?php echo $baris2->harga ?></span></td>
+                      <td><?php echo word_limiter($baris2->deskripsi,10),"..." ?></td>
                     </tr>
                   
                    
@@ -135,3 +227,4 @@
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
     
+           
