@@ -31,10 +31,18 @@
                       <input name="tgl_open" type="text" class="form-control datepicker"  placeholder="Tanggal input Keluhan" data-date-format="yyyy-mm-dd" >
                     </div>
 					
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Nama Customer</label>
-                      <input name="customer" type="text" class="form-control" id="exampleInput" placeholder="Nama Customer" required>
-                    </div>
+                    
+					<div class="form-group">
+						<label>Nama Customer</label>
+						<select name="customer" class="form-control selecttree" >
+						  <option>-Pilih</option>
+						  <?php if(!empty($isi)){
+							foreach($isi as $baris){ ?>
+						  <option value="<?php echo $baris->id_customer ?>"><?php echo $baris->nama ?></option>
+						  <?php }}?>
+						  
+						</select>
+					</div>
 					
                     <div class="form-group">
                       <label for="exampleInputPassword1">Keluhan</label>

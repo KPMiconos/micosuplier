@@ -30,7 +30,7 @@
 						if(empty($baris->photo_link)){
 							echo base_url(),"assets/images/default/suplier.png";
 						}else{
-							echo base_url(),"assets/images/petugas/",$baris->photo_link;
+							echo base_url(),"assets/images/supplier/",$baris->photo_link;
 						}
 						?>"
 					alt="User profile picture">
@@ -121,7 +121,7 @@
 						  </div>
 						  <div class="modal-body">
 						   <!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>admin/updateSuplier" method="post" enctype="multipart/form-data">
+							<form role="form" action="<?php echo base_url() ?>admin/uploadImgSuplier_act" method="post" enctype="multipart/form-data">
 							  <div class="box-body">
 								<div class="form-group">
 								  <label for="exampleInputEmail1">No.ID</label>

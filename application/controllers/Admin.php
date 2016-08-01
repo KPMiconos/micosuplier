@@ -53,6 +53,8 @@ class Admin extends CI_Controller {
 	{
 		$this->load->model('service');
 		$data['isi']=$this->service->list_service();
+		$this->load->model('customer');
+		$data['customer']=$this->customer->list_customer();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
@@ -77,6 +79,26 @@ class Admin extends CI_Controller {
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
 		$this->load->view('dasboard/listProduk',$data);
+		$this->load->view('dasboard/footer');
+	}
+	public function listPenjualan()
+	{
+		$this->load->model('penjualan');
+		$data['isi']=$this->penjualan->list_penjualan();
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/listPenjualan',$data);
+		$this->load->view('dasboard/footer');
+	}
+	public function listInstitusi()
+	{
+		$this->load->model('customer');
+		$data['isi']=$this->customer->list_institusi();
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/listInstitusi',$data);
 		$this->load->view('dasboard/footer');
 	}
 	
@@ -108,10 +130,12 @@ class Admin extends CI_Controller {
 	}
 	public function addService()
 	{
+		$this->load->model('customer');
+		$data['isi']=$this->customer->list_customer();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/inputService');
+		$this->load->view('dasboard/inputService',$data);
 		$this->load->view('dasboard/footer');
 	}
 	public function addSolving($id)
@@ -121,6 +145,15 @@ class Admin extends CI_Controller {
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
 		$this->load->view('dasboard/inputSolving',$data);
+		$this->load->view('dasboard/footer');
+	}
+	public function pilihSolving()
+	{
+		
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/pilihSolving');
 		$this->load->view('dasboard/footer');
 	}
 	public function addProduk()
@@ -142,6 +175,13 @@ class Admin extends CI_Controller {
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
 		$this->load->view('dasboard/Produk',$data);
+		$this->load->view('dasboard/footer');
+	}
+	public function addInstitusi(){
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/inputInstitusi');
 		$this->load->view('dasboard/footer');
 	}
 	
@@ -185,6 +225,19 @@ class Admin extends CI_Controller {
 		$this->load->view('dasboard/footer');
 		
 	}
+	public function viewService($id){
+		
+		$this->load->model('service');
+		//$this->load->model('produk');
+		$data['isi']=$this->service->view_service($id);
+		//$data['produk']=$this->produk->list_produk_perSuplier($id);
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/viewService',$data);
+		$this->load->view('dasboard/footer');
+		
+	}
 	//update or edit data
 	public function uploadImgPetugas_act(){
 		$this->load->library('upload');
@@ -213,14 +266,51 @@ class Admin extends CI_Controller {
                 $this->petugas->uploadGmbrPetugas($data); //akses model untuk menyimpan ke database
                 //pesan yang muncul jika berhasil diupload pada session flashdata
                 $this->session->set_flashdata("pesan", "<div class=\"col-md-12\"><div class=\"alert alert-success\" id=\"alert\">Upload gambar berhasil !!</div></div>");
-                redirect('admin/listPetugas'); //jika berhasil maka akan ditampilkan view vupload
+                redirect('admin/viewPetugas/'.$data['id_petugas']); //jika berhasil maka akan ditampilkan view vupload
             }else{
                 //pesan yang muncul jika terdapat error dimasukkan pada session flashdata
                 $this->session->set_flashdata("pesan", "<div class=\"col-md-12\"><div class=\"alert alert-danger\" id=\"alert\">Gagal upload gambar !!</div></div>");
-                redirect('admin/addPetugas'); //jika gagal maka akan ditampilkan form upload
+                redirect('admin/viewPetugas/'.$data['id_petugas']); //jika gagal maka akan ditampilkan form upload
             }
         }else{
-			redirect('admin/addPetugas');
+			redirect('admin/listPetugas');
+		}
+	}
+	public function uploadImgSuplier_act(){
+		$this->load->library('upload');
+        $nmfile = "file_".time(); //nama file saya beri nama langsung dan diikuti fungsi time
+        $config['upload_path'] = './assets/images/supplier/'; //path folder
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+        $config['max_size'] = '2048'; //maksimum besar file 2M
+        $config['max_width']  = '1288'; //lebar maksimum 1288 px
+        $config['max_height']  = '768'; //tinggi maksimu 768 px
+        $config['file_name'] = $nmfile; //nama yang terupload nantinya
+ 
+        $this->upload->initialize($config);
+		
+		 if($_FILES['filefoto']['name'])
+        {
+            if ($this->upload->do_upload('filefoto'))
+            {
+                $gbr = $this->upload->data();
+                $data = array(
+                  'nm_gbr' =>$gbr['file_name'],
+                  'idSuplier' => $this->input->post('idSuplier')
+				  
+                   
+                );
+				$this->load->model('suplier');
+                $this->suplier->uploadGmbrSuplier($data); //akses model untuk menyimpan ke database
+                //pesan yang muncul jika berhasil diupload pada session flashdata
+                $this->session->set_flashdata("pesan", "<div class=\"col-md-12\"><div class=\"alert alert-success\" id=\"alert\">Upload gambar berhasil !!</div></div>");
+                redirect('admin/viewSuplier/'.$data['idSuplier']); //jika berhasil maka akan ditampilkan view vupload
+            }else{
+                //pesan yang muncul jika terdapat error dimasukkan pada session flashdata
+                $this->session->set_flashdata("pesan", "<div class=\"col-md-12\"><div class=\"alert alert-danger\" id=\"alert\">Gagal upload gambar !!</div></div>");
+                redirect('admin/viewSuplier/'.$data['idSuplier']); //jika gagal maka akan ditampilkan form upload
+            }
+        }else{
+			redirect('admin/listPetugas');
 		}
 	}
 	public function updatePetugas(){
@@ -291,6 +381,39 @@ class Admin extends CI_Controller {
 		$this->load->view('dasboard/footer');
 		
 	}
+	public function cariPetugas(){
+		$word=$this->input->post('cari');
+		$this->load->model('petugas');
+		$data['isi']=$this->petugas->list_cariPetugas($word);
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/listPetugas',$data);
+		$this->load->view('dasboard/footer');
+		
+	}
+	public function cariSuplier(){
+		$word=$this->input->post('cari');
+		$this->load->model('suplier');
+		$data['isi']=$this->suplier->list_cariSuplier($word);
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/listSuplier',$data);
+		$this->load->view('dasboard/footer');
+		
+	}
+	public function cariCustomer(){
+		$word=$this->input->post('cari');
+		$this->load->model('customer');
+		$data['isi']=$this->customer->list_cariCustomer($word);
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/listCustomer',$data);
+		$this->load->view('dasboard/footer');
+		
+	}
 	/*input action function*/
 	public function register_act(){
 		$data = array(
@@ -344,13 +467,13 @@ class Admin extends CI_Controller {
 		
 	
 		$data = array(
-				
+				'idInstitut' => $this->input->post('idInstitut'),
 				'nama' => $this->input->post('nama'),
 				'jenkel' => $this->input->post('jenkel'),
 				'alamat' => $this->input->post('alamat'),
 				'hp' => $this->input->post('hp'),
 				'email' => $this->input->post('email'),
-				'hp' => $this->input->post('hp')
+				'jabatan' => $this->input->post('jabatan')
 				
 				
             );
@@ -359,6 +482,30 @@ class Admin extends CI_Controller {
 		
 		if($query==0){
 			redirect("/");
+		}else{
+		
+			redirect("admin/addSuplier");
+		}
+	}
+	public function addInstitusi_act(){
+		$this->db->reconnect();
+		
+	
+		$data = array(
+				
+				'id' => $this->input->post('id'),
+				'nama' => $this->input->post('nama'),
+				'alamat' => $this->input->post('alamat'),
+				'hp' => $this->input->post('hp'),
+				'email' => $this->input->post('email')
+				
+				
+            );
+		$this->load->model('customer');
+		$query=$this->customer->addInstitusi($data);
+		
+		if($query==0){
+			redirect("/admin/listInstitusi");
 		}else{
 		
 			redirect("admin/addSuplier");

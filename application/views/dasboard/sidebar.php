@@ -31,9 +31,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
+				<li><a href="<?php echo base_url() ?>admin/addPetugas"><i class="fa fa-circle-o"></i> Add Petugas</a></li>
                 <li><a href="<?php echo base_url() ?>admin/listPetugas"><i class="fa fa-circle-o"></i> List Petugas</a></li>
-                <li><a href="<?php echo base_url() ?>admin/addPetugas"><i class="fa fa-circle-o"></i> Add Petugas</a></li>
-               
+
               </ul>
             </li>
             <li class="treeview">
@@ -43,9 +43,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php echo base_url() ?>admin/listSuplier"><i class="fa fa-circle-o"></i> List Suplier</a></li>
-                <li><a href="<?php echo base_url() ?>admin/addSuplier"><i class="fa fa-circle-o"></i> Add Suplier</a></li>
-              
+			   <li><a href="<?php echo base_url() ?>admin/addSuplier"><i class="fa fa-circle-o"></i> Add Suplier</a></li>
+               <li><a href="<?php echo base_url() ?>admin/listSuplier"><i class="fa fa-circle-o"></i> List Suplier</a></li>
+               
               </ul>
             </li>
             <li class="treeview">
@@ -54,8 +54,11 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
+				<li><a href="<?php echo base_url() ?>admin/addInstitusi"><i class="fa fa-circle-o"></i> Add Institusi</a></li>
+				<li><a href="<?php echo base_url() ?>admin/addCustomer"><i class="fa fa-circle-o"></i> Add Customer</a></li>
+				<li><a href="<?php echo base_url() ?>admin/listInstitusi"><i class="fa fa-circle-o"></i> List Institusi</a></li>
                 <li><a href="<?php echo base_url() ?>admin/listCustomer"><i class="fa fa-circle-o"></i> List Customer</a></li>
-                <li><a href="<?php echo base_url() ?>admin/addCustomer"><i class="fa fa-circle-o"></i> Add Customer</a></li>
+                
                 
               </ul>
             </li>
@@ -65,8 +68,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
+				<li><a href="<?php echo base_url() ?>admin/addService"><i class="fa fa-circle-o"></i> Add Service</a></li>
                 <li><a href="<?php echo base_url() ?>admin/listService"><i class="fa fa-circle-o"></i> View Service</a></li>
-                <li><a href="<?php echo base_url() ?>admin/addService"><i class="fa fa-circle-o"></i> Add Service</a></li>
 				<li><a href="<?php echo base_url() ?>admin/listUnsolved"><i class="fa fa-circle-o"></i> Solving</a></li>
               </ul>
             </li>
@@ -76,8 +79,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
+				 <li><a href="<?php echo base_url() ?>admin/addProduk"><i class="fa fa-circle-o"></i> Add Produk</a></li>
                 <li><a href="<?php echo base_url() ?>admin/listProduk"><i class="fa fa-circle-o"></i> List Produk</a></li>
-                <li><a href="<?php echo base_url() ?>admin/addProduk"><i class="fa fa-circle-o"></i> Add Produk</a></li>
+               
               </ul>
             </li>
 			<li class="treeview">
@@ -86,8 +90,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
+				<li><a href="<?php echo base_url() ?>admin/addPenjualan"><i class="fa fa-circle-o"></i> Add Penjualan</a></li>
                 <li><a href="<?php echo base_url() ?>admin/listPenjualan"><i class="fa fa-circle-o"></i> List Penjualan</a></li>
-                <li><a href="<?php echo base_url() ?>admin/addPenjualan"><i class="fa fa-circle-o"></i> Add Penjualan</a></li>
+                
               </ul>
             </li>
            <li class="">

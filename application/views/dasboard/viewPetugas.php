@@ -60,7 +60,7 @@
 						<h4 class="modal-title" id="myModalLabel">Upload Photo Profile</h4>
 					  </div>
 					  <div class="modal-body">
-					   <form action="<?php echo base_url() ?>admin/uploadImgPetugas_act" method="post" enctype="multipart/form-data">
+					   <form action="<?php echo base_url() ?>admin/uploadImgSuplier_act" method="post" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="exampleInputFile">File input</label>
 							<input type="hidden" name="id_petugas" value="<?php echo $baris->id_petugas ?>">

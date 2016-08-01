@@ -22,12 +22,16 @@
                 <div class="box-header">
                   <a href="<?php echo base_url() ?>admin/addSuplier"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
                   <div class="box-tools">
+                    <form method="post" action="<?php echo base_url() ?>admin/cariSuplier" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
-                      <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
+					
+                      <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">
                       <div class="input-group-btn">
                         <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                       </div>
+					
                     </div>
+					 </form>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">

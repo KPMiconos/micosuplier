@@ -35,6 +35,10 @@
                       <label for="exampleInputEmail1">Harga Barang</label>
                       <input name="harga" type="text" class="form-control" id="exampleInput" placeholder="Harga Barang">
                     </div>
+					<div class="form-group">
+                      <label for="exampleInputEmail1">Jumlah</label>
+                      <input name="jumlah" type="text" class="form-control" id="exampleInput" placeholder="Jumlah Barang">
+                    </div>
 					
 					<div class="form-group">
 						<label>Suplier</label>

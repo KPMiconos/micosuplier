@@ -19,9 +19,9 @@ class Penjualan extends CI_Model{
 		$this->cart->destroy();
 	 }
 	 
-	public function list_produk(){
+	public function list_penjualan(){
 		$this->db->reconnect();
-			$query = $this->db->query("CALL sp_list_produk()");
+			$query = $this->db->query("CALL sp_list_penjualan()");
 			if ($query->num_rows() > 0)
 			{
 			foreach ($query->result() as $row)
