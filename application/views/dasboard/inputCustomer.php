@@ -28,7 +28,7 @@
                   <div class="box-body">
 					 <div class="form-group">
 						<label>Institusi</label>
-						<select name="institusi" class="form-control select2" style="width: 100%;">
+						<select name="institusi" class="form-control selecttree" style="width: 100%;">
 							<option>-Pilih</option>
 							<option value="1">General</option>
 							<option value="2" >Perempuan</option>

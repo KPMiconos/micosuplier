@@ -55,8 +55,8 @@
                       <td><?php echo $baris->alamat  ?></td>
 					  <td>
 					   <div class="btn-group btn-group-lg">
-					   <a href="#"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
-						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
+					   <a href="<?php echo base_url(),"admin/deleteCustomer/",$baris->id_customer?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
+						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_customer ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
 						<a href="<?php echo base_url(),"admin/viewCustomer/",$baris->id_customer?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
 						
 						</div>
@@ -64,42 +64,60 @@
                     </tr>
 					
 					<!-- Modal -->
-					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal fade" id="myModal<?php echo $baris->id_customer ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
 						<div class="modal-content">
 						  <div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">Edit List Suplier</h4>
+							<h4 class="modal-title" id="myModalLabel">Edit List Customer</h4>
 						  </div>
 						  <div class="modal-body">
 						   <!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>admin/addCustomer_act" method="post" enctype="multipart/form-data">
+							<form role="form" action="<?php echo base_url() ?>admin/updateCustomer" method="post" enctype="multipart/form-data">
                   <div class="box-body">
-					
+					 <div class="form-group">
+									<label>Institusi</label>
+									<select name="idInstitut" class="form-control selecttree" style="width: 100%;">
+									  <option>-Pilih</option>
+									  <?php  	if(!empty($institusi)){
+									foreach($institusi as $baris2){  ?>
+									  <option value="<?php echo $baris2->id_institusi ?>" <?php if($baris2->nama_institusi==$baris->nama_institusi) echo "selected" ?> ><?php echo $baris2->nama_institusi; ?></option>
+									 
+									  <?php }} ?>
+									</select>
+					</div>
+					<div class="form-group">
+								  <label for="exampleInputEmail1">No.KTP</label>
+								  <input name="ktp" type="text" class="form-control" id="exampleInput" placeholder="Nomor KTP" value="<?php echo $baris->id_customer ?>" required>
+								</div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nama</label>
-                      <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Lengkap" required>
+                      <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Lengkap " value="<?php echo $baris->nama ?>" required>
                     </div>
-					 <div class="form-group">
-                    <label>Jenis Kelamin</label>
-                    <select name="jenkel" class="form-control select2" style="width: 100%;">
-                      <option>-Pilih</option>
-                      <option value="L">Laki-laki</option>
-                      <option value="P" >Perempuan</option>
-                      
-                    </select>
-                  </div>
+					<div class="form-group">
+									<label>Jenis Kelamin</label>
+									<select name="jenkel" class="form-control select2" style="width: 100%;">
+									  <option>-Pilih</option>
+									  <option value="L" <?php if($baris->jenkel=="L") echo "selected" ?> >Laki-laki</option>
+									  <option value="P" <?php if($baris->jenkel=="P") echo "selected" ?> >Perempuan</option>
+									  
+									</select>
+								</div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Alamat</label>
-                      <input name="alamat" type="text" class="form-control" id="exampleInput" placeholder="Alamat" required>
+                      <input name="alamat" type="text" class="form-control" id="exampleInput" placeholder="Alamat" value="<?php echo $baris->alamat ?>" required>
                     </div>
 					 <div class="form-group">
                       <label for="exampleInputEmail1">No.Telephone</label>
-                      <input name="hp" type="text" class="form-control" id="exampleInput" placeholder="Nomor HP/Telephone" required>
+                      <input name="hp" type="text" class="form-control" id="exampleInput" placeholder="Nomor HP/Telephone" value="<?php echo $baris->hp ?>" required>
                     </div>
 					 <div class="form-group">
                       <label for="exampleInputEmail1">Email</label>
-                      <input name="email" type="email" class="form-control" id="exampleInput" placeholder="Email" required>
+                      <input name="email" type="email" class="form-control" id="exampleInput" placeholder="Email" value="<?php echo $baris->email ?>" required>
+                    </div>
+					 <div class="form-group">
+                      <label for="exampleInputEmail1">Jabatan</label>
+                      <input name="jabatan" type="text" class="form-control" id="exampleInput" placeholder="Jabatan" value="<?php echo $baris->jabatan ?>" required>
                     </div>
 			
                  

@@ -27,7 +27,7 @@
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-user-secret"></i>
-                <span>Petugas</span>
+                <span>Karyawan</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -68,30 +68,57 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-				<li><a href="<?php echo base_url() ?>admin/addService"><i class="fa fa-circle-o"></i> Add Service</a></li>
-                <li><a href="<?php echo base_url() ?>admin/listService"><i class="fa fa-circle-o"></i> View Service</a></li>
-				<li><a href="<?php echo base_url() ?>admin/listUnsolved"><i class="fa fa-circle-o"></i> Solving</a></li>
+				<li><a href="<?php echo base_url() ?>service/addService"><i class="fa fa-circle-o"></i> Add Service</a></li>
+                <li><a href="<?php echo base_url() ?>service/listService"><i class="fa fa-circle-o"></i> View Service</a></li>
+				<li><a href="<?php echo base_url() ?>service/listUnsolved"><i class="fa fa-circle-o"></i> Solving</a></li>
               </ul>
             </li>
 			<li class="treeview">
               <a href="#">
-                <i class="fa fa-opencart"></i> <span>Produk</span>
+                <i class="ion ion-bag"></i> <span>Pembelian</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-				 <li><a href="<?php echo base_url() ?>admin/addProduk"><i class="fa fa-circle-o"></i> Add Produk</a></li>
-                <li><a href="<?php echo base_url() ?>admin/listProduk"><i class="fa fa-circle-o"></i> List Produk</a></li>
+				<li><a href="<?php echo base_url() ?>pembelian/pemesanan"><i class="fa fa-circle-o"></i> Pemesanan</a></li>
+                <li><a href="<?php echo base_url() ?>pembelian/listPemesanan"><i class="fa fa-circle-o"></i> List Pemesanan</a></li>
+				<li><a href="<?php echo base_url() ?>admin/Report"><i class="fa fa-circle-o"></i> Report</a></li>
+                
+              </ul>
+            </li>
+			<li class="treeview">
+              <a href="#">
+                <i class="fa fa-cubes"></i> <span>Gudang</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+				<li><a href="<?php echo base_url() ?>gudang/addItem"><i class="fa fa-circle-o"></i> Tambah Item </a></li>
+				<li><a href="<?php echo base_url() ?>gudang/listPenerimaan"><i class="fa fa-circle-o"></i> Penerimaan Barang</a></li>
+                <li><a href="<?php echo base_url() ?>admin/listProduk"><i class="fa fa-circle-o"></i> List Barang</a></li>
+				<li><a href="<?php echo base_url() ?>gudang/listDefect"><i class="fa fa-circle-o"></i> Barang Rusak</a></li>
                
               </ul>
             </li>
 			<li class="treeview">
               <a href="#">
-                <i class="fa fa-line-chart"></i> <span>Penjualan</span>
+                <i class="fa fa-opencart"></i> <span>Penjualan</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
 				<li><a href="<?php echo base_url() ?>admin/addPenjualan"><i class="fa fa-circle-o"></i> Add Penjualan</a></li>
                 <li><a href="<?php echo base_url() ?>admin/listPenjualan"><i class="fa fa-circle-o"></i> List Penjualan</a></li>
+				<li><a href="<?php echo base_url() ?>admin/Report"><i class="fa fa-circle-o"></i> Report</a></li>
+                
+              </ul>
+            </li>
+			<li class="treeview">
+              <a href="#">
+                <i class="fa fa-line-chart"></i> <span>Laporan</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+				<li><a href="<?php echo base_url() ?>admin/addPenjualan"><i class="fa fa-circle-o"></i> Penjualan</a></li>
+                <li><a href="<?php echo base_url() ?>admin/listPenjualan"><i class="fa fa-circle-o"></i></a></li>
+				<li><a href="<?php echo base_url() ?>admin/Report"><i class="fa fa-circle-o"></i> Report</a></li>
                 
               </ul>
             </li>

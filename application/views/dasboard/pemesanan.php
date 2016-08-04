@@ -3,13 +3,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Add Penjualan
+            Tambah Pemesanan
             
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Penjualan</a></li>
-            <li class="active">Add Penjualan</li>
+            <li><a href="#">Pembelian</a></li>
+            <li class="active">Tambah Pemesanan</li>
           </ol>
         </section>
       
@@ -41,25 +41,30 @@
                       <th>ID</th>
 					   <th>Gambar</th>
                       <th>Nama Produk</th>
-                      <th>Suplier</th>
-                      <th>Harga</th>
+                      <th>Tipe</th>
+                      <th>Satuan</th>
+					  <th>Harga Satuan</th>
                       <th>Action</th>
                     </tr>
 					<?php
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
-					<form method="POST" action="<?php echo base_url(),"admin/addCart"?>" >
+					<form method="POST" action="<?php echo base_url(),"pembelian/addCart"?>" >
                     <tr>
-                      <td><?php echo $baris->id_produk ?></td>
-					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->image_link ?>"></td>
-                      <td><?php echo $baris->nama_produk ?></td>
-                      <td><a href="<?php echo base_url(),"admin/viewSuplier/", $baris->id_suplier ?>"><?php echo $baris->nama_suplier ?></a></td>
-                      <td><span class="label label-success">Rp <?php echo $baris->harga ?></span></td>
+                      <td><?php echo $baris->id_item ?></td>
+					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->link_photo ?>"></td>
+                      <td><?php echo $baris->nama_item ?></td>
+                      <td><?php echo $baris->tipe ?></a></td>
+                      <td><span class="label label-success"> <?php echo $baris->satuan ?></span></td>
+					  <td>
+					   <input name="harga" class="form-control pull-left" type="text"  style="width:100px" data-toggle="tooltip" data-placement="top" title="Harga Satuan">
+					  </td>
+						
                       <td> 
 					  <div>
-					  <input type="hidden" name="id" value="<?php echo $baris->id_produk ?>" >
-						<input type="hidden" name="nama" value="<?php echo $baris->nama_produk ?>" >
-						<input type="hidden" name="harga" value="<?php echo $baris->harga ?>" >
+					  <input type="hidden" name="id" value="<?php echo $baris->id_item ?>" >
+						<input type="hidden" name="nama" value="<?php echo $baris->nama_item ?>" >
+						
 						</div>
 					  <div class="btn-group">
 					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah">
@@ -86,7 +91,7 @@
 					<H3></H3>
 					</div>
 					 <div class="box-body">
-					  <form method="post" action="<?php echo base_url() ?>admin/addDataBelanja">
+					  <form method="post" action="<?php echo base_url() ?>pembelian/addDataPurchasing">
 					 <table class="table table-hover">
                     <tr>
                       
@@ -94,11 +99,11 @@
                       <th>Harga</th>
 					   <th>Pilihan</th>
 					   
-                      <input type="hidden" name="idtransaksi" value="<?php echo "TM",time()  ?>">
+                      <input type="hidden" name="idtransaksi" value="<?php echo "PO",time()  ?>">
                     </tr>
 					 <?php foreach($this->cart->contents() as $item){ ?>
 					<tr>
-						 <td><?php echo $item['name'] ?></td>
+						 <td><?php echo $item['name'],$item['id']; ?></td>
 						<input type="hidden" name="id" value="<?php echo $item['id'] ?>">
 						 <td>
                              <?php echo $item['qty'] ?>
@@ -110,7 +115,7 @@
 						   <input type="hidden" name="total" value="<?php echo $this->cart->total() ?>">
                         </td>
 						<td>
-							<a href="<?php echo base_url(),"admin/hapus/" ,$item['rowid']; ?>">Hapus</a>
+							<a href="<?php echo base_url(),"pembelian/hapus/" ,$item['rowid']; ?>">Hapus</a>
 						</td>
 						<?php } ?>
 					</tr>
@@ -119,7 +124,7 @@
 									
 								</td>
 								<td>
-									Total <?php echo "TM",time()  ?>
+									Total: 
 								</td>
 								<td>
 									<?php if($this->cart->total()>0){
@@ -134,12 +139,12 @@
 							  
 					</table>
 					<div class="form-group">
-						<label>Customer</label>
-						<select name="id_customer" class="form-control select2" style="width: 100%;">
+						<label>Supplier</label>
+						<select name="idSuplier" class="form-control select2" style="width: 100%;">
 						  <option>-Pilih</option>
 						  	<?php if(!empty($isi)){
-							foreach($customer as $baris){ ?>
-						  <option value="<?php echo $baris->id_customer ?>"><?php echo $baris->nama ?></option>
+							foreach($suplier as $baris){ ?>
+						  <option value="<?php echo $baris->id_suplier ?>"><?php echo $baris->nama_suplier ?></option>
 							<?php }} ?>
 						  
 						</select>

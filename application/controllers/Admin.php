@@ -33,6 +33,7 @@ class Admin extends CI_Controller {
 	{
 		$this->load->model('customer');
 		$data['isi']=$this->customer->list_customer();
+		$data['institusi']=$this->customer->list_institusi();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
@@ -49,18 +50,7 @@ class Admin extends CI_Controller {
 		$this->load->view('dasboard/listSuplier',$data);
 		$this->load->view('dasboard/footer');
 	}
-	public function listService()
-	{
-		$this->load->model('service');
-		$data['isi']=$this->service->list_service();
-		$this->load->model('customer');
-		$data['customer']=$this->customer->list_customer();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/listService',$data);
-		$this->load->view('dasboard/footer');
-	}
+	
 	public function listUnsolved()
 	{
 		$this->load->model('service');
@@ -128,34 +118,8 @@ class Admin extends CI_Controller {
 		$this->load->view('dasboard/inputCustomer');
 		$this->load->view('dasboard/footer');
 	}
-	public function addService()
-	{
-		$this->load->model('customer');
-		$data['isi']=$this->customer->list_customer();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/inputService',$data);
-		$this->load->view('dasboard/footer');
-	}
-	public function addSolving($id)
-	{
-		$data['id']=$id;
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/inputSolving',$data);
-		$this->load->view('dasboard/footer');
-	}
-	public function pilihSolving()
-	{
-		
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/pilihSolving');
-		$this->load->view('dasboard/footer');
-	}
+	
+	
 	public function addProduk()
 	{
 		
@@ -217,7 +181,8 @@ class Admin extends CI_Controller {
 		//$this->load->model('produk');
 		$data['isi']=$this->customer->view_customer($id);
 		$data['pembelian']=$this->customer->list_pembelian($id);
-		//$data['produk']=$this->produk->list_produk_perSuplier($id);
+		$data['institusi']=$this->customer->list_institusi();
+		$data['transaksi']=$this->customer->list_transaksi($id);
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
@@ -329,7 +294,7 @@ class Admin extends CI_Controller {
 		$this->load->model('petugas');
 		$query=$this->petugas->update($data);
 		if($query==0){
-			redirect("/admin/listPetugas");
+			redirect("admin/listPetugas");
 		}else{
 			 $this->session->set_flashdata("pesan", "<div class=\"col-md-12\"><div class=\"alert alert-danger\" id=\"alert\">Gagal update data !!</div></div>");
               
@@ -358,6 +323,30 @@ class Admin extends CI_Controller {
 			redirect("admin/addSuplier");
 		}
 	}
+	public function updateCustomer(){
+		$data = array(
+				'idInstitut' => $this->input->post('idInstitut'),
+				'ktp' => $this->input->post('ktp'),
+				'nama' => $this->input->post('nama'),
+				'jenkel' => $this->input->post('jenkel'),
+				'alamat' => $this->input->post('alamat'),
+				'hp' => $this->input->post('hp'),
+				'email' => $this->input->post('email'),
+				'hp' => $this->input->post('hp'),
+				'jabatan' => $this->input->post('jabatan')
+				
+            );
+		$this->load->model('customer');
+		$query=$this->customer->update($data);
+		if($query==0){
+			redirect("admin/listCustomer");
+		}else{
+			 $this->session->set_flashdata("pesan", "<div class=\"col-md-12\"><div class=\"alert alert-danger\" id=\"alert\">Gagal update data !!</div></div>");
+              
+			redirect("admin/listCustomer");
+		}
+		
+	}
 	//delete function
 	public function deletePetugas($id){
 		$this->load->model('petugas');
@@ -368,6 +357,11 @@ class Admin extends CI_Controller {
 		$this->load->model('suplier');
 		$query=$this->suplier->delete($id);
 		redirect("admin/listSuplier");
+	}
+	public function deleteCustomer($id){
+		$this->load->model('customer');
+		$query=$this->customer->delete($id);
+		redirect("admin/listCustomer");
 	}
 	//Searching
 	public function cariProduk(){

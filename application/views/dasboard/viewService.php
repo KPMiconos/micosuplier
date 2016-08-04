@@ -26,18 +26,35 @@
                     <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Next"><i class="fa fa-chevron-right"></i></a>
                   </div>
                 </div><!-- /.box-header -->
-                <div class="box-body no-padding">
+                <div class="box-body ">
                   <div class="mailbox-read-info">
                     <h4><strong><?php echo $baris->subject?></strong></h4>
-                    <h5>Dari: <?php echo $baris->nama_customer?> <span class="mailbox-read-time pull-right"><?php echo $baris->tgl_open?></span></h5>
+                    <h5>Customer: <?php echo $baris->nama_customer?> <span class="mailbox-read-time pull-right"><?php echo $baris->tgl_open?></span></h5>
                   </div><!-- /.mailbox-read-info -->
-                  <div class="mailbox-controls with-border">
+                  <div class="mailbox-controls">
                    <h5><strong>Keluhan</strong></h5>
-                  </div><!-- /.mailbox-controls -->
-                  <div class="mailbox-read-message">
+				    <div class="mailbox-read-message">
                     <p><?php echo $baris->keluhan?></p>
                     
                   </div><!-- /.mailbox-read-message -->
+                  </div><!-- /.mailbox-controls -->
+				  
+				  <hr>
+				  <div class="mailbox-controls">
+                   <h5><strong>Penyelesaian</strong></h5>
+				    <div class="mailbox-read-message">
+                    <p><?php echo $baris->keluhan?></p>
+                    <hr>
+                  </div><!-- /.mailbox-read-message -->
+                  </div><!-- /.mailbox-controls -->
+				   <div class="mailbox-controls">
+                   <h5><strong>Produk</strong></h5>
+				    <div class="mailbox-read-message">
+                    <p><?php echo $baris->keluhan?></p>
+                    
+                  </div><!-- /.mailbox-read-message -->
+                  </div><!-- /.mailbox-controls -->
+                 
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                   

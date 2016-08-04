@@ -24,9 +24,9 @@
 						<h3 class="box-title">Form Penanganan</h3>
 					</div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="<?php echo base_url() ?>admin/addSolving_act" method="post" enctype="multipart/form-data">
+                <form role="form" action="<?php echo base_url() ?>service/addSolving_act" method="post" enctype="multipart/form-data">
                   <div class="box-body">
-					<input name="id_service" type="hidden" value="<?php echo $id ?>">
+					<input name="id_service" type="hidden" value="<?php echo $this->session->userdata('idService'); ?>">
 					<div class="form-group">
                       <label for="exampleInputEmail1">Tanggal Penanganan</label>
                       <input name="tgl_solved" type="text" class="form-control datepicker"  placeholder="Tanggal input Keluhan" data-date-format="yyyy-mm-dd">

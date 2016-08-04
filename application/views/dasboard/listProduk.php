@@ -43,6 +43,7 @@
                       <th>Suplier</th>
                       <th>Harga</th>
                       <th>Deskripsi</th>
+					  <th>Jumlah</th>
 					  <th>Action</th>
                     </tr>
 					<?php
@@ -55,6 +56,7 @@
                       <td><a href="<?php echo base_url(),"admin/viewSuplier/", $baris->id_suplier ?>"><?php echo $baris->nama_suplier ?></a></td>
                       <td><span class="label label-success">Rp <?php echo $baris->harga ?></span></td>
                       <td><?php echo word_limiter($baris->deskripsi,10),"..." ?></td>
+					  <td><?php echo $baris->jumlah ?></td>
 					  <td>
 					   <div class="btn-group btn-group-lg">
 							<a href="#"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>

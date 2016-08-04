@@ -6,7 +6,8 @@ class Mservice extends CI_Model{
                 parent::__construct();
 	 }
 	 public function addService($data){
-		 $this->db->reconnect();		
+		 $this->db->reconnect();
+			echo $data['petugas'],$data['customer'],$data['subjek'],$data['keluhan'],$data['tgl_open'],$data['status'];
 		$query=$this->db->query("CALL sp_input_service('$data[petugas]','$data[customer]','$data[subjek]','$data[keluhan]','$data[tgl_open]','$data[status]')");
 	
 	 }
@@ -60,6 +61,25 @@ class Mservice extends CI_Model{
 				return 0;
 			}
 	}
+	public function delete($id){
+		$this->db->reconnect();		
+		$query=$this->db->query("CALL sp_deleteService('$id')");
+	}
+	public function addServProduk($data){
+		 //echo $data['email'],">",$data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$data['id'],">",$data['qty'],">",$data['price'];
+		
+		$this->db->reconnect();		
+		
+		foreach($this->cart->contents() as $item){
+			//echo $data['email'],">",$data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$item['id'],">",$item['qty'],">",$item['price'];
+				$this->db->query("CALL sp_input_servProduk('$data[idService]','$item[id]','$item[qty]','$item[price]')");
+				 //echo $data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$data['id'],">",$data['qty'],">",$data['price'];
+				
+		}	
+		$this->cart->destroy();
+		
+
+	 }
 	
 }
 

@@ -20,7 +20,7 @@
             <div class="col-xs-12 col-lg-10">
               <div class="box">
                 <div class="box-header">
-                 <a href="<?php echo base_url() ?>admin/addService"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
+                 <a href="<?php echo base_url() ?>service/addService"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
                   <div class="box-tools">
                     <div class="input-group" style="width: 150px;">
                       <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
@@ -64,17 +64,17 @@
 					  <th>
 					  <div class="btn-group btn-group-lg">
 						<?php if($baris->status<>3) {?>
-							<a href="<?php echo base_url() ?>admin/pilihSolving/<?php echo $baris->id_service ?>" ><li class="fa  fa-wrench btn btn-primary " data-toggle="tooltip" data-placement="top" title="Solving"></li></a>
+							<a href="<?php echo base_url() ?>service/pilihSolving/<?php echo $baris->id_service ?>" ><li class="fa  fa-wrench btn btn-primary " data-toggle="tooltip" data-placement="top" title="Solving"></li></a>
 						<?php }?>
-						<a href="<?php echo base_url(),"admin/viewService/",$baris->id_service ?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+						<a href="<?php echo base_url(),"service/viewService/",$baris->id_service ?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
 						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_service ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-						<a href="#"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
+						<a href="<?php echo base_url(),"service/delete/",$baris->id_service ?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
 					</div>
 						
 					  </th>
                     </tr>
                    <!-- Modal -->
-					<div class="modal fade" id="myModal<?php echo $baris->id_service ?>" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal fade" id="myModal<?php echo $baris->id_service ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
 						<div class="modal-content">
 						  <div class="modal-header">
@@ -83,7 +83,7 @@
 						  </div>
 						  <div class="modal-body" >
 							<!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>admin/addService_act" method="post" enctype="multipart/form-data">
+							<form role="form" action="<?php echo base_url() ?>service/addService_act" method="post" enctype="multipart/form-data">
 							  <div class="box-body">
 								 <div class="form-group">
 								  <label for="exampleInputEmail1">Tanggal</label>

@@ -3,13 +3,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Add Penjualan
+            Input Gudang
             
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Penjualan</a></li>
-            <li class="active">Add Penjualan</li>
+            <li><a href="#">Gudang</a></li>
+            <li class="active">Input Gudang</li>
           </ol>
         </section>
       
@@ -21,48 +21,44 @@
             
               <div class="box">
                 <div class="box-header">
-                  <a href="<?php echo base_url() ?>admin/addProduk"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
+                  <strong><h3 class="box-title">PO#<?php echo $this->session->userdata('idPO'); ?></h3></strong>
                   <div class="box-tools">
-				  <form method="post" action="<?php echo base_url() ?>admin/cariProduk" enctype="multipart/form-data">
-                    <div class="input-group" style="width: 150px;">
-					
-                      <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">
-                      <div class="input-group-btn">
-                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                      </div>
-					
-                    </div>
-					 </form>
+				 
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
                     <tr>
-                      <th>ID</th>
-					   <th>Gambar</th>
-                      <th>Nama Produk</th>
-                      <th>Suplier</th>
-                      <th>Harga</th>
-                      <th>Action</th>
+                      <th>Id.Item</th>
+					  <th>Nama Produk</th>
+                      <th>Tipe</th>
+                      <th>Satuan</th>
+					  <th>Harga Satuan</th>
+					  <th>Jumlah Pesanan</th>
+                      <th>Barang Datang</th>
+					 
                     </tr>
 					<?php
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
-					<form method="POST" action="<?php echo base_url(),"admin/addCart"?>" >
+					<form method="POST" action="<?php echo base_url(),"gudang/addCart"?>" >
                     <tr>
-                      <td><?php echo $baris->id_produk ?></td>
-					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->image_link ?>"></td>
-                      <td><?php echo $baris->nama_produk ?></td>
-                      <td><a href="<?php echo base_url(),"admin/viewSuplier/", $baris->id_suplier ?>"><?php echo $baris->nama_suplier ?></a></td>
-                      <td><span class="label label-success">Rp <?php echo $baris->harga ?></span></td>
+                      <td><?php echo $baris->id_item ?></td>
+                      <td><?php echo $baris->nama_item ?></td>
+                      <td><?php echo $baris->tipe ?></a></td>
+                      <td><span class="label label-success"> <?php echo $baris->satuan ?></span></td>
+					  <td>@ Rp<?php echo $baris->hargaSatuan ?> </td>
+					  <td><?php echo $baris->jumlah ?> item</td>
+						
                       <td> 
 					  <div>
-					  <input type="hidden" name="id" value="<?php echo $baris->id_produk ?>" >
-						<input type="hidden" name="nama" value="<?php echo $baris->nama_produk ?>" >
-						<input type="hidden" name="harga" value="<?php echo $baris->harga ?>" >
+					  <input name="harga" class="form-control pull-left" type="hidden" value="<?php echo $baris->hargaSatuan ?>" >
+					  <input type="hidden" name="id" value="<?php echo $baris->id_item ?>" >
+						<input type="hidden" name="nama" value="<?php echo $baris->nama_item ?>" >
+						
 						</div>
 					  <div class="btn-group">
-					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah">
+					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah barang datang yg fix">
 					   <input class="pull-right btn btn-primary" type="submit" value="Add" >
 						</div>
 					</td>
@@ -86,7 +82,7 @@
 					<H3></H3>
 					</div>
 					 <div class="box-body">
-					  <form method="post" action="<?php echo base_url() ?>admin/addDataBelanja">
+					  <form method="post" action="<?php echo base_url() ?>gudang/addDataGudang">
 					 <table class="table table-hover">
                     <tr>
                       
@@ -94,11 +90,11 @@
                       <th>Harga</th>
 					   <th>Pilihan</th>
 					   
-                      <input type="hidden" name="idtransaksi" value="<?php echo "TM",time()  ?>">
+                      <input type="hidden" name="idtransaksi" value="<?php echo "REC",time()  ?>">
                     </tr>
 					 <?php foreach($this->cart->contents() as $item){ ?>
 					<tr>
-						 <td><?php echo $item['name'] ?></td>
+						 <td><?php echo $item['name'],$item['id']; ?></td>
 						<input type="hidden" name="id" value="<?php echo $item['id'] ?>">
 						 <td>
                              <?php echo $item['qty'] ?>
@@ -110,7 +106,7 @@
 						   <input type="hidden" name="total" value="<?php echo $this->cart->total() ?>">
                         </td>
 						<td>
-							<a href="<?php echo base_url(),"admin/hapus/" ,$item['rowid']; ?>">Hapus</a>
+							<a href="<?php echo base_url(),"gudang/hapus/" ,$item['rowid']; ?>">Hapus</a>
 						</td>
 						<?php } ?>
 					</tr>
@@ -119,7 +115,7 @@
 									
 								</td>
 								<td>
-									Total <?php echo "TM",time()  ?>
+									Total: 
 								</td>
 								<td>
 									<?php if($this->cart->total()>0){
@@ -133,17 +129,7 @@
 							  </tr>
 							  
 					</table>
-					<div class="form-group">
-						<label>Customer</label>
-						<select name="id_customer" class="form-control select2" style="width: 100%;">
-						  <option>-Pilih</option>
-						  	<?php if(!empty($isi)){
-							foreach($customer as $baris){ ?>
-						  <option value="<?php echo $baris->id_customer ?>"><?php echo $baris->nama ?></option>
-							<?php }} ?>
-						  
-						</select>
-					</div>
+				
 					 <div class="form-group">
                       <label for="exampleInputEmail1">Tanggal</label>
                       <input name="tgl" type="text" class="form-control datepicker"  placeholder="Tanggal input " data-date-format="yyyy-mm-dd" >

@@ -24,7 +24,7 @@
                   <h3 class="box-title">Form Input Service</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="<?php echo base_url() ?>admin/addService_act" method="post" enctype="multipart/form-data">
+                <form role="form" action="<?php echo base_url() ?>service/addService_act" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					 <div class="form-group">
                       <label for="exampleInputEmail1">Tanggal</label>

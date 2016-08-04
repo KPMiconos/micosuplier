@@ -63,7 +63,7 @@
 					  <th>
 					  <div class="btn-group btn-group-lg">
 						<?php if($baris->status<>3) {?>
-							<a href="<?php echo base_url() ?>admin/pilihSolving/<?php echo $baris->id_service ?>" ><li class="fa  fa-wrench btn btn-primary " data-toggle="tooltip" data-placement="top" title="Solving"></li></a>
+							<a href="<?php echo base_url() ?>service/pilihSolving/<?php echo $baris->id_service ?>" ><li class="fa  fa-wrench btn btn-primary " data-toggle="tooltip" data-placement="top" title="Solving"></li></a>
 						<?php }?>
 						<a href="#"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
 						<a href="#"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
