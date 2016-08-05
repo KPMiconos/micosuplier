@@ -38,7 +38,7 @@
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
                     <tr>
-                      <th>ID</th>
+                      <th>Barcode</th>
 					   <th>Gambar</th>
                       <th>Nama Produk</th>
                       <th>Tipe</th>
@@ -54,8 +54,32 @@
                       <td><?php echo $baris->id_item ?></td>
 					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->link_photo ?>"></td>
                       <td><?php echo $baris->nama_item ?></td>
-                      <td><?php echo $baris->tipe ?></a></td>
-                      <td><span class="label label-success"> <?php echo $baris->satuan ?></span></td>
+                      <td>
+					  <?php
+						if($baris->tipe=="1"){
+							echo "Raw";
+						}else if($baris->tipe=="2"){
+							echo "Semi-finish";
+						}else if($baris->tipe=="3"){
+							echo "Finish";
+						}
+						 
+						?>
+						</a></td>
+                      <td><span class="label label-success"> 
+					  <?php 
+						if($baris->satuan=="1"){
+							echo "Pcs";
+						} else if($baris->satuan=="2"){
+							echo "Kg";
+						}else if($baris->satuan=="3"){
+							echo "m";
+						}else if($baris->satuan=="4"){
+							echo "m2";
+						}else if($baris->satuan=="5"){
+							echo "m3";
+						}
+					  ?></span></td>
 					  <td>
 					   <input name="harga" class="form-control pull-left" type="text"  style="width:100px" data-toggle="tooltip" data-placement="top" title="Harga Satuan">
 					  </td>

@@ -45,8 +45,33 @@
                     <tr>
                       <td><?php echo $baris->id_item ?></td>
                       <td><?php echo $baris->nama_item ?></td>
-                      <td><?php echo $baris->tipe ?></a></td>
-                      <td><span class="label label-success"> <?php echo $baris->satuan ?></span></td>
+                      <td>
+					  <?php
+						if($baris->tipe=="1"){
+							echo "Raw";
+						}else if($baris->tipe=="2"){
+							echo "Semi-finish";
+						}else if($baris->tipe=="3"){
+							echo "Finish";
+						}
+						 
+						?>
+						</a></td>
+                      <td><span class="label label-success"> 
+					  <?php 
+						if($baris->satuan=="1"){
+							echo "Pcs";
+						} else if($baris->satuan=="2"){
+							echo "Kg";
+						}else if($baris->satuan=="3"){
+							echo "m";
+						}else if($baris->satuan=="4"){
+							echo "m2";
+						}else if($baris->satuan=="5"){
+							echo "m3";
+						}
+					  ?></span></td>
+					 
 					  <td>@ Rp<?php echo $baris->hargaSatuan ?> </td>
 					  <td><?php echo $baris->jumlah ?> item</td>
 						
@@ -104,6 +129,7 @@
                             <?php echo "Rp ",$item['price'] ?>
 						  <input type="hidden" name="harga" value="<?php echo $item['price'] ?>">
 						   <input type="hidden" name="total" value="<?php echo $this->cart->total() ?>">
+						    <input type="hidden" name="idSuplier" value="<?php echo $baris->id_suplier ?>">
                         </td>
 						<td>
 							<a href="<?php echo base_url(),"gudang/hapus/" ,$item['rowid']; ?>">Hapus</a>
@@ -129,7 +155,22 @@
 							  </tr>
 							  
 					</table>
-				
+					<div class="form-group">
+						<label>Penerima</label>
+						<select name="idPenerima" class="form-control selecttree" style="width: 100%;">
+						  <option>-Pilih</option>
+						  	<?php if(!empty($petugas)){
+							foreach($petugas as $baris){ ?>
+						  <option value="<?php echo $baris->id_petugas ?>"><?php echo $baris->nama ?></option>
+							<?php }} ?>
+						  
+						</select>
+					</div>
+					
+					 <div class="form-group">
+                      <label for="exampleInputEmail1">Kurir</label>
+                      <input name="kurir" type="text" class="form-control"  placeholder="Kurir " >
+                    </div>
 					 <div class="form-group">
                       <label for="exampleInputEmail1">Tanggal</label>
                       <input name="tgl" type="text" class="form-control datepicker"  placeholder="Tanggal input " data-date-format="yyyy-mm-dd" >

@@ -32,9 +32,16 @@
                       <input name="tgl_solved" type="text" class="form-control datepicker"  placeholder="Tanggal input Keluhan" data-date-format="yyyy-mm-dd">
                     </div>
 					 <div class="form-group">
-                      <label for="exampleInputEmail1">Teknisi</label>
-                      <input name="teknisi" type="text" class="form-control" id="exampleInput" placeholder="Nama Teknisi yang menangani">
-                    </div>
+						<label>Teknisi</label>
+						<select name="teknisi" class="form-control selecttree" style="width: 100%;">
+						  <option>-Pilih</option>
+						  	<?php if(!empty($petugas)){
+							foreach($petugas as $baris){ ?>
+						  <option value="<?php echo $baris->id_petugas ?>"><?php echo $baris->nama ?></option>
+							<?php }} ?>
+						  
+						</select>
+					</div>
 					<div class="form-group">
                       <label for="exampleInputEmail1">Penyelesaian</label>
                        <textarea name="penyelesaian" class="form-control" rows="3" placeholder="Deskripsi penyelesaian..."></textarea>

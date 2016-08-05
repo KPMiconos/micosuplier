@@ -26,10 +26,7 @@
                 <!-- form start -->
                 <form role="form" action="<?php echo base_url() ?>gudang/addItem_act" method="post" enctype="multipart/form-data">
                   <div class="box-body">
-					 <div class="form-group">
-                      <label for="exampleInputEmail1">Barcode</label>
-                      <input name="idItem" type="text" class="form-control" id="exampleInput" placeholder="Nama Barang">
-                    </div>
+					
 					 <div class="form-group">
                       <label for="exampleInputEmail1">Nama Barang</label>
                       <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Barang">

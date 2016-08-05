@@ -37,7 +37,6 @@ class Gudang extends CI_Controller {
 				  'tipe' => $this->input->post('tipe'),
 				  'satuan' => $this->input->post('satuan'),
 				  'deskripsi' => $this->input->post('deskripsi')
-                   
                 );
 				$this->load->model('mgudang');
                 $this->mgudang->addItem($data); //akses model untuk menyimpan ke database
@@ -54,8 +53,8 @@ class Gudang extends CI_Controller {
 		}
 	}
 	public function listPenerimaan(){
-		$this->load->model('mpembelian');
-		$data['isi']=$this->mpembelian->listPemesanan();
+		$this->load->model('mgudang');
+		$data['isi']=$this->mgudang->listPenerimaan();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
@@ -68,6 +67,8 @@ class Gudang extends CI_Controller {
 		$this->session->set_userdata('idPO',$id);
 		$this->load->model('mgudang');
 		$data['isi']=$this->mgudang->viewPO($id);
+		$this->load->model('petugas');
+		$data['petugas']=$this->petugas->list_petugas();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
@@ -108,8 +109,63 @@ class Gudang extends CI_Controller {
 		$idtrans=$this->input->post('idtransaksi');
 		$data = array(
 				'idTransaksi' => $this->input->post('idtransaksi'),
+				'idSuplier' => $this->input->post('idSuplier'),
 				'id' => $this->input->post('id'),
 				'qty' => $this->input->post('jumlah'),
+				'price' => $this->input->post('harga'),
+				'total' => $this->input->post('total'),
+				'tgl' => $this->input->post('tgl'),
+				'idPenerima' => $this->input->post('idPenerima'),
+				'kurir' => $this->input->post('kurir'),
+				'idPO' => $this->session->userdata('idPO'),
+				'email' => $this->session->userdata('username')
+				
+            );
+		
+		$this->load->model('mgudang');
+		$this->mgudang->addGudang($data);
+		redirect("gudang/listPenerimaan");
+		
+	}
+	public function listBarang()
+	{
+		$this->load->model('produk');
+		$data['isi']=$this->produk->list_produk();
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/listProduk',$data);
+		$this->load->view('dasboard/footer');
+	}
+	public function listDefect(){
+		
+		$this->load->model('mgudang');
+		$data['isi']=$this->mgudang->listDefect();
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/listDefect',$data);
+		$this->load->view('dasboard/footer');
+	}
+	public function returnDefect(){
+		$data = array(
+				'idPurchasing' => $this->input->post('idPurchasing'),
+				'idItem' => $this->input->post('idItem'),
+				'jumlah' => $this->input->post('jumlah')
+            );
+		
+		$this->load->model('mgudang');
+		$this->mgudang->returnDefect($data);
+		redirect("gudang/listDefect");
+	}
+	public function addReturn()
+	{
+		
+		$idtrans=$this->input->post('idtransaksi');
+		$data = array(
+				'idPurchasing' => $this->input->post('idPurchasing'),
+				'idItem' => $this->input->post('id'),
+				'jumlah' => $this->input->post('jumlah'),
 				'price' => $this->input->post('harga'),
 				'total' => $this->input->post('total'),
 				'tgl' => $this->input->post('tgl'),
@@ -123,15 +179,9 @@ class Gudang extends CI_Controller {
 		redirect("gudang/listPenerimaan");
 		
 	}
-	public function listDefect(){
-		unset($_SESSION['idPO']);
+	public function deleteDefect($id){
 		$this->load->model('mgudang');
-		$data['isi']=$this->mgudang->listDefect();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/listDefect',$data);
-		$this->load->view('dasboard/footer');
+		$this->mgudang->deleteDefect($id);
 	}
 }
 ?>

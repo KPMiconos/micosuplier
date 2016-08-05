@@ -51,26 +51,8 @@ class Admin extends CI_Controller {
 		$this->load->view('dasboard/footer');
 	}
 	
-	public function listUnsolved()
-	{
-		$this->load->model('service');
-		$data['isi']=$this->service->list_unsolved();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/listUnsolvedService',$data);
-		$this->load->view('dasboard/footer');
-	}
-	public function listProduk()
-	{
-		$this->load->model('produk');
-		$data['isi']=$this->produk->list_produk();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/listProduk',$data);
-		$this->load->view('dasboard/footer');
-	}
+	
+	
 	public function listPenjualan()
 	{
 		$this->load->model('penjualan');
@@ -190,19 +172,7 @@ class Admin extends CI_Controller {
 		$this->load->view('dasboard/footer');
 		
 	}
-	public function viewService($id){
-		
-		$this->load->model('service');
-		//$this->load->model('produk');
-		$data['isi']=$this->service->view_service($id);
-		//$data['produk']=$this->produk->list_produk_perSuplier($id);
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/viewService',$data);
-		$this->load->view('dasboard/footer');
-		
-	}
+	
 	//update or edit data
 	public function uploadImgPetugas_act(){
 		$this->load->library('upload');
@@ -505,52 +475,8 @@ class Admin extends CI_Controller {
 			redirect("admin/addSuplier");
 		}
 	}
-	public function addService_act(){
-		$this->db->reconnect();
-		$data = array(
-				'petugas' => $this->session->userdata('username'),
-				'tgl_open' => $this->input->post('tgl_open'),
-				'customer' => $this->input->post('customer'),
-				'subjek' => $this->input->post('subjek'),
-				'keluhan' => $this->input->post('keluhan'),
-				'tgl_solved' => $this->input->post('tgl_solved'),
-				'teknisi' => $this->input->post('teknisi'),
-				'penyelesaian' => $this->input->post('penyelesaian'),
-				'status' => $this->input->post('status')
-				
-            );
-		$this->load->model('service');
-		$query=$this->service->addService($data);
-		
-		if($query==0){
-			redirect("admin/listService");
-		}else{
-		
-			redirect("admin/addService");
-		}
-	}
-	public function addSolving_act(){
-		$this->db->reconnect();
-		$data = array(
-				
-				'id_service' => $this->input->post('id_service'),
-				'tgl_solved' => $this->input->post('tgl_solved'),
-				'teknisi' => $this->input->post('teknisi'),
-				'penyelesaian' => $this->input->post('penyelesaian'),
-				'status' => $this->input->post('status')
-				
-            );
-		$this->load->model('service');
-		//echo $data['id_service'];
-		$query=$this->service->addSolving($data);
-		
-		if($query==0){
-			redirect("admin/listService");
-		}else{
-		
-			redirect("admin/listUnsolved");
-		}
-	}
+	
+	
 	public function addProduk_act(){
 		$this->load->library('upload');
         $nmfile = "file_".time(); //nama file saya beri nama langsung dan diikuti fungsi time
@@ -627,6 +553,8 @@ class Admin extends CI_Controller {
 				'price' => $this->input->post('harga'),
 				'total' => $this->input->post('total'),
 				'tgl' => $this->input->post('tgl'),
+				'kurir' => $this->input->post('kurir'),
+				
 				'idCustomer' => $this->input->post('id_customer'),
 				'email' => $this->session->userdata('username')
 				
@@ -670,5 +598,6 @@ class Admin extends CI_Controller {
 		$this->session->sess_destroy();
 			redirect("home");
 	}
+	
 	
 }

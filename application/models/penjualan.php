@@ -6,15 +6,47 @@ class Penjualan extends CI_Model{
                 parent::__construct();
 	 }
 	 public function addPenjualan($data){
-		 //echo $data['email'],">",$data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$data['id'],">",$data['qty'],">",$data['price'];
-		$idTransaksi=$data['idTransaksi'];
+		
 		$this->db->reconnect();		
-		$query=$this->db->query("CALL sp_pembelian('$data[idTransaksi]','$data[email]','$data[idCustomer]','$data[total]','$data[tgl]')");
+		$query=$this->db->query("CALL sp_input_penjualan('$data[idTransaksi]','$data[email]','$data[idCustomer]','$data[total]','$data[tgl]','$data[kurir]')");
 		foreach($this->cart->contents() as $item){
-			//echo $data['email'],">",$data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$item['id'],">",$item['qty'],">",$item['price'];
-				$this->db->query("CALL sp_detail_pembelian('$data[idTransaksi]','$item[id]','$item[qty]','$item[price]')");
-				 //echo $data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$data['id'],">",$data['qty'],">",$data['price'];
-				
+			$id=$item['id'];
+			
+			$query = $this->db->query("CALL sp_cekStok('$id')");
+			if ($query->num_rows() > 0)
+			{
+				$butuh=$item['qty'];
+				foreach ($query->result() as $row)
+				{
+						$stok = $row->jumlah;
+						$po = $row->id_purchasing;
+						$id_item = $row->id_item;
+						if($stok>=$butuh){
+							//echo "cek1";
+							$this->db->reconnect();	
+							$this->db->query("CALL sp_pengurangan_stok('$po','$id_item','$butuh')");
+							$this->db->query("CALL sp_input_detailPenjualan('$data[idTransaksi]','$item[id]','$item[qty]','$item[price]')");
+								$butuh=$butuh-$stok;
+							//echo $butuh;
+							break;
+						}else{
+							
+							$this->db->reconnect();	
+							//echo "cek2";
+							
+							$this->db->query("CALL sp_pengurangan_stok('$po','$id_item','$item[qty]')");
+							$butuh=$butuh-$stok;
+							//echo $butuh;
+						}
+						if($butuh<=0){
+							break;
+						}
+				}
+			
+			}
+			else{
+				return 0;
+			}
 		}	
 		$this->cart->destroy();
 	 }

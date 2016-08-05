@@ -41,8 +41,9 @@
                       <th>ID</th>
 					   <th>Gambar</th>
                       <th>Nama Produk</th>
-                      <th>Suplier</th>
+                      <th>Satuan</th>
                       <th>Harga</th>
+					  <th>Jumlah</th>
                       <th>Action</th>
                     </tr>
 					<?php
@@ -50,16 +51,17 @@
 							foreach($isi as $baris){ ?>
 					<form method="POST" action="<?php echo base_url(),"service/addCart/"?>" >
                     <tr>
-                      <td><?php echo $baris->id_produk ?></td>
-					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->image_link ?>"></td>
-                      <td><?php echo $baris->nama_produk ?></td>
-                      <td><a href="<?php echo base_url(),"admin/viewSuplier/", $baris->id_suplier ?>"><?php echo $baris->nama_suplier ?></a></td>
-                      <td><span class="label label-success">Rp <?php echo $baris->harga ?></span></td>
+                      <td><?php echo $baris->id_item ?></td>
+					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->link_photo ?>"></td>
+                      <td><?php echo $baris->nama_item ?></td>
+                      <td><?php echo $baris->satuan ?></td>
+                      <td><span class="label label-success">Rp <?php echo $baris->hargaSatuan ?></span></td>
+					  <td><?php echo $baris->jumlah ?></td>
                       <td> 
 					  <div>
-					  <input type="hidden" name="id" value="<?php echo $baris->id_produk ?>" >
-						<input type="hidden" name="nama" value="<?php echo $baris->nama_produk ?>" >
-						<input type="hidden" name="harga" value="<?php echo $baris->harga ?>" >
+					  <input type="hidden" name="id" value="<?php echo $baris->id_item ?>" >
+						<input type="hidden" name="nama" value="<?php echo $baris->nama_item ?>" >
+						<input type="hidden" name="harga" value="<?php echo $baris->hargaSatuan ?>" >
 						</div>
 					  <div class="btn-group">
 					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah">
@@ -134,7 +136,37 @@
 							  
 					</table>
 					
+					<div class="form-group">
+						<label>Customer</label>
+						<select name="idCustomer" class="form-control select2" style="width: 100%;">
+						  <option>-Pilih</option>
+						  	<?php if(!empty($customer)){
+							foreach($customer as $baris){ ?>
+						  <option value="<?php echo $baris->id_customer ?>"><?php echo $baris->nama ?></option>
+							<?php }} ?>
+						  
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Teknisi</label>
+						<select name="teknisi" class="form-control select2" style="width: 100%;">
+						  <option>-Pilih</option>
+						  	<?php if(!empty($petugas)){
+							foreach($petugas as $baris){ ?>
+						  <option value="<?php echo $baris->id_petugas ?>"><?php echo $baris->nama ?></option>
+							<?php }} ?>
+						  
+						</select>
+					</div>
 					
+					 <div class="form-group">
+                      <label for="exampleInputEmail1">Kendaraan/Kurir</label>
+                      <input name="kurir" type="text" class="form-control"  placeholder="Kurir " >
+                    </div>
+					 <div class="form-group">
+                      <label for="exampleInputEmail1">Tanggal</label>
+                      <input name="tgl" type="text" class="form-control datepicker"  placeholder="Tanggal input " data-date-format="yyyy-mm-dd" >
+                    </div>
 					 <div class="box-footer">
 					 
                     <button type="submit" class="btn btn-primary pull-right">Submit</button>

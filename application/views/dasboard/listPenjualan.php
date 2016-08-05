@@ -37,6 +37,7 @@
                       <th>Petugas</th>
                       <th>Customer</th>
                       <th>Tanggal</th>
+					   <th>Kurir</th>
                       <th>Total</th>
 					  <th>Action</th>
                     </tr>
@@ -49,6 +50,7 @@
                       <td><strong><?php echo $baris->nama_petugas?></strong></td>
                       <td><?php echo $baris->nama_customer?></td>
                       <td><?php echo $baris->tanggal?></td>
+					  <td><?php echo $baris->kurir?></td>
                       <td><?php echo $baris->total?></td>
 					  <th>
 					  <div class="btn-group btn-group-lg">

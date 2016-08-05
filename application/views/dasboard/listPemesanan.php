@@ -54,7 +54,15 @@
                       <td><?php echo $baris->nama_suplier?></td>
 					  <td><?php echo $baris->tanggal_po?></td>
 					  <td>Rp <?php echo $baris->totalHarga?></td>
-                      <td><span class="label label-success"><?php echo $baris->status?></span></td>
+                      <td><span class="label label-success"><?php 
+							if($baris->status=="1"){
+								echo "Ordered";
+							}else if($baris->status=="2"){
+								echo "Returning";
+							}else if($baris->status=="3"){
+								echo "Completed";
+							}
+					  ?></span></td>
                       
 					  <td>
 					   <div class="btn-group btn-group-lg">

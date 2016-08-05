@@ -65,20 +65,50 @@ class Mservice extends CI_Model{
 		$this->db->reconnect();		
 		$query=$this->db->query("CALL sp_deleteService('$id')");
 	}
-	public function addServProduk($data){
-		 //echo $data['email'],">",$data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$data['id'],">",$data['qty'],">",$data['price'];
+	 public function addServProduk($data){
 		
 		$this->db->reconnect();		
-		
+		$query=$this->db->query("CALL sp_input_servProduk('$data[idService]','$data[teknisi]','$data[idCustomer]','$data[total]','$data[tgl]','$data[kurir]')");
 		foreach($this->cart->contents() as $item){
-			//echo $data['email'],">",$data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$item['id'],">",$item['qty'],">",$item['price'];
-				$this->db->query("CALL sp_input_servProduk('$data[idService]','$item[id]','$item[qty]','$item[price]')");
-				 //echo $data['idTransaksi'],">",$data['idCustomer'],">",$data['total'],">",$data['tgl'],">",$data['id'],">",$data['qty'],">",$data['price'];
-				
+			$id=$item['id'];
+			
+			$query = $this->db->query("CALL sp_cekStok('$id')");
+			if ($query->num_rows() > 0)
+			{
+				$butuh=$item['qty'];
+				foreach ($query->result() as $row)
+				{
+						$stok = $row->jumlah;
+						$po = $row->id_purchasing;
+						$id_item = $row->id_item;
+						if($stok>=$butuh){
+							//echo "cek1";
+							$this->db->reconnect();	
+							$this->db->query("CALL sp_pengurangan_stok('$po','$id_item','$butuh')");
+							$this->db->query("CALL sp_input_detailServProduk('$data[idService]','$item[id]','$item[qty]','$item[price]')");
+								$butuh=$butuh-$stok;
+							//echo $butuh;
+							break;
+						}else{
+							
+							$this->db->reconnect();	
+							//echo "cek2";
+							
+							$this->db->query("CALL sp_pengurangan_stok('$po','$id_item','$butuh')");
+							$butuh=$butuh-$stok;
+							//echo $butuh;
+						}
+						if($butuh<=0){
+							break;
+						}
+				}
+			
+			}
+			else{
+				return 0;
+			}
 		}	
 		$this->cart->destroy();
-		
-
 	 }
 	
 }

@@ -62,6 +62,8 @@ class Service extends CI_Controller {
 	public function addSolving($id)
 	{
 		$data['id']=$id;
+		$this->load->model('petugas');
+		$data['petugas']=$this->petugas->list_petugas();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
@@ -84,6 +86,8 @@ class Service extends CI_Controller {
 		$data['isi']=$this->produk->list_produk();
 		$this->load->model('customer');
 		$data['customer']=$this->customer->list_customer();
+		$this->load->model('petugas');
+		$data['petugas']=$this->petugas->list_petugas();
 		
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
@@ -178,14 +182,20 @@ class Service extends CI_Controller {
 				'id' => $this->input->post('id'),
 				'qty' => $this->input->post('jumlah'),
 				'price' => $this->input->post('harga'),
-				'total' => $this->input->post('total')
+				'total' => $this->input->post('total'),
+				'teknisi' => $this->input->post('teknisi'),
+				'kurir' => $this->input->post('kurir'),
+				'idCustomer' => $this->input->post('idCustomer'),
+				'tgl' => $this->input->post('tgl'),
+				
 				
 				
             );
 		
 		$this->load->model('mservice');
 		$this->mservice->addServProduk($data);
-		redirect("service/addSolving");
+		$id=$data['idService'];
+		redirect("service/addSolving/$id");
 		
 	}
 	

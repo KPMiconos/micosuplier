@@ -40,7 +40,8 @@
                       <th>ID</th>
 					   <th>Gambar</th>
                       <th>Nama Produk</th>
-                      <th>Suplier</th>
+                      <th>Tipe</th>
+					  <th>Satuan</th>
                       <th>Harga</th>
                       <th>Deskripsi</th>
 					  <th>Jumlah</th>
@@ -50,18 +51,43 @@
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
                     <tr>
-                      <td><?php echo $baris->id_produk ?></td>
-					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->image_link ?>"></td>
-                      <td><?php echo $baris->nama_produk ?></td>
-                      <td><a href="<?php echo base_url(),"admin/viewSuplier/", $baris->id_suplier ?>"><?php echo $baris->nama_suplier ?></a></td>
-                      <td><span class="label label-success">Rp <?php echo $baris->harga ?></span></td>
+                      <td><?php echo $baris->id_item ?></td>
+					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->link_photo ?>"></td>
+                      <td><?php echo $baris->nama_item ?></td>
+                      <td>
+					  <?php
+						if($baris->tipe=="1"){
+							echo "Raw";
+						}else if($baris->tipe=="2"){
+							echo "Semi-finish";
+						}else if($baris->tipe=="3"){
+							echo "Finish";
+						}
+						 
+						?>
+						</a></td>
+					   <td><span class="label label-success"> 
+					  <?php 
+						if($baris->satuan=="1"){
+							echo "Pcs";
+						} else if($baris->satuan=="2"){
+							echo "Kg";
+						}else if($baris->satuan=="3"){
+							echo "m";
+						}else if($baris->satuan=="4"){
+							echo "m2";
+						}else if($baris->satuan=="5"){
+							echo "m3";
+						}
+					  ?></span></td>
+                      <td>Rp <?php echo $baris->hargaSatuan ?></td>
                       <td><?php echo word_limiter($baris->deskripsi,10),"..." ?></td>
-					  <td><?php echo $baris->jumlah ?></td>
+					  <td><?php echo $baris->jumlah ?> item</td>
 					  <td>
 					   <div class="btn-group btn-group-lg">
 							<a href="#"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
 							<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-							<a href="<?php echo base_url(),"admin/viewProduk/",$baris->id_produk?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+							<a href="<?php echo base_url(),"admin/viewProduk/",$baris->id_item?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
 						</div>
 					  </td>
                     </tr>

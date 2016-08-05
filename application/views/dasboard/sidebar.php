@@ -39,7 +39,7 @@
             <li class="treeview">
               <a href="#">
                 <i class="fa  fa-truck"></i>
-                <span>Suplier</span>
+                <span>Supplier</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -93,7 +93,7 @@
               <ul class="treeview-menu">
 				<li><a href="<?php echo base_url() ?>gudang/addItem"><i class="fa fa-circle-o"></i> Tambah Item </a></li>
 				<li><a href="<?php echo base_url() ?>gudang/listPenerimaan"><i class="fa fa-circle-o"></i> Penerimaan Barang</a></li>
-                <li><a href="<?php echo base_url() ?>admin/listProduk"><i class="fa fa-circle-o"></i> List Barang</a></li>
+                <li><a href="<?php echo base_url() ?>gudang/listBarang"><i class="fa fa-circle-o"></i> Stok Barang</a></li>
 				<li><a href="<?php echo base_url() ?>gudang/listDefect"><i class="fa fa-circle-o"></i> Barang Rusak</a></li>
                
               </ul>
@@ -116,9 +116,10 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-				<li><a href="<?php echo base_url() ?>admin/addPenjualan"><i class="fa fa-circle-o"></i> Penjualan</a></li>
-                <li><a href="<?php echo base_url() ?>admin/listPenjualan"><i class="fa fa-circle-o"></i></a></li>
-				<li><a href="<?php echo base_url() ?>admin/Report"><i class="fa fa-circle-o"></i> Report</a></li>
+				<li><a href="<?php echo base_url() ?>laporan/laporanMasuk"><i class="fa fa-circle-o"></i> Barang Masuk</a></li>
+                <li><a href="<?php echo base_url() ?>laporan/laporanKeluar"><i class="fa fa-circle-o"></i>Barang Keluar</a></li>
+				<li><a href="<?php echo base_url() ?>laporan/listPenjualan"><i class="fa fa-circle-o"></i>Barang Rusak</a></li>
+				<li><a href="<?php echo base_url() ?>admin/Report"><i class="fa fa-circle-o"></i>Penggantian</a></li>
                 
               </ul>
             </li>

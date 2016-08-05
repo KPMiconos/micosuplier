@@ -7,7 +7,7 @@ class Mgudang extends CI_Model{
 	 }
 	  public function additem($data){
 		 $this->db->reconnect();		
-		$query=$this->db->query("CALL sp_input_item('$data[idItem]','$data[nama]','$data[tipe]','$data[satuan]','$data[deskripsi]','$data[nm_gbr]')");
+		$query=$this->db->query("CALL sp_input_item('$data[nama]','$data[tipe]','$data[satuan]','$data[deskripsi]','$data[nm_gbr]')");
 	
 	 }
 	 //list_item
@@ -45,7 +45,7 @@ class Mgudang extends CI_Model{
 	public function addGudang($data){
 		
 		$this->db->reconnect();		
-		$query=$this->db->query("CALL sp_input_penerimaan('$data[idTransaksi]','$data[idPO]','$data[email]','$data[tgl]')");
+		$query=$this->db->query("CALL sp_input_penerimaan('$data[idTransaksi]','$data[idPO]','$data[idPenerima]','$data[tgl]','$data[idSuplier]','$data[total]','$data[kurir]')");
 		foreach($this->cart->contents() as $item){
 			$this->db->query("CALL sp_input_gudang('$data[idPO]','$item[id]','$item[qty]','$item[price]')");
 				
@@ -68,5 +68,29 @@ class Mgudang extends CI_Model{
 				return 0;
 			}
 	}
+	public function listPenerimaan(){
+		 $this->db->reconnect();
+			$query = $this->db->query("CALL sp_list_penerimaan()");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+	 }
+	 public function deleteDefect($id){
+		 $this->db->reconnect();
+			$query = $this->db->query("CALL sp_delete_defect($id)");
+	 }
+	 public function returnDefect($data){
+		 $this->db->reconnect();		
+		$query=$this->db->query("CALL sp_returning_defect('$data[idPurchasing]','$data[idItem]','$data[jumlah]')");
+	
+	 }
 }
 ?>

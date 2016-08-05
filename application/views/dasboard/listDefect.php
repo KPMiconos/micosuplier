@@ -17,7 +17,7 @@
         <section class="content">
          
           <div class="row">
-		  <section class="col-lg-8 connectedSortable">
+		  <section class="col-lg-10 connectedSortable">
             
               <div class="box">
                 <div class="box-header">
@@ -51,7 +51,7 @@
 					<?php
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
-					<form method="POST" action="<?php echo base_url(),"gudang/addCart"?>" >
+					<form method="POST" action="<?php echo base_url(),"gudang/returnDefect"?>" >
                     <tr>
                       <td><?php echo $baris->id_item ?></td>
                       <td><?php echo $baris->nama_item ?></td>
@@ -63,12 +63,12 @@
                       <td> 
 					  <div>
 					  <input name="harga" class="form-control pull-left" type="hidden" value="<?php echo $baris->hargaSatuan ?>" >
-					  <input type="hidden" name="id" value="<?php echo $baris->id_item ?>" >
-						<input type="hidden" name="nama" value="<?php echo $baris->nama_item ?>" >
+					  <input type="hidden" name="idItem" value="<?php echo $baris->id_item ?>" >
+						<input type="hidden" name="idPurchasing" value="<?php echo $baris->id_purchasing ?>" >
 						
 						</div>
 					  <div class="btn-group">
-					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah barang datang yg fix">
+					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah barang return">
 					   <input class="pull-right btn btn-primary" type="submit" value="Add" >
 						</div>
 					</td>
