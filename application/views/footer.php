@@ -4,17 +4,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-4">
-                    <h2>About Superlist</h2>
+                    <h2>About SI-Maniper</h2>
 
-                    <p>Superlist is directory template built upon Bootstrap and SASS to bring great experience in creation of directory.</p>
+                    <p>...</p>
                 </div><!-- /.col-* -->
 
                 <div class="col-sm-4">
                     <h2>Contact Information</h2>
 
                     <p>
-                        Your Street 123, Melbourne, Australia<br>
-                        +1-123-456-789, <a href="#">sample@example.com</a>
+                        Jl. Tasura, Perumahan Taman Cemara Blok G-16
+						Maguwoharjo, Depok, Sleman
+						D. I. Yogyakarta, Indonesia
+						55282<br>
+                        +62 274 4532764, <a href="#">info@miconos.co.id</a>
                     </p>
                 </div><!-- /.col-* -->
 
@@ -38,15 +41,12 @@
     <div class="footer-bottom">
         <div class="container">
             <div class="footer-bottom-left">
-                &copy; 2016 All rights reserved. Created by <a href="#">Aviators</a>.
+                &copy; 2016 All rights reserved.
             </div><!-- /.footer-bottom-left -->
 
             <div class="footer-bottom-right">
                 <ul class="nav nav-pills">
-                    <li><a href="index-2.html">Home</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
-                    <li><a href="contact-1.html">Contact</a></li>
+                    
                 </ul><!-- /.nav -->
             </div><!-- /.footer-bottom-right -->
         </div><!-- /.container -->
