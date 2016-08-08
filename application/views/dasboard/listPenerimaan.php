@@ -20,9 +20,9 @@
             <div class="col-xs-12 col-lg-10">
               <div class="box">
                 <div class="box-header">
-                 <a href="<?php echo base_url() ?>admin/addPetugas"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
+                <strong><h2 class="box-title"></h2></strong>
                   <div class="box-tools">
-                   <form method="post" action="<?php echo base_url() ?>admin/cariPetugas" enctype="multipart/form-data">
+                   <form method="post" action="#" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
 					
                       <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">

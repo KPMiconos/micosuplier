@@ -36,6 +36,10 @@
 						 <button type="submit" class="btn btn-primary">Filter</button>
 					</div>
 					 </form>
+					 <div class="col-lg-1">
+						 <button type="submit" class="btn btn-info"><li class="fa fa-print"></li>Print</button>
+					</div>
+					 </form>
 					 </div>
                   </div>
                </div><!-- /.box-header -->

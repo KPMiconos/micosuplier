@@ -21,9 +21,9 @@
             
               <div class="box">
                 <div class="box-header">
-                  <a href="<?php echo base_url() ?>admin/addProduk"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
+                  <h3 class="box-title"></h3>
                   <div class="box-tools">
-				  <form method="post" action="<?php echo base_url() ?>admin/cariProduk" enctype="multipart/form-data">
+				  <form method="post" action="#" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
 					
                       <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">

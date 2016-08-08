@@ -21,7 +21,7 @@
             
               <div class="box">
                 <div class="box-header">
-                  <a href="<?php echo base_url() ?>service/addProduk"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
+                  <h3 class="box-title"></h3>
                   <div class="box-tools">
 				  <form method="post" action="<?php echo base_url() ?>admin/cariProduk" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
@@ -54,26 +54,45 @@
                       <td><?php echo $baris->id_item ?></td>
 					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->link_photo ?>"></td>
                       <td><?php echo $baris->nama_item ?></td>
-                      <td><?php echo $baris->satuan ?></td>
-                      <td><span class="label label-success">Rp <?php echo $baris->hargaSatuan ?></span></td>
-					  <td><?php echo $baris->jumlah ?></td>
+                      <td> <?php 
+						if($baris->satuan=="1"){
+							echo "Pcs";
+						} else if($baris->satuan=="2"){
+							echo "Kg";
+						}else if($baris->satuan=="3"){
+							echo "m";
+						}else if($baris->satuan=="4"){
+							echo "m2";
+						}else if($baris->satuan=="5"){
+							echo "m3";
+						}
+					  ?></td>
+                      <td>Rp <?php echo $baris->hargaSatuan ?></td>
+					  <td><?php 
+						if (empty($baris->jumlah)){
+							echo "<span class='label label-danger'>Stok kosong</span>";
+						}else {
+							echo $baris->jumlah," item";
+						}?> </td>
                       <td> 
 					  <div>
 					  <input type="hidden" name="id" value="<?php echo $baris->id_item ?>" >
 						<input type="hidden" name="nama" value="<?php echo $baris->nama_item ?>" >
 						<input type="hidden" name="harga" value="<?php echo $baris->hargaSatuan ?>" >
 						</div>
+						<?php if(!empty($baris->jumlah)){?>
 					  <div class="btn-group">
 					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah">
 					   <input class="pull-right btn btn-primary" type="submit" value="Add" >
 						</div>
+						<?php } ?>
 					</td>
                     </tr>
                   </form>
                    
 					<?php }}
 						else{
-							echo "Belum ada data Petugas";
+							echo "Belum ada data";
 							}
 					?>
                   </table>

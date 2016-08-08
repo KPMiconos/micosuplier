@@ -27,15 +27,22 @@
 						<label for="exampleInputEmail1">Filter</label>                   
 					</div>
                     <div class="col-lg-2">
-						<input name="tgl_awal" type="text" class="form-control datepicker"  placeholder="Tanggal awal" data-date-format="yyyy-mm-dd" >
+						<input name="tgl_awal" type="text" class="form-control datepicker"   placeholder="Tanggal awal" data-date-format="yyyy-mm-dd" >
                     </div>
 					<div class="col-lg-2">
-						<input name="tgl_akhir" type="text" class="form-control datepicker"  placeholder="Tanggal akhir" data-date-format="yyyy-mm-dd" >
+						<input name="tgl_akhir" type="text" class="form-control datepicker"    placeholder="Tanggal akhir" data-date-format="yyyy-mm-dd" >
                     </div>
 					<div class="col-lg-1">
 						 <button type="submit" class="btn btn-primary">Filter</button>
 					</div>
 					 </form>
+					 <div class="col-lg-1">
+					 <form method="post" action="<?php echo base_url(),"laporan/exportMasuk" ?>" enctype="multipart/form-data">
+					 <input name="tgl_awal" type="hidden" >
+					 <input name="tgl_akhir" type="hidden"  > 
+						 <button type="submit" class="btn btn-info"><li class="fa fa-print"></li>Print</button>
+					</form>
+					</div>
 					 </div>
                   </div>
                 </div><!-- /.box-header -->

@@ -3,13 +3,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            List Service
+            List Barang Keluar
             
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Service</a></li>
-            <li class="active">List Service</li>
+            <li><a href="#">Penjualan</a></li>
+            <li class="active">List Barang Keluar</li>
           </ol>
         </section>
       
@@ -20,7 +20,7 @@
             <div class="col-xs-12 col-lg-10">
               <div class="box">
                 <div class="box-header">
-                 <a href="<?php echo base_url() ?>admin/addService"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
+                <h2 class="box-title"></h2></strong>
                   <div class="box-tools">
                     <div class="input-group" style="width: 150px;">
                       <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
