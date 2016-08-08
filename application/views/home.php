@@ -6,7 +6,7 @@
     <div class="hero-image-inner" style="background-image: url('<?php echo base_url() ?>assets/images/tmp/slider-large-3.jpg');">
         <div class="hero-image-content">
             <div class="container">
-                <h1>Data Base</h1>
+                <h1>Manajemen Internal Perusahaan</h1>
 
                 <p>Memuat semua data keluar masuk barang dan data pelayanan PT. Miconos</p>
 
