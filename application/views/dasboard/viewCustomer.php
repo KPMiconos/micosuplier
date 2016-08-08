@@ -49,8 +49,7 @@
               <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                   <li class="active"><a href="#activity" data-toggle="tab">About</a></li>
-				   <li><a href="#produk" data-toggle="tab">Pembelian</a></li>
-				   <li><a href="#riwayat" data-toggle="tab">Riwayat Transaksi</a></li>
+				  <li><a href="#riwayat" data-toggle="tab">Riwayat Transaksi</a></li>
                   
                   
                 </ul>
@@ -162,62 +161,12 @@
 			echo "data tidak ada";
 		} ?>
                  </div><!-- /.tab-pane -->
-				  <div class="tab-pane" id="produk">
-                    <!-- The timeline -->
-						 <div class="box">
-                <div class="box-header" style="padding:20px;">
-                  <div class="box-tools">
-				  <form method="post" action="<?php echo base_url() ?>admin/cariProduk" enctype="multipart/form-data">
-                    <div class="input-group" style="width: 150px;">
-					
-                      <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">
-                      <div class="input-group-btn">
-                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                      </div>
-					
-                    </div>
-					 </form>
-                  </div>
-                </div><!-- /.box-header -->
-                <div class="box-body table-responsive no-padding">
-                  <table class="table table-hover">
-                    <tr>
-                      <th>ID</th>
-					   <th>Gambar</th>
-                      <th>Nama Produk</th>
-                      
-                      <th>Harga</th>
-                      <th>Deskripsi</th>
-                    </tr>
-					<?php
-							if(!empty($pembelian)){
-							foreach($pembelian as $baris){ ?>
-                    <tr>
-                      <td><?php echo $baris->id_produk ?></td>
-					  <td><img src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->image_link ?>"></td>
-                      <td><?php echo $baris->nama_produk ?></td>
-                     
-                      <td><span class="label label-success">Rp <?php echo $baris->harga ?></span></td>
-                      <td><?php echo word_limiter($baris->deskripsi,10),"..." ?></td>
-                    </tr>
-                  
-                   
-					<?php }}
-						else{
-							echo "Belum ada data Produk";
-							}
-					?>
-                  </table>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-          
-					</div><!-- /.tab-pane -->
 				 <div class="tab-pane" id="riwayat">
                     <!-- The timeline -->
 						 <div class="box">
                 <div class="box-header" style="padding:20px;">
                   <div class="box-tools">
-				  <form method="post" action="<?php echo base_url() ?>admin/cariProduk" enctype="multipart/form-data">
+				  <form method="post" action="#" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
 					
                       <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">
@@ -235,8 +184,9 @@
                       <th>ID</th>
 					  
                       <th>Tanggal Transaksi</th>
-                      
-                      <th>Total</th>
+                      <th>Nama Barang</th>
+					  <th>Jumlah</th>
+                      <th>harga</th>
                       
                     </tr>
 					<?php
@@ -246,15 +196,16 @@
                       <td><?php echo $baris->id_transaksi ?></td>
 
                       <td><?php echo $baris->tanggal ?></td>
-                     
-                      <td><span class="label label-success">Rp <?php echo $baris->total?></span></td>
+                     <td><?php echo $baris->nama_item ?></td>
+					 <td><?php echo $baris->jumlah ?></td>
+                      <td>Rp <?php echo $baris->harga?></td>
                       
                     </tr>
                   
                    
 					<?php }}
 						else{
-							echo "Belum ada data Produk";
+							echo "Belum ada data";
 							}
 					?>
                   </table>

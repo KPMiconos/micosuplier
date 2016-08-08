@@ -20,20 +20,25 @@
             <div class="col-xs-12 col-lg-10">
               <div class="box">
                 <div class="box-header">
-                 <a href="<?php echo base_url() ?>admin/addPetugas"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
-                  <div class="box-tools">
-                   <form method="post" action="<?php echo base_url() ?>admin/cariPetugas" enctype="multipart/form-data">
-                    <div class="input-group" style="width: 150px;">
-					
-                      <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">
-                      <div class="input-group-btn">
-                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                      </div>
-					
+                   <div class="row">
+					<div class="co-lg-12">
+                   <form method="post" action="<?php echo base_url(),"laporan/filterKeluar" ?>" enctype="multipart/form-data">
+				   <div class="col-lg-1">
+						<label for="exampleInputEmail1">Filter</label>                   
+					</div>
+                    <div class="col-lg-2">
+						<input name="tgl_awal" type="text" class="form-control datepicker"  placeholder="Tanggal awal" data-date-format="yyyy-mm-dd" >
                     </div>
+					<div class="col-lg-2">
+						<input name="tgl_akhir" type="text" class="form-control datepicker"  placeholder="Tanggal akhir" data-date-format="yyyy-mm-dd" >
+                    </div>
+					<div class="col-lg-1">
+						 <button type="submit" class="btn btn-primary">Filter</button>
+					</div>
 					 </form>
+					 </div>
                   </div>
-                </div><!-- /.box-header -->
+               </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
                     <tr>
@@ -92,10 +97,11 @@
                    
 					<?php }}
 								else{
-									echo "Belum ada data Petugas";
-								}
-
-							?>
+									?>
+									
+										<td>Belum ada data masuk hari ini</td>
+									
+									<?php }?>
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

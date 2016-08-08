@@ -17,7 +17,7 @@
         <section class="content">
          
           <div class="row">
-            <div class="col-xs-10 col-lg-10">
+            <div class="col-xs-12 col-lg-12">
               <div class="box">
                 <div class="box-header">
                   <a href="<?php echo base_url() ?>admin/addProduk"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
@@ -44,6 +44,7 @@
 					  <th>Satuan</th>
                       <th>Harga</th>
                       <th>Deskripsi</th>
+					  
 					  <th>Jumlah</th>
 					  <th>Action</th>
                     </tr>
@@ -80,9 +81,15 @@
 							echo "m3";
 						}
 					  ?></span></td>
-                      <td>Rp <?php echo $baris->hargaSatuan ?></td>
-                      <td><?php echo word_limiter($baris->deskripsi,10),"..." ?></td>
-					  <td><?php echo $baris->jumlah ?> item</td>
+                      <td><?php echo $baris->hargaSatuan ?></td>
+                      <td style="width:200px;"><?php echo word_limiter($baris->deskripsi,10),"..." ?></td>
+					  
+					  <td><?php 
+						if (empty($baris->jumlah)){
+							echo "<span class='label label-danger'>Stok kosong</span>";
+						}else {
+							echo $baris->jumlah," item";
+						}?> </td>
 					  <td>
 					   <div class="btn-group btn-group-lg">
 							<a href="#"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>

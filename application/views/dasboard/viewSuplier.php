@@ -50,7 +50,7 @@
                     </li>
                   </ul>
 
-                  <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                 
                 </div><!-- /.box-body -->
 				
               </div><!-- /.box -->
@@ -174,7 +174,7 @@
 						 <div class="box">
                 <div class="box-header" style="padding:20px;">
                   <div class="box-tools">
-				  <form method="post" action="<?php echo base_url() ?>admin/cariProduk" enctype="multipart/form-data">
+				  <form method="post" action="#" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
 					
                       <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">
@@ -192,20 +192,37 @@
                       <th>ID</th>
 					   <th>Gambar</th>
                       <th>Nama Produk</th>
-                      <th>Suplier</th>
-                      <th>Harga</th>
+                      <th>Satuan</th>
+                      <th>Stok</th>
                       <th>Deskripsi</th>
                     </tr>
 					<?php
-							if(!empty($isi)){
+							if(!empty($produk)){
 							foreach($produk as $baris2){ ?>
                     <tr>
-                      <td><?php echo $baris2->id_produk ?></td>
-					  <td><img src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris2->image_link ?>"></td>
-                      <td><?php echo $baris2->nama_produk ?></td>
-                      <td><a href="<?php echo base_url(),"admin/viewSuplier/", $baris2->id_suplier ?>"><?php echo $baris2->nama_suplier ?></a></td>
-                      <td><span class="label label-success">Rp <?php echo $baris2->harga ?></span></td>
-                      <td><?php echo word_limiter($baris2->deskripsi,10),"..." ?></td>
+                      <td><?php echo $baris2->id_item ?></td>
+					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris2->link_photo ?>"></td>
+                      <td><?php echo $baris2->nama_item ?></td>
+                      <td><?php 
+						if($baris2->satuan=="1"){
+							echo "Pcs";
+						} else if($baris2->satuan=="2"){
+							echo "Kg";
+						}else if($baris2->satuan=="3"){
+							echo "m";
+						}else if($baris2->satuan=="4"){
+							echo "m2";
+						}else if($baris2->satuan=="5"){
+							echo "m3";
+						}
+					  ?></td>
+                      <td><?php 
+						if (empty($baris2->jumlah)){
+							echo "<span class='label label-danger'>Stok kosong</span>";
+						}else {
+							echo $baris2->jumlah," item";
+						}?> </td>
+                      <td><?php echo word_limiter($baris2->deskripsi,5),"..." ?></td>
                     </tr>
                   
                    

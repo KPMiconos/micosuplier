@@ -162,7 +162,7 @@ class Admin extends CI_Controller {
 		$this->load->model('customer');
 		//$this->load->model('produk');
 		$data['isi']=$this->customer->view_customer($id);
-		$data['pembelian']=$this->customer->list_pembelian($id);
+	
 		$data['institusi']=$this->customer->list_institusi();
 		$data['transaksi']=$this->customer->list_transaksi($id);
 		$this->load->view('dasboard/head');
@@ -469,7 +469,7 @@ class Admin extends CI_Controller {
 		$query=$this->customer->addInstitusi($data);
 		
 		if($query==0){
-			redirect("/admin/listInstitusi");
+			redirect("admin/listInstitusi");
 		}else{
 		
 			redirect("admin/addSuplier");

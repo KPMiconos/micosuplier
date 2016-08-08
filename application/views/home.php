@@ -6,11 +6,11 @@
     <div class="hero-image-inner" style="background-image: url('<?php echo base_url() ?>assets/images/tmp/slider-large-3.jpg');">
         <div class="hero-image-content">
             <div class="container">
-                <h1>Directory Template</h1>
+                <h1>Data Base</h1>
 
-                <p>Create your own directory website by using Superlist template <br> incorporating all features of modern directory website.</p>
+                <p>Memuat semua data keluar masuk barang dan data pelayanan PT. Miconos</p>
 
-                <a href="listing-row.html" class="btn btn-primary btn-lg">Cari Suplier Produk</a>
+                <a href="#" class="btn btn-primary btn-lg">Cari Suplier Produk</a>
                 
             </div><!-- /.container -->
         </div><!-- /.hero-image-content -->

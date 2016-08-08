@@ -9,7 +9,7 @@
                 <div class="header-logo">
                     <a href="index-2.html">
                         <img src="<?php echo base_url() ?>assets/images/logo-white.png" alt="Logo">
-                        <span>SI-Micosuplier</span>
+                        <span>SI-Maniper</span>
                     </a>
                 </div><!-- /.header-logo -->
 

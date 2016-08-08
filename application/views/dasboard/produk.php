@@ -54,7 +54,19 @@
                       <td><?php echo $baris->id_item ?></td>
 					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->link_photo ?>"></td>
                       <td><?php echo $baris->nama_item ?></td>
-                      <td><?php echo $baris->satuan; ?></td>
+                      <td><?php 
+						if($baris->satuan=="1"){
+							echo "Pcs";
+						} else if($baris->satuan=="2"){
+							echo "Kg";
+						}else if($baris->satuan=="3"){
+							echo "m";
+						}else if($baris->satuan=="4"){
+							echo "m2";
+						}else if($baris->satuan=="5"){
+							echo "m3";
+						}
+					  ?></td>
 					   <td><?php echo $baris->jumlah ?></td>
                       <td><span class="label label-success">Rp <?php echo $baris->hargaSatuan ?></span></td>
                       <td> 

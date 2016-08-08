@@ -68,8 +68,10 @@
 						
 						</div>
 					  <div class="btn-group">
+					  <?php if($baris->status=="1"){ ?>
 					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah barang return">
 					   <input class="pull-right btn btn-primary" type="submit" value="Add" >
+					  <?php }else{ echo "Returned";}?>
 						</div>
 					</td>
 					<td>
