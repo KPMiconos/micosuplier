@@ -7,7 +7,7 @@
         }
 	public function addCustomer($data){
 		$this->db->reconnect();		
-		$query=$this->db->query("CALL sp_input_customer('$data[idInstitut]','$data[nama]','$data[jenkel]','$data[alamat]','$data[hp]','$data[email],'$data[jabatan]'')");
+		$query=$this->db->query("CALL sp_input_customer('$data[idCustomer]','$data[idInstitut]','$data[nama]','$data[jenkel]','$data[alamat]','$data[hp]','$data[email]','$data[jabatan]')");
 	}
 	public function list_customer(){
 		$this->db->reconnect();

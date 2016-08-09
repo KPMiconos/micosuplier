@@ -57,7 +57,7 @@ class Laporan extends CI_Controller {
 		$this->load->view('dasboard/footer');
 	}
 	public function exportMasuk(){
-		/* $this->load->library(array('PHPExcel'));
+		 $this->load->library(array('PHPExcel'));
 		 $data = array(
 				
 				'tgl_awal' => $this->input->post('tgl_awal'),
@@ -71,8 +71,8 @@ class Laporan extends CI_Controller {
             $objPHPExcel = new PHPExcel();
             // Set properties
             $objPHPExcel->getProperties()
-                  ->setCreator("SAMSUL ARIFIN") //creator
-                    ->setTitle("Programmer - Regional Planning and Monitoring, XL AXIATA");  //file title
+                  ->setCreator("Miconos") //creator
+                    ->setTitle("Programmer - ");  //file title
  
             $objset = $objPHPExcel->setActiveSheetIndex(0); //inisiasi set object
             $objget = $objPHPExcel->getActiveSheet();  //inisiasi get object
@@ -139,33 +139,97 @@ class Laporan extends CI_Controller {
             //$objPHPExcel->getActiveSheet()->setTitle('Data Export');
  
             $objPHPExcel->setActiveSheetIndex(0);  
-            $filename = urlencode("Data".date("Y-m-d H:i:s").".xls");
-               
-              header('Content-Type: application/vnd.ms-excel'); //mime type
-              header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
-              header('Cache-Control: max-age=0'); //no cache
- 
-            //$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5'); 			
-           // $objWriter->save();
+		   $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+			$filename = urlencode("L_Masuk".date('Y-m-d H-i-s').".xlsx");
+			header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+			header('Content-Disposition:inline;filename="'.$filename.'"');
+			$objWriter->save('php://output');		
         }else{
             redirect('Excel');
-        }
+        }/*
 				//load library PHPExcel
-		$this->load->library('phpexcel');//Panggil Library Excel
+		$this->load->library('phpexcel');
+		
  
-                $this->excel->setActiveSheetIndex(0)
-                               ->setCellValue('A1', 'Hello')
-                               ->setCellValue('B2', 'world!')
-                               ->setCellValue('C1', 'Hello')
-                               ->setCellValue('D2', 'world!');
-                $this->excel->getActiveSheet()->setTitle('Simple');
+		// merubah style border pada cell yang aktif (cell yang terisi)
+		$styleArray = array( 'borders' => 
+			array( 'allborders' => 
+				array( 'style' => PHPExcel_Style_Border::BORDER_THIN, 'color' => array('argb' => '00000000'), 
+					), 
+				), 
+			);
  
-                $this->excel->setActiveSheetIndex(0);
+		// melakukan pengaturan pada header kolom
+		$fontHeader = array( 
+			'font' => array(
+				'bold' => true
+			),
+			'alignment' => array(
+				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+             	'vertical'   => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+             	'rotation'   => 0,
+			),
+			'fill' => array(
+            	'type' => PHPExcel_Style_Fill::FILL_SOLID,
+            	'color' => array('rgb' => '6CCECB')
+        	)
+		);
  
-                $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
+		//membuat object baru bernama $objPHPExcel
+		$objPHPExcel = new PHPExcel();
+		$objPHPExcel->getProperties()->setTitle("Miconos")->setDescription("Pergudangan");
  
-                $objWriter->save(APPPATH."../assets/doc/apalah.xlsx");    //Simpan sebagai apalah.xlsx
-		*/
+		// data dibuat pada sheet pertama
+		$objPHPExcel->setActiveSheetIndex(0); 
+ 
+		//set header kolom
+		$objPHPExcel->getActiveSheet()->setCellValue('B2', 'No.'); 
+		$objPHPExcel->getActiveSheet()->setCellValue('C2', 'Nama Lengkap'); 
+		$objPHPExcel->getActiveSheet()->setCellValue('D2', 'Alamat');
+		 $data = array(
+				
+				'tgl_awal' => $this->input->post('tgl_awal'),
+				'tgl_akhir' => $this->input->post('tgl_akhir')
+            );
+			
+        $this->load->model('mlaporan');
+		$ambildata = $this->mlaporan->filterLaporanMasuk($data);
+		
+		// pendefinisian data
+		$isi = array(
+			array('B' => '1', 'C' => 'Budi Santoso', 'D' => 'Depok'),
+			array('B' => '2', 'C' => 'Susi Liana', 'D' => 'Jakarta'),
+			array('B' => '3', 'C' => 'Ari Agung', 'D' => 'Jakarta'),
+			array('B' => '4', 'C' => 'Ira Mandala', 'D' => 'Surabaya'),
+			array('B' => '5', 'C' => 'Joko Dolo', 'D' => 'Depok'),
+			array('B' => '6', 'C' => 'Hasan Basri', 'D' => 'Bandung'),
+		);
+		
+		// melakukan pengisian data
+		foreach($isi as $k => $v)
+		{
+			$col = $k + 3;
+			foreach($v as $k1 => $v1)
+			{
+				$column = $k1.$col;
+				$objPHPExcel->getActiveSheet()->setCellValue($column, $v1); 
+			}
+		}
+ 
+		$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+ 
+		$objWorksheet = $objPHPExcel->getActiveSheet();
+		$objWorksheet->getStyle('B2:D2')->applyFromArray($fontHeader);
+		$objWorksheet->getStyle('B2:'.$column)->applyFromArray($styleArray);
+ 
+		$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+		$filename = urlencode("L_Masuk".date('Y-m-d H-i-s').".xlsx");
+		header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition:inline;filename="'.$filename.'"');
+		$objWriter->save('php://output');		
+		//$objWriter->save("test_".date('Y-m-d H-i-s').".xlsx");*/
 	}
 	
 	

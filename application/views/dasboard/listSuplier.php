@@ -17,7 +17,7 @@
         <section class="content">
          
           <div class="row">
-            <div class="col-xs-12 col-lg-10">
+            <div class="col-xs-12 col-lg-12">
               <div class="box">
                 <div class="box-header">
                   <a href="<?php echo base_url() ?>admin/addSuplier"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
@@ -53,7 +53,7 @@
                       <td><?php echo $baris->email ?></td>
                       <td><span class="label label-success"><?php echo $baris->hp ?></span></td>
                       <td style="width:200px;"><?php echo word_limiter($baris->deskripsi,5) ?></td>
-					  <td>
+					  <td style="width:150px;">
 					   <div class="btn-group btn-group-lg">
 					   <a href="<?php echo base_url(),"admin/deleteSuplier/",$baris->id_suplier ?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
 						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_suplier ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>

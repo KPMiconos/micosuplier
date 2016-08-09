@@ -28,16 +28,19 @@
                   <div class="box-body">
 					 <div class="form-group">
 						<label>Institusi</label>
-						<select name="institusi" class="form-control selecttree" style="width: 100%;">
+						<select name="idInstitut" class="form-control selecttree" style="width: 100%;">
 							<option>-Pilih</option>
-							<option value="1">General</option>
-							<option value="2" >Perempuan</option>
+							
+							<?php if(!empty($isi)){
+							foreach($isi as $baris){ ?>
+							<option value="<?php echo $baris->id_institusi  ?>"><?php echo $baris->nama_institusi; ?></option>
+							<?php }} ?>
                       
 						</select>
 					</div>
 					   <div class="form-group">
                       <label for="exampleInputEmail1">No.ID</label>
-                      <input name="idInstitut" type="text" class="form-control" id="exampleInput" placeholder="Nama Lengkap" required>
+                      <input name="idCustomer" type="text" class="form-control" id="exampleInput" placeholder="Nama Lengkap" required>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nama</label>

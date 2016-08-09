@@ -16,7 +16,7 @@
                 <div class="header-content">
                     <div class="header-bottom">
                         <div class="header-action">
-                            <a href="listing-submit.html" class="header-action-inner" title="Add Data" data-toggle="tooltip" data-placement="bottom">
+                            <a href="#" class="header-action-inner" title="Add Data" data-toggle="tooltip" data-placement="bottom">
                                 <i class="fa fa-plus"></i>
                             </a><!-- /.header-action-inner -->
                         </div><!-- /.header-action -->

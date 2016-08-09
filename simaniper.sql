@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2016 at 01:50 AM
+-- Generation Time: Aug 10, 2016 at 01:45 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.5.30
 
@@ -93,8 +93,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_filter_laporanPenjualan` (`_tgl_
 	where penjualan.`tanggal`>=_tgl_awal and penjualan.`tanggal`<=_tgl_akhir;
     END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_input_customer` (`_id_istitut` VARCHAR(100), `_nama` VARCHAR(200), `_jenkel` VARCHAR(3), `_alamat` VARCHAR(500), `_hp` VARCHAR(20), `_email` VARCHAR(200), `_jabatan` VARCHAR(100))  BEGIN
-	insert into `customer` (id_customer,nama,jenkel,alamat,hp,email,tgl,jabatan) values(_id_institu,_nama,_jenkel,_alamat,_hp,_email,now(),_jabatan);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_input_customer` (`_idCustomer` VARCHAR(100), `_id_institut` VARCHAR(100), `_nama` VARCHAR(200), `_jenkel` VARCHAR(3), `_alamat` VARCHAR(500), `_hp` VARCHAR(20), `_email` VARCHAR(200), `_jabatan` VARCHAR(100))  BEGIN
+	INSERT INTO `customer` (id_customer,id_institut,nama,jenkel,alamat,hp,email,tgl,jabatan) VALUES(_idCustomer,_id_institut,_nama,_jenkel,_alamat,_hp,_email,NOW(),_jabatan);
     END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_input_defect` (`_id` VARCHAR(100), `_id_item` INT(11), `_jumlah` INT(11), `_harga` INT(11))  BEGIN
@@ -799,12 +799,12 @@ ALTER TABLE `suplier`
 -- AUTO_INCREMENT for table `item_master`
 --
 ALTER TABLE `item_master`
-  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `service`
 --
 ALTER TABLE `service`
-  MODIFY `id_service` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_service` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `solving`
 --
@@ -814,7 +814,7 @@ ALTER TABLE `solving`
 -- AUTO_INCREMENT for table `suplier`
 --
 ALTER TABLE `suplier`
-  MODIFY `id_suplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_suplier` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

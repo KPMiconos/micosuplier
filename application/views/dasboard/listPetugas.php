@@ -17,7 +17,7 @@
         <section class="content">
          
           <div class="row">
-            <div class="col-xs-12 col-lg-10">
+            <div class="col-xs-12 col-lg-12">
               <div class="box">
                 <div class="box-header">
                  <a href="<?php echo base_url() ?>admin/addPetugas"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
@@ -51,9 +51,9 @@
                       <td><a href="<?php echo base_url(),"admin/viewPetugas/",$baris->id_petugas?>"><?php echo $baris->id_petugas?></a></td>
                       <td><?php echo $baris->nama?></td>
                       <td><?php echo $baris->email?></td>
-                      <td><span class="label label-success"><?php echo $baris->hp?></span></td>
+                      <td><?php echo $baris->hp?></td>
                       <td><?php echo $baris->jabatan?></td>
-					  <td>
+					  <td style="width:150px">
 					   <div class="btn-group btn-group-lg">
 					   <a href="<?php echo base_url(),"admin/deletePetugas/",$baris->id_petugas?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
 						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_petugas ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>

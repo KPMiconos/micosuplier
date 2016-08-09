@@ -4,6 +4,9 @@
         <section class="content-header">
           <h1>
             Dashboard
+			<?php if($this->session->flashdata('pesan')){
+				echo $this->session->flashdata('pesan');
+			} ?>
             <small>Control panel</small>
           </h1>
           <ol class="breadcrumb">

@@ -9,7 +9,12 @@
                 <h1>Manajemen Internal Perusahaan</h1>
 
                 <p>Memuat semua data keluar masuk barang dan data pelayanan PT. Miconos</p>
-
+					<?php 
+					if($this->session->flashdata('pesan')){
+						echo $this->session->flashdata('pesan');
+					}
+					
+				?>
                 <a href="#" class="btn btn-primary btn-lg">Cari Suplier Produk</a>
                 
             </div><!-- /.container -->
@@ -18,6 +23,12 @@
         <div class="hero-image-form-wrapper">
             <div class="container">
                 <div class="row">
+				<?php 
+					if($this->session->flashdata("pesan")){
+						echo $this->session->flashdata("pesan");
+					}
+					
+				?>
                     <div class="col-sm-4 col-sm-offset-8 col-lg-4 col-lg-offset-7">
                         <form method="post" action="<?php echo base_url() ?>admin/login_act" style="margin-top:-400px;">
                             <h2>Login</h2>
