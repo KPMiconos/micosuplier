@@ -21,10 +21,14 @@
 				 <!-- general form elements -->
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Form Data Petugas</h3>
+                  <h3 class="box-title">Form Data Customer</h3>
+				  <?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
+               
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="<?php echo base_url() ?>admin/addCustomer_act" method="post" enctype="multipart/form-data">
+                <form role="form" action="<?php echo base_url() ?>customer/addCustomer_act" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					 <div class="form-group">
 						<label>Institusi</label>
@@ -40,7 +44,7 @@
 					</div>
 					   <div class="form-group">
                       <label for="exampleInputEmail1">No.ID</label>
-                      <input name="idCustomer" type="text" class="form-control" id="exampleInput" placeholder="Nama Lengkap" required>
+                      <input name="idCustomer" type="text" class="form-control" id="exampleInput" placeholder="No.Id/No.KTP" required>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nama</label>
@@ -57,7 +61,7 @@
 					</div>
 					 <div class="form-group">
                       <label for="exampleInputPassword1">Jabatan</label>
-                      <input name="jabatan" type="text" class="form-control" id="exampleInput" placeholder="Alamat" required>
+                      <input name="jabatan" type="text" class="form-control" id="exampleInput" placeholder="Jabatan" required>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Alamat</label>

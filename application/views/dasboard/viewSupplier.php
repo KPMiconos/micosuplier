@@ -62,7 +62,7 @@
 							<h4 class="modal-title" id="myModalLabel">Upload Photo Profile</h4>
 					  </div>
 					  <div class="modal-body">
-						 <form action="<?php echo base_url() ?>admin/uploadImgSuplier_act" method="post" enctype="multipart/form-data">
+						 <form action="<?php echo base_url() ?>supplier/uploadImgSuplier_act" method="post" enctype="multipart/form-data">
 						 
 						<div class="form-group">
 							<label for="exampleInputFile">File input</label>
@@ -83,34 +83,38 @@
             <div class="col-md-9">
               <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                  <li class="active"><a href="#activity" data-toggle="tab">About</a></li>
-                  <li><a href="#timeline" data-toggle="tab">Produk</a></li>
+                  <li class="active"><a href="#about" data-toggle="tab">About</a></li>
+                  <li><a href="#produk" data-toggle="tab">Produk</a></li>
                   
                 </ul>
                 <div class="tab-content">
-                  <div class="active tab-pane" id="activity">
+                  <div class="active tab-pane" id="about">
 					 <div class="form-horizontal">
-                      <div class="form-group">
-                         <p class="col-sm-2 pull-left" style="margin-left:20px;"><strong>Alamat</strong></p>
-                        <p class="col-sm-6 pull-left">: <?php echo $baris->alamat ?></p>
-                      </div>
-                      <div class="form-group">
-                         <p class="col-sm-2 pull-left" style="margin-left:20px;"><strong>HP/Telepon</strong></p>
-                        <p class="col-sm-6 pull-left">: <?php echo $baris->hp ?></p>
-                      </div>
-                      <div class="form-group">
-                         <p class="col-sm-2 pull-left" style="margin-left:20px;"><strong>Email</strong></p>
-                        <p class="col-sm-6 pull-left">: <?php echo $baris->email ?></p>
-                      </div>
-                      <div class="form-group">
-                         <p class="col-sm-2 pull-left" style="margin-left:20px;"><strong>Deskripsi</strong></p>
-                        <p class="col-sm-6 pull-left">: <?php echo $baris->deskripsi ?></p>
-                      </div>
-                    <div class="box-footer">
-                    <button data-toggle="modal" data-target="#myModal1" class="btn btn-primary">Edit</button>
-                  </div>
+						  <div class="form-group">
+							 <p class="col-sm-2 pull-left" style="margin-left:20px;"><strong>Alamat</strong></p>
+							<p class="col-sm-6 pull-left">: <?php echo $baris->alamat ?></p>
+						  </div>
+						  <div class="form-group">
+							 <p class="col-sm-2 pull-left" style="margin-left:20px;"><strong>HP/Telepon</strong></p>
+							<p class="col-sm-6 pull-left">: <?php echo $baris->hp ?></p>
+						  </div>
+						  <div class="form-group">
+							 <p class="col-sm-2 pull-left" style="margin-left:20px;"><strong>Email</strong></p>
+							<p class="col-sm-6 pull-left">: <?php echo $baris->email ?></p>
+						  </div>
+						  <div class="form-group">
+							 <p class="col-sm-2 pull-left" style="margin-left:20px;"><strong>Deskripsi</strong></p>
+							<p class="col-sm-6 pull-left">: <?php echo $baris->deskripsi ?></p>
+						  </div>
+						  <?php $idSuplier=$baris->id_suplier; ?>
+						<div class="box-footer">
+							<button data-toggle="modal" data-target="#myModal1" class="btn btn-primary">Edit</button>
+						</div>
                       
                     </div>
+					 <?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
 					<!-- Modal -->
 					<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
@@ -121,7 +125,7 @@
 						  </div>
 						  <div class="modal-body">
 						   <!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>admin/uploadImgSuplier_act" method="post" enctype="multipart/form-data">
+							<form role="form" action="<?php echo base_url() ?>supplier/updateSupplier" method="post" enctype="multipart/form-data">
 							  <div class="box-body">
 								<div class="form-group">
 								  <label for="exampleInputEmail1">No.ID</label>
@@ -169,10 +173,34 @@
 		} ?>
 
                  </div><!-- /.tab-pane -->
-                  <div class="tab-pane" id="timeline">
+                  <div class="tab-pane" id="produk">
                     <!-- The timeline -->
 						 <div class="box">
                 <div class="box-header" style="padding:20px;">
+				  <div class="row">
+					<div class="co-lg-12">
+                   <form method="post" action="<?php echo base_url(),"supplier/tambahProduk" ?>" enctype="multipart/form-data">
+				   
+                     <div class="form-group">
+						<label>Tambah Produk </label>
+						<select name="idItem" class="form-control selecttree" style="width: 20%;" required>
+							<option disabled selected value>-Pilih</option>
+							
+							<?php if(!empty($barang)){
+							foreach($barang as $baris){ ?>
+							<option value="<?php echo $baris->id_item  ?>"><?php echo $baris->nama_item; ?></option>
+							<?php }} ?>
+                      
+						</select>
+						<input type="hidden" value="<?php echo $idSuplier ?>" name="idSupplier" required>
+						 <button type="submit" class="btn btn-primary">Add</button>
+					</div>
+					
+					
+					 </form>
+					
+					 </div>
+                  </div>
                   <div class="box-tools">
 				  <form method="post" action="#" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
@@ -193,6 +221,7 @@
 					   <th>Gambar</th>
                       <th>Nama Produk</th>
                       <th>Satuan</th>
+					  <th>Harga</th>
                       <th>Stok</th>
                       <th>Deskripsi</th>
                     </tr>
@@ -216,6 +245,11 @@
 							echo "m3";
 						}
 					  ?></td>
+					  <td><?php if (empty($baris2->jumlah)){
+							echo "-";
+						}else {
+							echo "Rp ",$baris2->hargaSatuan;
+						} ?></td>
                       <td><?php 
 						if (empty($baris2->jumlah)){
 							echo "<span class='label label-danger'>Stok kosong</span>";
@@ -234,6 +268,7 @@
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+			  
           
 					</div><!-- /.tab-pane -->
 				</div><!-- /.tab-content -->

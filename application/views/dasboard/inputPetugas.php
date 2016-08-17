@@ -22,9 +22,15 @@
               <div class="box box-primary">
                 <div class="box-header with-border">
                   <h3 class="box-title">Form Data Petugas</h3>
-                </div><!-- /.box-header -->
+				  
+				<?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
+               
+				
+				<!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="<?php echo base_url() ?>admin/register_act" method="post" enctype="multipart/form-data">
+                <form role="form" action="<?php echo base_url() ?>petugas/addPetugas_act" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					<div class="form-group">
                       <label for="exampleInputEmail1">No.KTP</label>

@@ -1,8 +1,8 @@
 <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Edited By <a href="ahapedia.com">ahapedia</a></b>
+          <b>Edited By <a href="http://ahapedia.com">ahapedia</a></b>
         </div>
-        <strong>Copyright &copy; 2016 <a href="#">Almsaeed Studio</a></strong> 
+        <strong>Copyright &copy; 2016 <a href="#">PT.Miconos</a></strong> 
       </footer>
 
      

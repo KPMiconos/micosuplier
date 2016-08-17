@@ -22,9 +22,13 @@
               <div class="box box-primary">
                 <div class="box-header with-border">
                   <h3 class="box-title">Form Data Institusi</h3>
+				  <?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
+               
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="<?php echo base_url() ?>admin/addInstitusi_act" method="post" enctype="multipart/form-data">
+                <form role="form" action="<?php echo base_url() ?>customer/addInstitusi_act" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					 <div class="form-group">
                       <label for="exampleInputEmail1">ID Institusi</label>

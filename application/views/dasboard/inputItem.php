@@ -26,7 +26,10 @@
                 <!-- form start -->
                 <form role="form" action="<?php echo base_url() ?>gudang/addItem_act" method="post" enctype="multipart/form-data">
                   <div class="box-body">
-					
+					<div class="form-group">
+                      <label for="exampleInputEmail1">Id.Item</label>
+                      <input name="idItem" type="text" class="form-control" id="exampleInput" placeholder="ID item">
+                    </div>
 					 <div class="form-group">
                       <label for="exampleInputEmail1">Nama Barang</label>
                       <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Barang">
@@ -45,11 +48,14 @@
 						<label>Satuan</label>
 						<select name="satuan" class="form-control selecttree" style="width: 100%;">
 						  <option>-Pilih</option>
-						  <option value="1">Pcs</option>
-						  <option value="2" >Kg</option>
-						  <option value="3" >m</option>
-						  <option value="4" >m2</option>
-						  <option value="5" >m3</option>
+						  <?php if(!empty($satuan)){
+							  foreach($satuan as $baris){s
+							 ?>
+						  <option value="<?php echo $baris->id_satuan; ?>"><?php echo $baris->nama_satuan; ?></option>
+							  <?php } }else{
+								  echo "Data kosong";
+							  }?>
+						  
 						</select>
 					</div>
 					

@@ -3,24 +3,24 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            List Produk
+            List Item
             
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Produk</a></li>
-            <li class="active">List Produk</li>
+            <li><a href="#">Master Item</a></li>
+            <li class="active">List Item</li>
           </ol>
         </section>
       
-        <!-- Main content -->
+          <!-- Main content -->
         <section class="content">
          
           <div class="row">
             <div class="col-xs-12 col-lg-12">
               <div class="box">
                 <div class="box-header">
-                  <a href="<?php echo base_url() ?>gudang/additem"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
+                  <a href="<?php echo base_url() ?>gudang/addItem"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
                   <div class="box-tools">
 				  <form method="post" action="<?php echo base_url() ?>admin/cariProduk" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
@@ -42,10 +42,10 @@
                       <th>Nama Produk</th>
                       <th>Tipe</th>
 					  <th>Satuan</th>
-                      <th>Harga</th>
+                      
                       <th>Deskripsi</th>
 					  
-					  <th>Jumlah</th>
+					
 					  <th>Action</th>
                     </tr>
 					<?php
@@ -81,15 +81,10 @@
 							echo "m3";
 						}
 					  ?></span></td>
-                      <td><?php echo $baris->hargaSatuan ?></td>
+                    
                       <td style="width:200px;"><?php echo word_limiter($baris->deskripsi,10),"..." ?></td>
 					  
-					  <td><?php 
-						if (empty($baris->jumlah)){
-							echo "<span class='label label-danger'>Stok kosong</span>";
-						}else {
-							echo $baris->jumlah," item";
-						}?> </td>
+					 
 					  <td>
 					   <div class="btn-group btn-group-lg">
 							<a href="#"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
@@ -102,7 +97,7 @@
                    
 					<?php }}
 						else{
-							echo "Belum ada data Petugas";
+							echo "Belum ada data Item";
 							}
 					?>
                   </table>
@@ -111,5 +106,6 @@
             </div>
           </div>
         </section><!-- /.content -->
+        
       </div><!-- /.content-wrapper -->
      

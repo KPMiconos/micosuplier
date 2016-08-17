@@ -18,11 +18,15 @@
          
           <div class="row">
             <div class="col-xs-12 col-lg-12">
+			 
+			
+			
               <div class="box">
                 <div class="box-header">
-                 <a href="<?php echo base_url() ?>admin/addPetugas"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
+                 <a href="<?php echo base_url() ?>petugas/addPetugas"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
+				
                   <div class="box-tools">
-                   <form method="post" action="<?php echo base_url() ?>admin/cariPetugas" enctype="multipart/form-data">
+                   <form method="post" action="<?php echo base_url() ?>petugas/cariPetugas" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
 					
                       <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">
@@ -35,7 +39,11 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
+				 <?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
                   <table class="table table-hover">
+				 
                     <tr>
                       <th>No.ID</th>
                       <th>Nama</th>
@@ -48,16 +56,16 @@
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
                     <tr>
-                      <td><a href="<?php echo base_url(),"admin/viewPetugas/",$baris->id_petugas?>"><?php echo $baris->id_petugas?></a></td>
+                      <td><a href="<?php echo base_url(),"petugas/viewPetugas/",$baris->id_petugas?>"><?php echo $baris->id_petugas?></a></td>
                       <td><?php echo $baris->nama?></td>
                       <td><?php echo $baris->email?></td>
                       <td><?php echo $baris->hp?></td>
                       <td><?php echo $baris->jabatan?></td>
 					  <td style="width:150px">
 					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"admin/deletePetugas/",$baris->id_petugas?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
+					   <a href="<?php echo base_url(),"petugas/deletePetugas/",$baris->id_petugas?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
 						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_petugas ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-						<a href="<?php echo base_url(),"admin/viewPetugas/",$baris->id_petugas?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+						<a href="<?php echo base_url(),"petugas/viewPetugas/",$baris->id_petugas?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
 						
 						</div>
 					</td>
@@ -70,7 +78,7 @@
 							<h4 class="modal-title" id="myModalLabel">Edit Data Petugas</h4>
 						  </div>
 						  <div class="modal-body">
-						   <form role="form" action="<?php echo base_url() ?>admin/updatePetugas" method="post" enctype="multipart/form-data">
+						   <form role="form" action="<?php echo base_url() ?>petugas/updatePetugas" method="post" enctype="multipart/form-data">
 							  <div class="box-body">
 								<div class="form-group">
 								  <label for="exampleInputEmail1">No.KTP</label>

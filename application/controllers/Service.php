@@ -6,8 +6,8 @@ class Service extends CI_Controller {
 	public function index(){
 		$this->load->model('mservice');
 		$data['isi']=$this->mservice->list_service();
-		$this->load->model('customer');
-		$data['customer']=$this->customer->list_customer();
+		$this->load->model('mcustomer');
+		$data['customer']=$this->mcustomer->list_customer();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
@@ -18,8 +18,8 @@ class Service extends CI_Controller {
 	{
 		$this->load->model('mservice');
 		$data['isi']=$this->mservice->list_service();
-		$this->load->model('customer');
-		$data['customer']=$this->customer->list_customer();
+		$this->load->model('mcustomer');
+		$data['customer']=$this->mcustomer->list_customer();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
@@ -38,8 +38,8 @@ class Service extends CI_Controller {
 	}
 	public function addService()
 	{
-		$this->load->model('customer');
-		$data['isi']=$this->customer->list_customer();
+		$this->load->model('mcustomer');
+		$data['isi']=$this->mcustomer->list_customer();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
@@ -62,8 +62,8 @@ class Service extends CI_Controller {
 	public function addSolving($id)
 	{
 		$data['id']=$id;
-		$this->load->model('petugas');
-		$data['petugas']=$this->petugas->list_petugas();
+		$this->load->model('mpetugas');
+		$data['petugas']=$this->mpetugas->list_petugas();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
@@ -84,10 +84,10 @@ class Service extends CI_Controller {
 	{
 		$this->load->model('produk');
 		$data['isi']=$this->produk->list_produk();
-		$this->load->model('customer');
-		$data['customer']=$this->customer->list_customer();
-		$this->load->model('petugas');
-		$data['petugas']=$this->petugas->list_petugas();
+		$this->load->model('mcustomer');
+		$data['customer']=$this->mcustomer->list_customer();
+		$this->load->model('mpetugas');
+		$data['petugas']=$this->mpetugas->list_petugas();
 		
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');

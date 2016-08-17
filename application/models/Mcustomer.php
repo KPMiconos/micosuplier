@@ -1,4 +1,4 @@
-<?php class Customer extends CI_Model {
+<?php class Mcustomer extends CI_Model {
 
 	 public function __construct()
         {
@@ -8,10 +8,28 @@
 	public function addCustomer($data){
 		$this->db->reconnect();		
 		$query=$this->db->query("CALL sp_input_customer('$data[idCustomer]','$data[idInstitut]','$data[nama]','$data[jenkel]','$data[alamat]','$data[hp]','$data[email]','$data[jabatan]')");
+		$row=$query->row();
+		return $row->cek;
 	}
+	//list data
 	public function list_customer(){
 		$this->db->reconnect();
 			$query = $this->db->query("CALL sp_list_customer()");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+	}
+	public function pageList_customer($page,$per_page){
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_pageList_customer('$page','$per_page')");
 			if ($query->num_rows() > 0)
 			{
 			foreach ($query->result() as $row)
@@ -123,6 +141,20 @@
 	public function delete($id){
 		$this->db->reconnect();		
 		$query=$this->db->query("CALL sp_deleteCustomer('$id')");
+	}
+	public function countCustomer(){
+		
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_hitungCustomer()");
+			if ($query->num_rows() > 0)
+			{
+				$row=$query->row();
+				return $row->jumlah;
+			}
+			else{
+				return 0;
+			}
+	
 	}
 }
 ?>

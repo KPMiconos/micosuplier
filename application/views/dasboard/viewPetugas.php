@@ -60,12 +60,12 @@
 						<h4 class="modal-title" id="myModalLabel">Upload Photo Profile</h4>
 					  </div>
 					  <div class="modal-body">
-					   <form action="<?php echo base_url() ?>admin/uploadImgSuplier_act" method="post" enctype="multipart/form-data">
+					   <form action="<?php echo base_url() ?>petugas/uploadImgPetugas_act" method="post" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="exampleInputFile">File input</label>
 							<input type="hidden" name="id_petugas" value="<?php echo $baris->id_petugas ?>">
 							<input name="filefoto" type="file" id="exampleInputFile">
-							<p class="help-block">Besar file maksimal 1 MB, format jpg,png,gif </p>
+							<p class="help-block">Besar file maksimal 1 MB, format jpg,png,gif <?php echo $baris->id_petugas ?></p>
 						</div>
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Upload</button>
@@ -116,10 +116,14 @@
                       </div>
                     <div class="box-footer">
                     <button data-toggle="modal" data-target="#myModal1" class="btn btn-primary">Edit</button>
+					
                   </div>
-                    
+                  
                       
                     </div>
+					 <?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
 				<!-- Modal -->
 					<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
@@ -129,7 +133,7 @@
 							<h4 class="modal-title" id="myModalLabel">Edit Data Petugas</h4>
 						  </div>
 						  <div class="modal-body">
-						   <form role="form" action="<?php echo base_url() ?>admin/updatePetugas" method="post" enctype="multipart/form-data">
+						   <form role="form" action="<?php echo base_url() ?>petugas/updatePetugas" method="post" enctype="multipart/form-data">
 							  <div class="box-body">
 								<div class="form-group">
 								  <label for="exampleInputEmail1">No.KTP</label>

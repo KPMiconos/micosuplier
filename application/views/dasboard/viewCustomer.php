@@ -58,7 +58,7 @@
 					 <div class="form-horizontal">
 					 <div class="form-group">
                          <p class="col-sm-2 pull-left" style="margin-left:20px;"><strong>No.ID</strong></p>
-                        <p class="col-sm-6 pull-left">: <?php echo "M1607",$baris->id_customer ?></p>
+                        <p class="col-sm-6 pull-left">: <?php echo $baris->id_customer ?></p>
                       </div>
 					  <div class="form-group">
                          <p class="col-sm-2 pull-left" style="margin-left:20px;"><strong>Jenis Kelamin</strong></p>
@@ -96,7 +96,7 @@
 							<h4 class="modal-title" id="myModalLabel">Edit Data Petugas</h4>
 						  </div>
 						  <div class="modal-body">
-						   <form role="form" action="<?php echo base_url() ?>admin/updateCustomer" method="post" enctype="multipart/form-data">
+						   <form role="form" action="<?php echo base_url() ?>customer/updateCustomer" method="post" enctype="multipart/form-data">
 							  <div class="box-body">
 							  <div class="form-group">
 									<label>Institusi</label>

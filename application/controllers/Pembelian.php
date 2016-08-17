@@ -11,8 +11,8 @@ class Pembelian extends CI_Controller {
 	{
 		$this->load->model('mgudang');
 		$data['isi']=$this->mgudang->list_item();
-		$this->load->model('suplier');
-		$data['suplier']=$this->suplier->list_suplier();
+		$this->load->model('msupplier');
+		$data['suplier']=$this->msupplier->list_supplier();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');

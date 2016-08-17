@@ -3,13 +3,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            List Suplier
+            List Supplier
             
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Suplier</a></li>
-            <li class="active">List Suplier</li>
+            <li><a href="#">Supplier</a></li>
+            <li class="active">List Supplier</li>
           </ol>
         </section>
       
@@ -20,9 +20,9 @@
             <div class="col-xs-12 col-lg-12">
               <div class="box">
                 <div class="box-header">
-                  <a href="<?php echo base_url() ?>admin/addSuplier"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
+                  <a href="<?php echo base_url() ?>supplier/addSupplier"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
                   <div class="box-tools">
-                    <form method="post" action="<?php echo base_url() ?>admin/cariSuplier" enctype="multipart/form-data">
+                    <form method="post" action="<?php echo base_url() ?>supplier/cariSupplier" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
 					
                       <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">
@@ -35,10 +35,13 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
+				<?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
                   <table class="table table-hover">
                     <tr>
                       <th>ID</th>
-                      <th>Nama Suplier</th>
+                      <th>Nama Supplier</th>
                       <th>Email</th>
                       <th>No.Telephone</th>
                       <th>Deskripsi</th>
@@ -55,9 +58,9 @@
                       <td style="width:200px;"><?php echo word_limiter($baris->deskripsi,5) ?></td>
 					  <td style="width:150px;">
 					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"admin/deleteSuplier/",$baris->id_suplier ?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
+					   <a href="<?php echo base_url(),"supplier/deleteSupplier/",$baris->id_suplier ?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
 						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_suplier ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-						<a href="<?php echo base_url(),"admin/viewSuplier/",$baris->id_suplier?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+						<a href="<?php echo base_url(),"supplier/viewSupplier/",$baris->id_suplier?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
 						
 						</div>
 					  </td>
@@ -73,7 +76,7 @@
 						  </div>
 						  <div class="modal-body">
 						   <!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>admin/updateSuplier" method="post" enctype="multipart/form-data">
+							<form role="form" action="<?php echo base_url() ?>supplier/updateSupplier" method="post" enctype="multipart/form-data">
 							  <div class="box-body">
 								<div class="form-group">
 								  <label for="exampleInputEmail1">No.ID</label>
@@ -119,12 +122,17 @@
                    
 					<?php }}
 						else{
-							echo "Belum ada data Petugas";
+							echo "Belum ada data Supplier";
 							}
 					?>
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+			   <div class="row">
+					<div class="col-md-12 text-center">
+						<?php echo $paging; ?>
+					</div>
+				</div>
             </div>
           </div>
         </section><!-- /.content -->

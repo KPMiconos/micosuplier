@@ -99,9 +99,9 @@
                   </form>
                    
 					<?php }}
-						else{
-							echo "Belum ada data Petugas";
-							}
+						else{ ?>
+							<tr><td>Belum ada data Produk</td></tr>
+							<?php }
 					?>
                   </table>
                 </div><!-- /.box-body -->
@@ -164,9 +164,9 @@
 					</table>
 					<div class="form-group">
 						<label>Supplier</label>
-						<select name="idSuplier" class="form-control select2" style="width: 100%;">
+						<select name="idSuplier" class="form-control selecttree" style="width: 100%;">
 						  <option>-Pilih</option>
-						  	<?php if(!empty($isi)){
+						  	<?php if(!empty($suplier)){
 							foreach($suplier as $baris){ ?>
 						  <option value="<?php echo $baris->id_suplier ?>"><?php echo $baris->nama_suplier ?></option>
 							<?php }} ?>

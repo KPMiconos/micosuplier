@@ -31,9 +31,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-				<li><a href="<?php echo base_url() ?>admin/addPetugas"><i class="fa fa-circle-o"></i> Add Petugas</a></li>
-                <li><a href="<?php echo base_url() ?>admin/listPetugas"><i class="fa fa-circle-o"></i> List Petugas</a></li>
-
+				<li><a href="<?php echo base_url() ?>petugas/addPetugas"><i class="fa fa-circle-o"></i> Add Karyawan</a></li>
+                <li><a href="<?php echo base_url() ?>petugas/listPetugas"><i class="fa fa-circle-o"></i> List Karyawan</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -43,8 +42,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-			   <li><a href="<?php echo base_url() ?>admin/addSuplier"><i class="fa fa-circle-o"></i> Add Suplier</a></li>
-               <li><a href="<?php echo base_url() ?>admin/listSuplier"><i class="fa fa-circle-o"></i> List Suplier</a></li>
+			   <li><a href="<?php echo base_url() ?>supplier/addSupplier"><i class="fa fa-circle-o"></i> Add Supplier</a></li>
+               <li><a href="<?php echo base_url() ?>supplier/listSupplier"><i class="fa fa-circle-o"></i> List Supplier</a></li>
                
               </ul>
             </li>
@@ -54,12 +53,24 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-				<li><a href="<?php echo base_url() ?>admin/addInstitusi"><i class="fa fa-circle-o"></i> Add Institusi</a></li>
-				<li><a href="<?php echo base_url() ?>admin/addCustomer"><i class="fa fa-circle-o"></i> Add Customer</a></li>
-				<li><a href="<?php echo base_url() ?>admin/listInstitusi"><i class="fa fa-circle-o"></i> List Institusi</a></li>
-                <li><a href="<?php echo base_url() ?>admin/listCustomer"><i class="fa fa-circle-o"></i> List Customer</a></li>
+				<li><a href="<?php echo base_url() ?>customer/addInstitusi"><i class="fa fa-circle-o"></i> Add Institusi</a></li>
+				<li><a href="<?php echo base_url() ?>customer/addCustomer"><i class="fa fa-circle-o"></i> Add Customer</a></li>
+				<li><a href="<?php echo base_url() ?>customer/listInstitusi"><i class="fa fa-circle-o"></i> List Institusi</a></li>
+                <li><a href="<?php echo base_url() ?>customer/listCustomer"><i class="fa fa-circle-o"></i> List Customer</a></li>
                 
                 
+              </ul>
+            </li>
+			 <li class="treeview">
+              <a href="#">
+                <i class="fa fa-th"></i>
+                <span>Master Item</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+				<li><a href="<?php echo base_url() ?>gudang/addItem"><i class="fa fa-circle-o"></i> Tambah Item </a></li>
+                <li><a href="<?php echo base_url() ?>gudang/listItem"><i class="fa fa-circle-o"></i> List Item</a></li>
+				<li><a href="<?php echo base_url() ?>gudang/listSatuan"><i class="fa fa-circle-o"></i> Satuan</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -96,6 +107,16 @@
                 <li><a href="<?php echo base_url() ?>gudang/listBarang"><i class="fa fa-circle-o"></i> Stok Barang</a></li>
 				<li><a href="<?php echo base_url() ?>gudang/listDefect"><i class="fa fa-circle-o"></i> Barang Rusak</a></li>
                
+              </ul>
+            </li>
+			<li class="treeview">
+              <a href="#">
+                <i class="fa fa-industry"></i> <span>Produksi</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+				<li><a href="<?php echo base_url() ?>admin/addPenjualan"><i class="fa fa-circle-o"></i> Add Produksi</a></li>
+                <li><a href="<?php echo base_url() ?>admin/listPenjualan"><i class="fa fa-circle-o"></i> List Produksi</a></li>
               </ul>
             </li>
 			<li class="treeview">

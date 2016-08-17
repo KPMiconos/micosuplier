@@ -20,9 +20,9 @@
             <div class="col-xs-12 col-lg-12">
               <div class="box">
                 <div class="box-header">
-					<a href="<?php echo base_url() ?>admin/addCustomer"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
+					<a href="<?php echo base_url() ?>customer/addCustomer"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
                   <div class="box-tools">
-                    <form method="post" action="<?php echo base_url() ?>admin/cariCustomer" enctype="multipart/form-data">
+                    <form method="post" action="<?php echo base_url() ?>customer/cariCustomer" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
 					
                       <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">
@@ -48,16 +48,16 @@
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
                     <tr>
-                      <td><a href="<?php echo base_url(),"admin/viewCustomer/",$baris->id_customer  ?>"><?php echo "M1607",$baris->id_customer  ?></a></td>
+                      <td><a href="<?php echo base_url(),"customer/viewCustomer/",$baris->id_customer  ?>"><?php echo "M1607",$baris->id_customer  ?></a></td>
                       <td><?php echo $baris->nama  ?></td>
                       <td><?php echo $baris->email  ?></td>
                       <td><span class="label label-success"><?php echo $baris->hp  ?></span></td>
                       <td><?php echo $baris->alamat  ?></td>
 					  <td style="width:150px">
 					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"admin/deleteCustomer/",$baris->id_customer?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
+					   <a href="<?php echo base_url(),"customer/deleteCustomer/",$baris->id_customer?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
 						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_customer ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-						<a href="<?php echo base_url(),"admin/viewCustomer/",$baris->id_customer?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+						<a href="<?php echo base_url(),"customer/viewCustomer/",$baris->id_customer?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
 						
 						</div>
 					  </td>
@@ -142,6 +142,12 @@
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+			  <div class="row">
+					<div class="col-md-12 text-center">
+						<?php echo $paging; ?>
+					</div>
+				</div>
+			  
             </div>
           </div>
         </section><!-- /.content -->

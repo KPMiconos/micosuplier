@@ -20,7 +20,7 @@
             <div class="col-xs-12 col-lg-10">
               <div class="box">
                 <div class="box-header">
-                 <a href="<?php echo base_url() ?>admin/addInstitusi"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
+                 <a href="<?php echo base_url() ?>customer/addInstitusi"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
                   <div class="box-tools">
                    <form method="post" action="<?php echo base_url() ?>admin/cariPetugas" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">

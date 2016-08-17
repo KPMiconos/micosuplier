@@ -37,9 +37,9 @@
 					</div>
 					 </form>
 					 <div class="col-lg-1">
-					 <form method="post" action="#" enctype="multipart/form-data">
-					 <input name="tgl_awal" type="hidden" >
-					 <input name="tgl_akhir" type="hidden" > 
+					 <form method="post" action="<?php echo base_url(),"laporan/exportMasuk" ?>" enctype="multipart/form-data">
+					 <input name="tgl_awal" type="hidden" value="<?php echo $tgl_awal; ?>">
+					 <input name="tgl_akhir" type="hidden"  value="<?php echo $tgl_akhir; ?>"> 
 						 <button type="submit" class="btn btn-info"><li class="fa fa-print"></li>Print</button>
 					</form>
 					</div>

@@ -6,14 +6,18 @@ class Gudang extends CI_Controller {
 		
 		
 	}
+	//add data
 	public function addItem(){
+		$this->load->model('mgudang');
+		$data['satuan']=$this->mgudang->list_satuan();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/inputItem');
+		$this->load->view('dasboard/inputItem',$data);
 		$this->load->view('dasboard/footer');
 	}
 		public function addItem_act(){
+			
 		$this->load->library('upload');
         $nmfile = "file_".time(); //nama file saya beri nama langsung dan diikuti fungsi time
         $config['upload_path'] = './assets/images/produk/'; //path folder
@@ -49,9 +53,32 @@ class Gudang extends CI_Controller {
                 redirect('gudang/addItem'); //jika gagal maka akan ditampilkan form upload
             }
         }else{
-			redirect('gudang/addItem');
+			 $data = array(
+                  'nm_gbr' => '',
+				  'idItem' => $this->input->post('idItem'),
+                  'nama' => $this->input->post('nama'),
+				  'tipe' => $this->input->post('tipe'),
+				  'satuan' => $this->input->post('satuan'),
+				  'deskripsi' => $this->input->post('deskripsi')
+                );
+				$this->load->model('mgudang');
+                $this->mgudang->addItem($data); 
+			 redirect('gudang/addItem');
 		}
 	}
+	public function addSatuan(){
+		$data = array(
+				'nama' => $this->input->post('nama'),
+				'kelas' => $this->input->post('kelas'),
+				'deskripsi' => $this->input->post('deskripsi')
+
+            );
+		
+		$this->load->model('mgudang');
+		$this->mgudang->addSatuan($data);
+		redirect("gudang/listSatuan");
+	}
+	//list data
 	public function listPenerimaan(){
 		$this->load->model('mgudang');
 		$data['isi']=$this->mgudang->listPenerimaan();
@@ -61,14 +88,32 @@ class Gudang extends CI_Controller {
 		$this->load->view('dasboard/listPenerimaan',$data);
 		$this->load->view('dasboard/footer');
 	}
-	
+	public function listItem(){
+		$this->load->model('mgudang');
+		$data['isi']=$this->mgudang->list_item();
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/listItem',$data);
+		$this->load->view('dasboard/footer');
+	}
+	public function listSatuan(){
+		$this->load->model('mgudang');
+		$data['isi']=$this->mgudang->list_satuan();
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/listSatuan',$data);
+		$this->load->view('dasboard/footer');
+	}
+	//view data
 	public function viewPO($id)
 	{
 		$this->session->set_userdata('idPO',$id);
 		$this->load->model('mgudang');
 		$data['isi']=$this->mgudang->viewPO($id);
-		$this->load->model('petugas');
-		$data['petugas']=$this->petugas->list_petugas();
+		$this->load->model('mpetugas');
+		$data['petugas']=$this->mpetugas->list_petugas();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
