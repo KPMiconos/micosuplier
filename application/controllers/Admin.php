@@ -22,27 +22,6 @@ class Admin extends CI_Controller {
 	}
 	//List data
 
-	public function listPenjualan()
-	{
-		$cek=$this->session->userdata('username');
-		if($cek){
-			$this->load->model('penjualan');
-			$data['isi']=$this->penjualan->list_penjualan();
-			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
-			$this->load->view('dasboard/sidebar');
-			$this->load->view('dasboard/listPenjualan',$data);
-			$this->load->view('dasboard/footer');
-		}else{
-			
-			redirect('home');
-		}
-	}
-	
-	
-	//Add Data
-	
-
 	public function addProduk()
 	{
 		$cek=$this->session->userdata('username');
@@ -57,59 +36,6 @@ class Admin extends CI_Controller {
 			redirect('home');
 		}
 	}
-	public function addPenjualan()
-	{
-		$cek=$this->session->userdata('username');
-		if($cek){
-			$this->load->model('produk');
-			$data['isi']=$this->produk->list_produk();
-			$this->load->model('mcustomer');
-			$data['customer']=$this->mcustomer->list_customer();
-			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
-			$this->load->view('dasboard/sidebar');
-			$this->load->view('dasboard/Produk',$data);
-			$this->load->view('dasboard/footer');
-		}else{
-			
-			redirect('home');
-		}
-	}
-	
-	
-	//View Data
-
-	//update or edit data
-	
-	
-	
-	
-	//delete function
-	
-	
-	
-	//Searching
-	public function cariProduk(){
-		$cek=$this->session->userdata('username');
-		if($cek){
-			$word=$this->input->post('cari');
-			$this->load->model('produk');
-			$data['isi']=$this->produk->list_cariProduk($word);
-			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
-			$this->load->view('dasboard/sidebar');
-			$this->load->view('dasboard/listProduk',$data);
-			$this->load->view('dasboard/footer');
-		}else{
-			
-			redirect('home');
-		}
-		
-	}
-	//searching
-	
-	
-	/*input action function*/
 	
 	
 	
@@ -140,8 +66,8 @@ class Admin extends CI_Controller {
 					  'deskripsi' => $this->input->post('deskripsi')
 					   
 					);
-					$this->load->model('produk');
-					$this->produk->addProduk($data); //akses model untuk menyimpan ke database
+					$this->load->model('mproduk');
+					$this->mproduk->addProduk($data); //akses model untuk menyimpan ke database
 					//pesan yang muncul jika berhasil diupload pada session flashdata
 					$this->session->set_flashdata("pesan", "<div class=\"col-md-12\"><div class=\"alert alert-success\" id=\"alert\">Upload gambar berhasil !!</div></div>");
 					redirect('admin/listProduk'); //jika berhasil maka akan ditampilkan view vupload
@@ -161,71 +87,7 @@ class Admin extends CI_Controller {
 			redirect('home');
 		}
 	}
-	public function addCart()
-	{
-		$cek=$this->session->userdata('username');
-		if($cek){
-			$data = array(
-					'id' => $this->input->post('id'),
-					'name' => $this->input->post('nama'),
-					'qty' => $this->input->post('jumlah'),
-					'price' => $this->input->post('harga')
-					
-				);
-			
-			$this->cart->insert($data);
-			echo $data['id'];
-			redirect("admin/addPenjualan");
-		}else{
-			
-			redirect('home');
-		}
 	
-	}
-	public function hapus($id){
-		$cek=$this->session->userdata('username');
-		if($cek){
-			
-			$data=array(
-				'rowid'=>$id,
-				'qty' =>0
-			
-			);
-			$this->cart->update($data);
-			redirect("admin/addPenjualan");
-		}else{
-			
-			redirect('home');
-		}
-	}
-	public function addDataBelanja()
-	{
-		$cek=$this->session->userdata('username');
-		if($cek){
-			$idtrans=$this->input->post('idtransaksi');
-			$data = array(
-					'idTransaksi' => $this->input->post('idtransaksi'),
-					'id' => $this->input->post('id'),
-					'qty' => $this->input->post('jumlah'),
-					'price' => $this->input->post('harga'),
-					'total' => $this->input->post('total'),
-					'tgl' => $this->input->post('tgl'),
-					'kurir' => $this->input->post('kurir'),
-					
-					'idCustomer' => $this->input->post('id_customer'),
-					'email' => $this->session->userdata('username')
-					
-				);
-			
-			$this->load->model('penjualan');
-			$this->penjualan->addPenjualan($data);
-			redirect("admin/addPenjualan");
-		}else{
-			
-			redirect('home');
-		}
-		
-	}
 	//Authentication
 	
 	public function login_act(){

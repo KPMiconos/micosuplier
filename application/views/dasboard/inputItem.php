@@ -24,7 +24,7 @@
 						<h3 class="box-title">Form Tambah Barang</h3>
 					</div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="<?php echo base_url() ?>gudang/addItem_act" method="post" enctype="multipart/form-data">
+                <form role="form" action="<?php echo base_url() ?>produk/addItem_act" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					<div class="form-group">
                       <label for="exampleInputEmail1">Id.Item</label>

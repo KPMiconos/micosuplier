@@ -89,7 +89,7 @@
 					   <div class="btn-group btn-group-lg">
 							<a href="#"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
 							<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-							<a href="<?php echo base_url(),"admin/viewProduk/",$baris->id_item?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+							<a href="<?php echo base_url(),"produk/viewItem/",$baris->id_item?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
 						</div>
 					  </td>
                     </tr>

@@ -233,17 +233,7 @@
 					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris2->link_photo ?>"></td>
                       <td><?php echo $baris2->nama_item ?></td>
                       <td><?php 
-						if($baris2->satuan=="1"){
-							echo "Pcs";
-						} else if($baris2->satuan=="2"){
-							echo "Kg";
-						}else if($baris2->satuan=="3"){
-							echo "m";
-						}else if($baris2->satuan=="4"){
-							echo "m2";
-						}else if($baris2->satuan=="5"){
-							echo "m3";
-						}
+						echo $baris2->nama_satuan;
 					  ?></td>
 					  <td><?php if (empty($baris2->jumlah)){
 							echo "-";

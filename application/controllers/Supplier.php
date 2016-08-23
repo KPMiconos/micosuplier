@@ -78,11 +78,11 @@ class Supplier extends CI_Controller {
 		$cek=$this->session->userdata('username');
 		if($cek){
 			$this->load->model('msupplier');
-			$this->load->model('produk');
-			$this->load->model('mgudang');
+			$this->load->model('mproduk');
+			$this->load->model('mproduk');
 			$data['isi']=$this->msupplier->view_supplier($id);
-			$data['produk']=$this->produk->list_produk_perSuplier($id);
-			$data['barang']=$this->mgudang->list_item();
+			$data['produk']=$this->mproduk->list_produk_perSuplier($id);
+			$data['barang']=$this->mproduk->list_item();
 			$this->load->view('dasboard/head');
 			$this->load->view('dasboard/header');
 			$this->load->view('dasboard/sidebar');

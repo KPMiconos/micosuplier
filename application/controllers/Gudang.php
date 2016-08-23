@@ -4,80 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Gudang extends CI_Controller {
 	public function index(){
 		
-		
+		redirect('gudang/listBarang');
 	}
-	//add data
-	public function addItem(){
-		$this->load->model('mgudang');
-		$data['satuan']=$this->mgudang->list_satuan();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/inputItem',$data);
-		$this->load->view('dasboard/footer');
-	}
-		public function addItem_act(){
-			
-		$this->load->library('upload');
-        $nmfile = "file_".time(); //nama file saya beri nama langsung dan diikuti fungsi time
-        $config['upload_path'] = './assets/images/produk/'; //path folder
-        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
-        $config['max_size'] = '2048'; //maksimum besar file 2M
-        $config['max_width']  = '1288'; //lebar maksimum 1288 px
-        $config['max_height']  = '768'; //tinggi maksimu 768 px
-        $config['file_name'] = $nmfile; //nama yang terupload nantinya
- 
-        $this->upload->initialize($config);
-		
-		 if($_FILES['filefoto']['name'])
-        {
-            if ($this->upload->do_upload('filefoto'))
-            {
-                $gbr = $this->upload->data();
-                $data = array(
-                  'nm_gbr' =>$gbr['file_name'],
-				  'idItem' => $this->input->post('idItem'),
-                  'nama' => $this->input->post('nama'),
-				  'tipe' => $this->input->post('tipe'),
-				  'satuan' => $this->input->post('satuan'),
-				  'deskripsi' => $this->input->post('deskripsi')
-                );
-				$this->load->model('mgudang');
-                $this->mgudang->addItem($data); //akses model untuk menyimpan ke database
-                //pesan yang muncul jika berhasil diupload pada session flashdata
-                $this->session->set_flashdata("pesan", "<div class=\"col-md-12\"><div class=\"alert alert-success\" id=\"alert\">Upload gambar berhasil !!</div></div>");
-                redirect('gudang/addItem'); //jika berhasil maka akan ditampilkan view vupload
-            }else{
-                //pesan yang muncul jika terdapat error dimasukkan pada session flashdata
-                $this->session->set_flashdata("pesan", "<div class=\"col-md-12\"><div class=\"alert alert-danger\" id=\"alert\">Gagal upload gambar !!</div></div>");
-                redirect('gudang/addItem'); //jika gagal maka akan ditampilkan form upload
-            }
-        }else{
-			 $data = array(
-                  'nm_gbr' => '',
-				  'idItem' => $this->input->post('idItem'),
-                  'nama' => $this->input->post('nama'),
-				  'tipe' => $this->input->post('tipe'),
-				  'satuan' => $this->input->post('satuan'),
-				  'deskripsi' => $this->input->post('deskripsi')
-                );
-				$this->load->model('mgudang');
-                $this->mgudang->addItem($data); 
-			 redirect('gudang/addItem');
-		}
-	}
-	public function addSatuan(){
-		$data = array(
-				'nama' => $this->input->post('nama'),
-				'kelas' => $this->input->post('kelas'),
-				'deskripsi' => $this->input->post('deskripsi')
-
-            );
-		
-		$this->load->model('mgudang');
-		$this->mgudang->addSatuan($data);
-		redirect("gudang/listSatuan");
-	}
+	
 	//list data
 	public function listPenerimaan(){
 		$this->load->model('mgudang');
@@ -88,22 +17,65 @@ class Gudang extends CI_Controller {
 		$this->load->view('dasboard/listPenerimaan',$data);
 		$this->load->view('dasboard/footer');
 	}
-	public function listItem(){
+	public function listPengeluaran(){
 		$this->load->model('mgudang');
-		$data['isi']=$this->mgudang->list_item();
+		$data['isi']=$this->mgudang->listPengeluaran();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/listItem',$data);
+		$this->load->view('dasboard/listPengeluaran',$data);
 		$this->load->view('dasboard/footer');
 	}
-	public function listSatuan(){
-		$this->load->model('mgudang');
-		$data['isi']=$this->mgudang->list_satuan();
+	public function listBarang()
+	{
+		$this->load->model('mproduk');
+		$data['isi']=$this->mproduk->list_produk();
 		$this->load->view('dasboard/head');
 		$this->load->view('dasboard/header');
 		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/listSatuan',$data);
+		$this->load->view('dasboard/listProduk',$data);
+		$this->load->view('dasboard/footer');
+	}
+	 public function rincianBarang($id){
+		 
+		 $this->load->model('mproduk');
+		 $query=$this->mproduk->rincianProduk($id);
+		 
+		 if(!empty($query)){
+			 foreach ($query as $row)
+			{
+				if($row->jumlah>0){
+					echo '<tr>
+							<td>
+							</td>
+							<td><a href="',base_url(),'supplier/viewSupplier/',$row->id_suplier,'">',$row->nama_suplier,'</a></td>
+							<td>',$row->nama_item,'</td>
+							<td>',$row->hargaSatuan,'</td>
+							<td>',$row->jumlah,'</td>
+						</tr>';
+				}else{
+					echo '<tr>
+							<td>
+							</td>
+							<td><a href="',base_url(),'supplier/viewSupplier/',$row->id_suplier,'">',$row->nama_suplier,'</a></td>
+							<td>',$row->nama_item,'</td>
+							<td>',$row->hargaSatuan,'</td>
+							<td><span class="label label-danger">Stok kosong</span></td>
+						</tr>';
+				}
+					
+			}
+		 }
+		 
+	 }
+	public function listDefect(){
+		
+		$this->load->model('mgudang');
+		$data['isi']=$this->mgudang->listDefect();
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/listDefect',$data);
 		$this->load->view('dasboard/footer');
 	}
 	//view data
@@ -120,6 +92,28 @@ class Gudang extends CI_Controller {
 		$this->load->view('dasboard/inputGudang',$data);
 		$this->load->view('dasboard/footer');
 	}
+	public function viewSO($id)
+	{
+		$data = array(
+				'idTransaksi' => $id,
+				'status' => "2"	
+            );
+		$this->session->set_userdata('idSO',$id);
+		$this->load->model('mgudang');
+		$data['isi']=$this->mgudang->viewSO($id);
+		$data['rincian']=$this->mgudang->rincianViewSO($id);
+		$this->load->model('mpetugas');
+		$data['petugas']=$this->mpetugas->list_petugas();
+		$this->load->model('mpenjualan');
+		$this->mpenjualan->updateStatus($data);
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/outGudang',$data);
+		$this->load->view('dasboard/footer');
+	}
+	
+	
 	//input gudang
 	public function addCart()
 	{
@@ -172,31 +166,82 @@ class Gudang extends CI_Controller {
 		redirect("gudang/listPenerimaan");
 		
 	}
-	public function listBarang()
+	//keranjang keluar
+	public function addCartKeluar()
 	{
-		$this->load->model('produk');
-		$data['isi']=$this->produk->list_produk();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/listProduk',$data);
-		$this->load->view('dasboard/footer');
+		$cek=$this->session->userdata('username');
+		if($cek){
+			$data = array(
+					'id' => $this->input->post('id'),
+					'name' => $this->input->post('nama'),
+					'qty' => $this->input->post('jumlah'),
+					'price' => $this->input->post('harga'),
+					'options' =>array('idSuplier'=>$this->input->post('idSuplier'),
+									'idHarga'=>$this->input->post('harga'),
+									'defect'=>$this->input->post('defect'),)
+					
+				);
+			
+			$this->cart->insert($data);
+			$id=$this->session->userdata('idSO');
+			redirect("gudang/viewSO/".$id);
+		}else{
+			
+			redirect('home');
+		}
+	
 	}
-	public function listDefect(){
+	public function hapusKeluar($id){
+		$cek=$this->session->userdata('username');
+		if($cek){
+			
+			$data=array(
+				'rowid'=>$id,
+				'qty' =>0
+			
+			);
+			$this->cart->update($data);
+			$id=$this->session->userdata('idSO');
+			redirect("gudang/viewSO/".$id);
+		}else{
+			
+			redirect('home');
+		}
+	}
+	public function addDataKeluar()
+	{
+		$cek=$this->session->userdata('username');
+		if($cek){
+			$idtrans=$this->input->post('idtransaksi');
+			$data = array(
+					'idTransaksi' => $this->input->post('idtransaksi'),
+					'id' => $this->input->post('id'),
+					'qty' => $this->input->post('jumlah'),
+					'price' => $this->input->post('harga'),
+					'total' => $this->input->post('total'),
+					'tgl' => $this->input->post('tgl'),
+					'kurir' => $this->input->post('kurir'),
+					'idCustomer' => $this->input->post('id_customer'),
+					'email' => $this->session->userdata('username')
+					
+				);
+			
+			$this->load->model('mgudang');
+			$this->mgudang->keluarGudang($data);
+			redirect("gudang/listPengeluaran");
+		}else{
+			
+			redirect('home');
+		}
 		
-		$this->load->model('mgudang');
-		$data['isi']=$this->mgudang->listDefect();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/listDefect',$data);
-		$this->load->view('dasboard/footer');
 	}
+	
 	public function returnDefect(){
 		$data = array(
 				'idPurchasing' => $this->input->post('idPurchasing'),
 				'idItem' => $this->input->post('idItem'),
-				'jumlah' => $this->input->post('jumlah')
+				'jumlah' => $this->input->post('jumlah'),
+				'hargaSatuan' => $this->input->post('hargaSatuan')
             );
 		
 		$this->load->model('mgudang');
@@ -228,5 +273,55 @@ class Gudang extends CI_Controller {
 		$this->load->model('mgudang');
 		$this->mgudang->deleteDefect($id);
 	}
+	//searching data
+	public function cariProduk(){
+		$cek=$this->session->userdata('username');
+		if($cek){
+			$word=$this->input->post('cari');
+			$this->load->model('mproduk');
+			$data['isi']=$this->mproduk->list_cariProduk($word);
+			$this->load->view('dasboard/head');
+			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/sidebar');
+			$this->load->view('dasboard/listProduk',$data);
+			$this->load->view('dasboard/footer');
+		}else{
+			
+			redirect('home');
+		}
+		
+	}
+	function updateDefect(){
+		$data=array(
+					'idTransaksi'=>$this->input->post('idTransaksi'),
+					'idItem'=>$this->input->post('idItem'),
+					'harga'=>$this->input->post('harga'));
+		//print_r($data);
+		$this->load->model('mgudang');
+		$this->mgudang->updateDefect($data);
+		redirect('gudang/listDefect');
+	}
+	//action function
+	 public function stokBarang($id){
+		 
+		 $this->load->model('mgudang');
+		 $query=$this->mgudang->stokBarang($id);
+		 //print_r($query);
+		
+			
+			foreach ($query as $person) {
+		
+			$row = array();
+			$row['jumlah']=$person->jumlah;
+			$row['asal']=$person->asal;
+			$data[] = $row;
+		}
+			$out=array(
+						'isi'=>$data);
+			 echo json_encode($out);
+			
+		
+	 }
+	
 }
 ?>

@@ -58,7 +58,7 @@
                       <td style="width:200px;"><?php echo word_limiter($baris->deskripsi,5) ?></td>
 					  <td style="width:150px;">
 					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"supplier/deleteSupplier/",$baris->id_suplier ?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
+					   <a href="<?php echo base_url(),"supplier/deleteSupplier/",$baris->id_suplier ?>"><li onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
 						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_suplier ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
 						<a href="<?php echo base_url(),"supplier/viewSupplier/",$baris->id_suplier?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
 						

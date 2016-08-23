@@ -31,7 +31,14 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap3-wysihtml5.min.css">
 	  <!-- bootstrap-select -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/select2.min.css">
+	 <!-- ajax datatables -->
+	    
+	    <!-- jQuery 2.1.4 -->
+    <script src="<?php echo base_url() ?>assets/js/jQuery-2.1.4.min.js"></script>
+	<!-- ChartJS 1.0.1 -->
+    <!--script src="<?php echo base_url() ?>assets/js/Chart.min.js"></script-->
 	
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

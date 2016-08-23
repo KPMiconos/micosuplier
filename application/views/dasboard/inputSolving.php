@@ -29,7 +29,7 @@
 					<input name="id_service" type="hidden" value="<?php echo $this->session->userdata('idService'); ?>">
 					<div class="form-group">
                       <label for="exampleInputEmail1">Tanggal Penanganan</label>
-                      <input name="tgl_solved" type="text" class="form-control datepicker"  placeholder="Tanggal input Keluhan" data-date-format="yyyy-mm-dd">
+                      <input name="tgl_solved" type="text" class="form-control datepicker"  placeholder="Tanggal input Penanganan" data-date-format="yyyy-mm-dd">
                     </div>
 					 <div class="form-group">
 						<label>Teknisi</label>

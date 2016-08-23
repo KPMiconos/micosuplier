@@ -68,9 +68,10 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-				<li><a href="<?php echo base_url() ?>gudang/addItem"><i class="fa fa-circle-o"></i> Tambah Item </a></li>
-                <li><a href="<?php echo base_url() ?>gudang/listItem"><i class="fa fa-circle-o"></i> List Item</a></li>
-				<li><a href="<?php echo base_url() ?>gudang/listSatuan"><i class="fa fa-circle-o"></i> Satuan</a></li>
+				<li><a href="<?php echo base_url() ?>produk/addItem"><i class="fa fa-circle-o"></i> Tambah Item </a></li>
+                <li><a href="<?php echo base_url() ?>produk/listItem"><i class="fa fa-circle-o"></i> List Item</a></li>
+				<li><a href="<?php echo base_url() ?>produk/listSatuan"><i class="fa fa-circle-o"></i> Satuan</a></li>
+				<li><a href="<?php echo base_url() ?>produk/listTipeItem"><i class="fa fa-circle-o"></i>Tipe Item</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -92,7 +93,7 @@
               <ul class="treeview-menu">
 				<li><a href="<?php echo base_url() ?>pembelian/pemesanan"><i class="fa fa-circle-o"></i> Pemesanan</a></li>
                 <li><a href="<?php echo base_url() ?>pembelian/listPemesanan"><i class="fa fa-circle-o"></i> List Pemesanan</a></li>
-				<li><a href="<?php echo base_url() ?>admin/Report"><i class="fa fa-circle-o"></i> Report</a></li>
+				
                 
               </ul>
             </li>
@@ -102,8 +103,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-				<li><a href="<?php echo base_url() ?>gudang/addItem"><i class="fa fa-circle-o"></i> Tambah Item </a></li>
+				
 				<li><a href="<?php echo base_url() ?>gudang/listPenerimaan"><i class="fa fa-circle-o"></i> Penerimaan Barang</a></li>
+				<li><a href="<?php echo base_url() ?>gudang/listPengeluaran"><i class="fa fa-circle-o"></i> Pengeluaran Barang</a></li>
                 <li><a href="<?php echo base_url() ?>gudang/listBarang"><i class="fa fa-circle-o"></i> Stok Barang</a></li>
 				<li><a href="<?php echo base_url() ?>gudang/listDefect"><i class="fa fa-circle-o"></i> Barang Rusak</a></li>
                
@@ -115,8 +117,10 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-				<li><a href="<?php echo base_url() ?>admin/addPenjualan"><i class="fa fa-circle-o"></i> Add Produksi</a></li>
-                <li><a href="<?php echo base_url() ?>admin/listPenjualan"><i class="fa fa-circle-o"></i> List Produksi</a></li>
+				<li><a href="<?php echo base_url() ?>produksi/addBom"><i class="fa fa-circle-o"></i> Add BOM</a></li>
+				<li><a href="<?php echo base_url() ?>produksi/addProduksi"><i class="fa fa-circle-o"></i> Add Produksi</a></li>
+				<li><a href="<?php echo base_url() ?>produksi/listBom"><i class="fa fa-circle-o"></i> List BOM</a></li>
+                <li><a href="<?php echo base_url() ?>produksi/listProduksi"><i class="fa fa-circle-o"></i> List Produksi</a></li>
               </ul>
             </li>
 			<li class="treeview">
@@ -125,9 +129,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-				<li><a href="<?php echo base_url() ?>admin/addPenjualan"><i class="fa fa-circle-o"></i> Add Penjualan</a></li>
-                <li><a href="<?php echo base_url() ?>admin/listPenjualan"><i class="fa fa-circle-o"></i> List Penjualan</a></li>
-				<li><a href="<?php echo base_url() ?>admin/Report"><i class="fa fa-circle-o"></i> Report</a></li>
+				<li><a href="<?php echo base_url() ?>penjualan/addPenjualan"><i class="fa fa-circle-o"></i> Add Penjualan</a></li>
+                <li><a href="<?php echo base_url() ?>penjualan/listPenjualan"><i class="fa fa-circle-o"></i> List Penjualan</a></li>
+			
                 
               </ul>
             </li>
@@ -145,7 +149,7 @@
               </ul>
             </li>
            <li class="">
-              <a href="#">
+              <a href="<?php echo base_url() ?>petugas/privilege">
                 <i class="fa fa-expeditedssl"></i> <span>Privilege</span>
               </a>
             </li>

@@ -18,7 +18,38 @@ class Petugas extends CI_Controller {
 			redirect('home');
 		}
 	}
-	
+	public function privilege(){
+		$cek=$this->session->userdata('username');
+		if($cek){
+			$this->load->model('mpetugas');
+			$data['isi']=$this->mpetugas->list_petugas();
+			$this->load->view('dasboard/head');
+			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/sidebar');
+			$this->load->view('dasboard/privilege',$data);
+			$this->load->view('dasboard/footer');
+		}else{
+			
+			redirect('home');
+		}
+	}
+	//update data
+	public function updatePrivilege(){
+		$cek=$this->session->userdata('username');
+		if($cek){
+			$data = array(
+					'id_petugas' => $this->input->post('id_petugas'),
+					'privilege' => $this->input->post('privilege')
+				);
+			//echo $data['id_petugas'],$data['privilege'];
+			$this->load->model('mpetugas');
+			$query=$this->mpetugas->updatePrivilege($data);
+			redirect('petugas/privilege');
+		}else{
+			
+			redirect('home');
+		}
+	}
 	//list data
 	public function listPetugas()
 	{

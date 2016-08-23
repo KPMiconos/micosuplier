@@ -27,10 +27,10 @@
 						<label for="exampleInputEmail1">Filter</label>                   
 					</div>
                     <div class="col-lg-2">
-						<input name="tgl_awal" type="text" class="form-control datepicker" value="<?php echo $tgl_awal; ?>"  placeholder="Tanggal awal" data-date-format="yyyy-mm-dd" >
+						<input name="tgl_awal" type="text" class="form-control datepicker"  placeholder="Tanggal awal" data-date-format="yyyy-mm-dd" >
                     </div>
 					<div class="col-lg-2">
-						<input name="tgl_akhir" type="text" class="form-control datepicker" value="<?php echo $tgl_akhir; ?>"  placeholder="Tanggal akhir" data-date-format="yyyy-mm-dd" >
+						<input name="tgl_akhir" type="text" class="form-control datepicker"   placeholder="Tanggal akhir" data-date-format="yyyy-mm-dd" >
                     </div>
 					<div class="col-lg-1">
 						 <button type="submit" class="btn btn-primary">Filter</button>
@@ -70,17 +70,7 @@
 					  <td><?php echo $baris->tanggal_receive?></td>
                       <td><?php echo $baris->nama_item?></td>
                       <td><?php 
-						if($baris->satuan=="1"){
-							echo "Pcs";
-						} else if($baris->satuan=="2"){
-							echo "Kg";
-						}else if($baris->satuan=="3"){
-							echo "m";
-						}else if($baris->satuan=="4"){
-							echo "m2";
-						}else if($baris->satuan=="5"){
-							echo "m3";
-						}
+						echo $baris->nama_satuan
 					  ?></td>
                       <td><?php echo $baris->jumlah?></td>
 					  <td><?php echo $baris->kurir?></td>

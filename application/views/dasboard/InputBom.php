@@ -3,13 +3,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Add Penjualan
+            Tambah BOM
             
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Penjualan</a></li>
-            <li class="active">Add Penjualan</li>
+            <li><a href="#">Produksi</a></li>
+            <li class="active">Tambah BOM</li>
           </ol>
         </section>
       
@@ -21,9 +21,9 @@
             
               <div class="box">
                 <div class="box-header">
-                  <a href="<?php echo base_url() ?>admin/addProduk"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
+                  <h3 class="box-title"></h3>
                   <div class="box-tools">
-				  <form method="post" action="<?php echo base_url() ?>admin/cariProduk" enctype="multipart/form-data">
+				  <form method="post" action="#" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
 					
                       <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">
@@ -38,23 +38,35 @@
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
                     <tr>
-                      <th>ID</th>
+                      <th>Barcode</th>
 					   <th>Gambar</th>
                       <th>Nama Produk</th>
+                      <th>Tipe</th>
                       <th>Satuan</th>
-					  <th>Stok</th>
-                      <th>Harga</th>
                       <th>Action</th>
                     </tr>
 					<?php
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
-					<form method="POST" action="<?php echo base_url(),"admin/addCart"?>" >
+					<form method="POST" action="<?php echo base_url(),"produksi/addCart"?>" >
                     <tr>
                       <td><?php echo $baris->id_item ?></td>
 					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->link_photo ?>"></td>
                       <td><?php echo $baris->nama_item ?></td>
-                      <td><?php 
+                      <td>
+					  <?php
+						if($baris->tipe=="1"){
+							echo "Raw";
+						}else if($baris->tipe=="2"){
+							echo "Semi-finish";
+						}else if($baris->tipe=="3"){
+							echo "Finish";
+						}
+						 
+						?>
+						</a></td>
+                      <td><span class="label label-success"> 
+					  <?php 
 						if($baris->satuan=="1"){
 							echo "Pcs";
 						} else if($baris->satuan=="2"){
@@ -66,14 +78,15 @@
 						}else if($baris->satuan=="5"){
 							echo "m3";
 						}
-					  ?></td>
-					   <td><?php echo $baris->jumlah ?></td>
-                      <td><span class="label label-success">Rp <?php echo $baris->hargaSatuan ?></span></td>
+					  ?></span></td>
+					  
+						
                       <td> 
 					  <div>
+					  <input name="harga" class="form-control pull-left" type="hidden"  >
 					  <input type="hidden" name="id" value="<?php echo $baris->id_item ?>" >
 						<input type="hidden" name="nama" value="<?php echo $baris->nama_item ?>" >
-						<input type="hidden" name="harga" value="<?php echo $baris->hargaSatuan ?>" >
+						
 						</div>
 					  <div class="btn-group">
 					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah">
@@ -84,9 +97,9 @@
                   </form>
                    
 					<?php }}
-						else{
-							echo "Belum ada data Petugas";
-							}
+						else{ ?>
+							<tr><td>Belum ada data Produk</td></tr>
+							<?php }
 					?>
                   </table>
                 </div><!-- /.box-body -->
@@ -100,74 +113,56 @@
 					<H3></H3>
 					</div>
 					 <div class="box-body">
-					  <form method="post" action="<?php echo base_url() ?>admin/addDataBelanja">
+					  <form method="post" action="<?php echo base_url() ?>produksi/addDataBom">
 					 <table class="table table-hover">
                     <tr>
                       
-					  <th>Nama Produk</th>
-                      <th>Harga</th>
+					  <th>Nama Bahan</th>
+                      <th>Jumlah</th>
 					   <th>Pilihan</th>
 					   
-                      <input type="hidden" name="idtransaksi" value="<?php echo "DO",time()  ?>">
+                      <input type="hidden" name="idtransaksi" value="<?php echo "PO",time()  ?>">
                     </tr>
 					 <?php foreach($this->cart->contents() as $item){ ?>
 					<tr>
-						 <td><?php echo $item['name'] ?></td>
+						 <td><?php echo $item['name'],$item['id']; ?></td>
 						<input type="hidden" name="id" value="<?php echo $item['id'] ?>">
 						 <td>
                              <?php echo $item['qty'] ?>
 							 <input type="hidden" name="jumlah" value="<?php echo $item['qty'] ?>">
                          </td>
-						<td>
-                            <?php echo "Rp ",$item['price'] ?>
+						
+                            
 						  <input type="hidden" name="harga" value="<?php echo $item['price'] ?>">
 						   <input type="hidden" name="total" value="<?php echo $this->cart->total() ?>">
-                        </td>
+                        
 						<td>
-							<a href="<?php echo base_url(),"admin/hapus/" ,$item['rowid']; ?>">Hapus</a>
+							<a href="<?php echo base_url(),"produksi/hapus/" ,$item['rowid']; ?>">Hapus</a>
 						</td>
 						<?php } ?>
 					</tr>
 					 <tr>
-								<td>
-									
-								</td>
-								<td>
-									Total:
-								</td>
-								<td>
-									<?php if($this->cart->total()>0){
-										echo "Rp ", $this->cart->total();
-									}else{
-										echo "Rp ", $this->cart->total();
+					 <td>
+									<?php if(empty($this->cart->contents())){
+										echo "Data kosong";
 									}
 									
 									?>
 								</td>
-							  </tr>
+					</tr>
 							  
 					</table>
-					<div class="form-group">
-						<label>Customer</label>
-						<select name="id_customer" class="form-control select2" style="width: 100%;">
-						  <option>-Pilih</option>
-						  	<?php if(!empty($isi)){
-							foreach($customer as $baris){ ?>
-						  <option value="<?php echo $baris->id_customer ?>"><?php echo $baris->nama ?></option>
+						<div class="form-group">
+						<label>Nama Produk</label>
+						<select name="id_produk" class="form-control selecttree" style="width: 100%;" required>
+						  <option disabled selected value>-Pilih</option>
+						  	<?php if(!empty($produk)){
+							foreach($produk as $baris){ ?>
+						  <option value="<?php echo $baris->id_item ?>"><?php echo $baris->nama_item ?></option>
 							<?php }} ?>
 						  
 						</select>
 					</div>
-					
-					 <div class="form-group">
-                      <label for="exampleInputEmail1">Kurir</label>
-                      <input name="kurir" type="text" class="form-control"  placeholder="Kurir " >
-                    </div>
-					 <div class="form-group">
-                      <label for="exampleInputEmail1">Tanggal</label>
-                      <input name="tgl" type="text" class="form-control datepicker"  placeholder="Tanggal input " data-date-format="yyyy-mm-dd" >
-                    </div>
-					
 					 <div class="box-footer">
 					 
                     <button type="submit" class="btn btn-primary pull-right">Submit</button>

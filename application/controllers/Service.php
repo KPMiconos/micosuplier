@@ -14,6 +14,44 @@ class Service extends CI_Controller {
 		$this->load->view('dasboard/listService',$data);
 		$this->load->view('dasboard/footer');
 	}
+	//add data
+	public function addService()
+	{
+		$this->load->model('mcustomer');
+		$data['isi']=$this->mcustomer->list_customer();
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/inputService',$data);
+		$this->load->view('dasboard/footer');
+	}
+	public function addSolving($id)
+	{
+		$data['id']=$id;
+		$this->load->model('mpetugas');
+		$data['petugas']=$this->mpetugas->list_petugas();
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/inputSolving',$data);
+		$this->load->view('dasboard/footer');
+	}
+	public function addProdukSolving()
+	{
+		$this->load->model('mproduk');
+		$data['isi']=$this->mproduk->list_produk();
+		$this->load->model('mcustomer');
+		$data['customer']=$this->mcustomer->list_customer();
+		$this->load->model('mpetugas');
+		$data['petugas']=$this->mpetugas->list_petugas();
+		
+		$this->load->view('dasboard/head');
+		$this->load->view('dasboard/header');
+		$this->load->view('dasboard/sidebar');
+		$this->load->view('dasboard/produkSolving',$data);
+		$this->load->view('dasboard/footer');
+	}
+	//list data
 	public function listService()
 	{
 		$this->load->model('mservice');
@@ -36,16 +74,7 @@ class Service extends CI_Controller {
 		$this->load->view('dasboard/listUnsolvedService',$data);
 		$this->load->view('dasboard/footer');
 	}
-	public function addService()
-	{
-		$this->load->model('mcustomer');
-		$data['isi']=$this->mcustomer->list_customer();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/inputService',$data);
-		$this->load->view('dasboard/footer');
-	}
+	//view data
 	public function viewService($id){
 		
 		$this->load->model('mservice');
@@ -59,42 +88,24 @@ class Service extends CI_Controller {
 		$this->load->view('dasboard/footer');
 		
 	}
-	public function addSolving($id)
-	{
-		$data['id']=$id;
-		$this->load->model('mpetugas');
-		$data['petugas']=$this->mpetugas->list_petugas();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/inputSolving',$data);
-		$this->load->view('dasboard/footer');
-	}
+	
 	public function pilihSolving($id)
 	{
 		$this->session->set_userdata('idService',$id);
+		$this->load->model('mservice');
+		$ser=$this->mservice->cekService($id);
+		if($ser==1){
+			redirect('service/addSolving/'.$this->session->userdata('idService'));
+		}else{
+			$this->load->view('dasboard/head');
+			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/sidebar');
+			$this->load->view('dasboard/pilihSolving');
+			$this->load->view('dasboard/footer');
+		}
 		
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/pilihSolving');
-		$this->load->view('dasboard/footer');
 	}
-	public function addProdukSolving()
-	{
-		$this->load->model('produk');
-		$data['isi']=$this->produk->list_produk();
-		$this->load->model('mcustomer');
-		$data['customer']=$this->mcustomer->list_customer();
-		$this->load->model('mpetugas');
-		$data['petugas']=$this->mpetugas->list_petugas();
-		
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/produkSolving',$data);
-		$this->load->view('dasboard/footer');
-	}
+	//acton funtion
 	public function addService_act(){
 		$this->db->reconnect();
 		$data = array(
@@ -141,12 +152,13 @@ class Service extends CI_Controller {
 			redirect("service/listUnsolved");
 		}
 	}
+	//delete data
 	public function delete($id){
 		$this->load->model('mservice');
 		$query=$this->mservice->delete($id);
 		redirect("service/listService");
 	}
-	//menambahkan produk untuk service
+	//menambahkan produk keranjang service
 	public function addCart()
 	{
 		
@@ -154,7 +166,8 @@ class Service extends CI_Controller {
 				'id' => $this->input->post('id'),
 				'name' => $this->input->post('nama'),
 				'qty' => $this->input->post('jumlah'),
-				'price' => $this->input->post('harga')
+				'price' => $this->input->post('harga'),
+				'options' =>array('idSuplier'=>$this->input->post('idSuplier'))
 				
             );
 		

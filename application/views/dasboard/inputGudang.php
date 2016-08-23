@@ -46,31 +46,10 @@
                       <td><?php echo $baris->id_item ?></td>
                       <td><?php echo $baris->nama_item ?></td>
                       <td>
-					  <?php
-						if($baris->tipe=="1"){
-							echo "Raw";
-						}else if($baris->tipe=="2"){
-							echo "Semi-finish";
-						}else if($baris->tipe=="3"){
-							echo "Finish";
-						}
-						 
-						?>
+					  <?php echo $baris->nama_tipe_item?>
 						</a></td>
                       <td><span class="label label-success"> 
-					  <?php 
-						if($baris->satuan=="1"){
-							echo "Pcs";
-						} else if($baris->satuan=="2"){
-							echo "Kg";
-						}else if($baris->satuan=="3"){
-							echo "m";
-						}else if($baris->satuan=="4"){
-							echo "m2";
-						}else if($baris->satuan=="5"){
-							echo "m3";
-						}
-					  ?></span></td>
+					  <?php echo $baris->nama_satuan; ?></span></td>
 					 
 					  <td>@ Rp<?php echo $baris->hargaSatuan ?> </td>
 					  <td><?php echo $baris->jumlah ?> item</td>
@@ -92,7 +71,7 @@
                    
 					<?php }}
 						else{
-							echo "Belum ada data Petugas";
+							echo "Belum ada data produk";
 							}
 					?>
                   </table>

@@ -11,6 +11,11 @@
 		$row=$query->row();
 		return $row->cek;
 	}
+	//update data
+	public function updatePrivilege($data){
+		$this->db->reconnect();		
+		$query=$this->db->query("CALL sp_update_privilege('$data[id_petugas]','$data[privilege]')");
+	}
 	public function list_petugas(){
 		$this->db->reconnect();
 			$query = $this->db->query("CALL sp_list_petugas()");

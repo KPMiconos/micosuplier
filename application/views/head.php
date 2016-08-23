@@ -18,5 +18,5 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url() ?>assets/images/favicon.png">
 
-    <title>Superlist - Directory Template</title>
+    <title>SI-Maniper</title>
 </head>

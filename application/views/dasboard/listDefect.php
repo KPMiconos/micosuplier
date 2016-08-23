@@ -55,8 +55,8 @@
                     <tr>
                       <td><?php echo $baris->id_item ?></td>
                       <td><?php echo $baris->nama_item ?></td>
-                      <td><?php echo $baris->tipe ?></a></td>
-                      <td><span class="label label-success"> <?php echo $baris->satuan ?></span></td>
+                      <td><?php echo $baris->nama_tipe_item ?></a></td>
+                      <td><span class="label label-success"> <?php echo $baris->nama_satuan ?></span></td>
 					  <td>@ Rp<?php echo $baris->hargaSatuan ?> </td>
 					  <td><?php echo $baris->jumlah ?> item</td>
 						
@@ -64,6 +64,7 @@
 					  <div>
 					  <input name="harga" class="form-control pull-left" type="hidden" value="<?php echo $baris->hargaSatuan ?>" >
 					  <input type="hidden" name="idItem" value="<?php echo $baris->id_item ?>" >
+					  <input type="hidden" name="hargaSatuan" value="<?php echo $baris->hargaSatuan ?>" >
 						<input type="hidden" name="idPurchasing" value="<?php echo $baris->id_purchasing ?>" >
 						
 						</div>
@@ -71,17 +72,29 @@
 					  <?php if($baris->status=="1"){ ?>
 					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah barang return">
 					   <input class="pull-right btn btn-primary" type="submit" value="Add" >
-					  <?php }else{ echo "Returned";}?>
+					  <?php }else if($baris->status=="0"){
+						  echo "Returned";
+						  }else if($baris->status=="2"){
+							  echo "Ignoring";
+						  }?>
 						</div>
+					</form>
 					</td>
+					<form method="post" action="<?php echo base_url(),"gudang/updateDefect"; ?>">
 					<td>
-					 <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"gudang/deleteDefect/",$baris->id_purchasing?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
+						<input type="hidden" name="idTransaksi" value="<?php echo $baris->id_purchasing ?>">
+						<input type="hidden" name="idItem" value="<?php echo $baris->id_item ?>">
+						<input type="hidden" name="harga" value="<?php echo $baris->hargaSatuan ?>">
+					 <div class="btn-group">
+					   <button <?php if($baris->status=="0"){
+						   echo "disabled";
+					   } ?> type="submit" class="btn btn-xs btn-primary pull-right"><li class="fa  fa-trash btn " data-toggle="tooltip" data-placement="top" title="Delete"></li></button>
 						
 						</div>
 					</td>
+					</form>
                     </tr>
-                  </form>
+                  
                    
 					<?php }}
 						else{

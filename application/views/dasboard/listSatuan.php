@@ -49,16 +49,16 @@
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
                     <tr>
-                      <td><a href="<?php echo base_url(),"customer/viewCustomer/",$baris->id_satuan  ?>"><?php echo $baris->id_satuan  ?></a></td>
+                      <td><a href="<?php echo base_url(),"produk/viewSatuan/",$baris->id_satuan  ?>"><?php echo $baris->id_satuan  ?></a></td>
                       <td><?php echo $baris->nama_satuan  ?></td>
                       <td><?php echo $baris->kelompok_satuan  ?></td>
                       <td><?php echo $baris->deskripsi_satuan  ?></td>
                       
 					  <td style="width:150px">
 					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"gudang/deleteSatuan/",$baris->id_satuan?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
+					   <a href="<?php echo base_url(),"produk/deleteSatuan/",$baris->id_satuan?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
 						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_satuan ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-						<a href="<?php echo base_url(),"gudang/viewCustomer/",$baris->id_satuan?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+						<a href="<?php echo base_url(),"produk/viewSatuan/",$baris->id_satuan?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
 						
 						</div>
 					  </td>
@@ -74,7 +74,7 @@
 						  </div>
 						  <div class="modal-body">
 						   <!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>gudang/addSatuan" method="post" enctype="multipart/form-data">
+							<form role="form" action="<?php echo base_url() ?>produk/addSatuan" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					
 					<div class="form-group">

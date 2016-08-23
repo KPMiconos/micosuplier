@@ -181,7 +181,7 @@
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
                     <tr>
-                      <th>ID</th>
+                      <th>ID.Transaksi</th>
 					  
                       <th>Tanggal Transaksi</th>
                       <th>Nama Barang</th>

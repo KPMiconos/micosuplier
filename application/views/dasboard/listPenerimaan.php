@@ -38,9 +38,9 @@
                   <table class="table table-hover">
                     <tr>
                       <th>No.PO</th>
+                      <th>Tanggal</th>
                       <th>Creator</th>
                       <th>Supplier</th>
-                      <th>Tanggal</th>
 					  <th>Jumlah</th>
                       <th>Status</th>
 					  <th>Action</th>
@@ -49,10 +49,10 @@
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
                     <tr>
-                      <td><a href="<?php echo base_url(),"admin/viewPetugas/",$baris->id_po?>"><?php echo $baris->id_po?></a></td>
+                      <td><?php echo $baris->id_po?></td>
+					  <td><?php echo date('d/m/Y',strtotime($baris->tanggal_po))?></td>
                       <td><?php echo $baris->nama_petugas?></td>
                       <td><?php echo $baris->nama_suplier?></td>
-					  <td><?php echo $baris->tanggal_po?></td>
 					  <td>Rp <?php echo $baris->totalHarga?></td>
                       <td><span class="label label-success">
 					  <?php 
@@ -67,62 +67,25 @@
                       
 					  <td>
 					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"pembelian/deletePetugas/",$baris->id_po?>"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
-						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->nama_petugas ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-						<a href="<?php echo base_url(),"gudang/viewPO/",$baris->id_po?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+					   <a href="<?php echo base_url(),"gudang/viewPO/",$baris->id_po?>"><button class="btn btn-primary"<?php
+							if($baris->status==2){
+								echo "disabled";
+							}?> ><li class="fa  <?php if($baris->status==2){
+								echo "fa-reply-all";
+							}else{
+								echo "fa-check-square-o";
+							} ?>" data-toggle="tooltip" data-placement="top" title="Proses penerimaan"></li></button></a>
 						
 						</div>
 					</td>
-					<!-- Modal -->
-					<div class="modal fade" id="myModal<?php echo $baris->id_po ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-						<div class="modal-content">
-						  <div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">Edit Data Petugas</h4>
-						  </div>
-						  <div class="modal-body">
-						   <form role="form" action="<?php echo base_url() ?>admin/updatePetugas" method="post" enctype="multipart/form-data">
-							  <div class="box-body">
-								<div class="form-group">
-								  <label for="exampleInputEmail1">No.KTP</label>
-								  <input name="ktp" type="text" class="form-control" id="exampleInput" placeholder="Nomor KTP" value="<?php echo $baris->nama_petugas ?>" required>
-								</div>
-								<div class="form-group">
-								  <label for="exampleInputEmail1">Nama</label>
-								  <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Lengkap" value="<?php echo $baris->nama_suplier?>" required>
-								</div>
-								
-								<div class="form-group">
-								  <label for="exampleInputPassword1">Alamat</label>
-								  <input name="alamat" type="text" class="form-control" id="exampleInput" placeholder="Alamat" value="<?php echo $baris->status ?>" required>
-								</div>
-								 <div class="form-group">
-								  <label for="exampleInputEmail1">No.Telephone</label>
-								  <input name="hp" type="text" class="form-control" id="exampleInput" placeholder="Nomor HP/Telephone" value="<?php echo $baris->totalharga ?>" required>
-								</div>
-								
-
-							 
-							  </div><!-- /.box-body -->
-
-							  <div class="box-footer">
-								<button type="submit" class="btn btn-primary">Submit</button>
-							  </div>
-							</form>
-						  </div>
-						  
-						</div>
-					  </div>
-					</div>
-                    </tr>
+					 </tr>
 						  
 				
             
                    
 					<?php }}
 								else{
-									echo "Belum ada data Petugas";
+									echo "Belum ada data Penerimaan";
 								}
 
 							?>

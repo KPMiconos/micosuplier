@@ -7,7 +7,7 @@ class Mservice extends CI_Model{
 	 }
 	 public function addService($data){
 		 $this->db->reconnect();
-			echo $data['petugas'],$data['customer'],$data['subjek'],$data['keluhan'],$data['tgl_open'],$data['status'];
+			//echo $data['petugas'],$data['customer'],$data['subjek'],$data['keluhan'],$data['tgl_open'],$data['status'];
 		$query=$this->db->query("CALL sp_input_service('$data[petugas]','$data[customer]','$data[subjek]','$data[keluhan]','$data[tgl_open]','$data[status]')");
 	
 	 }
@@ -67,12 +67,13 @@ class Mservice extends CI_Model{
 	}
 	 public function addServProduk($data){
 		
-		$this->db->reconnect();		
-		$query=$this->db->query("CALL sp_input_servProduk('$data[idService]','$data[teknisi]','$data[idCustomer]','$data[total]','$data[tgl]','$data[kurir]')");
+		$this->db->reconnect();
 		foreach($this->cart->contents() as $item){
 			$id=$item['id'];
+			$harga=$item['price'];
+			$idSuplier=$item['options']['idSuplier'];
 			
-			$query = $this->db->query("CALL sp_cekStok('$id')");
+			$query = $this->db->query("CALL sp_cekStok('$id','$idSuplier','$harga')");
 			if ($query->num_rows() > 0)
 			{
 				$butuh=$item['qty'];
@@ -109,6 +110,11 @@ class Mservice extends CI_Model{
 			}
 		}	
 		$this->cart->destroy();
+	 }
+	 public function cekService($id){
+		 $query=$this->db->query("CALL sp_cekService('$id')");
+		$row=$query->row();
+		return $row->cek;
 	 }
 	
 }

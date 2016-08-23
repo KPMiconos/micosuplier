@@ -4,31 +4,86 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Pembelian extends CI_Controller {
 	public function index(){
 		
-		
+		redirect('pembelian/listPemesanan');
 	}
-	
+	//add data
 	public function pemesanan()
 	{
-		$this->load->model('mgudang');
-		$data['isi']=$this->mgudang->list_item();
-		$this->load->model('msupplier');
-		$data['suplier']=$this->msupplier->list_supplier();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/pemesanan',$data);
-		$this->load->view('dasboard/footer');
+		$cek=$this->session->userdata('username');
+		if($cek){
+			$this->load->model('mproduk');
+			$data['isi']=$this->mproduk->list_item();
+			$this->load->model('msupplier');
+			$data['suplier']=$this->msupplier->list_supplier();
+			$this->load->view('dasboard/head');
+			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/sidebar');
+			$this->load->view('dasboard/pemesanan',$data);
+			$this->load->view('dasboard/footer');
+		}else{
+			
+			redirect('home');
+		}
 	}
+	//list data
 	public function listPemesanan()
 	{
-		$this->load->model('mpembelian');
-		$data['isi']=$this->mpembelian->listPemesanan();
-		$this->load->view('dasboard/head');
-		$this->load->view('dasboard/header');
-		$this->load->view('dasboard/sidebar');
-		$this->load->view('dasboard/listPemesanan',$data);
-		$this->load->view('dasboard/footer');
+		$cek=$this->session->userdata('username');
+		if($cek){
+			$this->load->model('mpembelian');
+			$data['isi']=$this->mpembelian->listPemesanan();
+			$this->load->view('dasboard/head');
+			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/sidebar');
+			$this->load->view('dasboard/listPemesanan',$data);
+			$this->load->view('dasboard/footer');
+		}else{
+			
+			redirect('home');
+		}
 	}
+	//update status
+	public function updateStatus(){
+		$cek=$this->session->userdata('username');
+		if($cek){
+			$data = array(
+				'idTransaksi' => $this->input->post('idTransaksi'),
+				'status' => $this->input->post('status')	
+            );
+			$this->load->model('mpembelian');
+			$this->mpembelian->updateStatus($data);
+			redirect('pembelian/listPemesanan');
+		}else{
+			
+			redirect('home');
+		}
+	}
+	//rincian pembelian
+	 public function rincianPemesanan($id){
+		 
+		 $this->load->model('mpembelian');
+		 $query=$this->mpembelian->rincianPemesanan($id);
+		 
+		 if(!empty($query)){
+			 foreach ($query as $row)
+			{
+				
+					echo '<tr>
+							
+							<td><a href="',base_url(),'supplier/viewProduk/',$row->id_item,'">',$row->nama_item,'</a></td>
+							<td>',$row->nama_tipe_item,'</td>
+							<td>',$row->nama_satuan,'</td>
+							<td>',$row->hargaSatuan,'</td>
+							<td>',$row->jumlah,'</td>
+						</tr>';
+				
+					
+			}
+		 }
+		 
+	 }
+	
+	//keranjang belanja
 	public function addCart()
 	{
 		
@@ -73,7 +128,7 @@ class Pembelian extends CI_Controller {
 		
 		$this->load->model('mpembelian');
 		$this->mpembelian->addPurchasing($data);
-		redirect("pembelian/pemesanan");
+		redirect("pembelian/listPemesanan");
 		
 	}
 
