@@ -9,7 +9,9 @@ class Mproduksi extends CI_Model{
 	 public function addBom($data){
 		 $this->db->reconnect();		
 		foreach($this->cart->contents() as $item){
-			$this->db->query("CALL sp_input_bom('$data[id_produk]','$item[id]','$item[qty]')");
+			$query=$this->db->query("CALL sp_input_bom('$data[id_produk]','$item[id]','$item[qty]')");
+			$row=$query->row();
+			return $row->cek;
 				
 		}	
 		$this->cart->destroy();
@@ -27,43 +29,9 @@ class Mproduksi extends CI_Model{
 			$id=$item['id'];
 			$harga=$item['price'];
 			$idSuplier=$item['options']['idSuplier'];
+			$this->db->query("CALL sp_input_detailProduksi('$data[idTransaksi]','$item[id]','$item[qty]','$item[price]','$idSuplier')");
 			
 			
-			$query = $this->db->query("CALL sp_cekStok('$id','$idSuplier','$harga')");
-			if ($query->num_rows() > 0)
-			{
-				$butuh=$item['qty'];
-				foreach ($query->result() as $row)
-				{
-						$stok = $row->jumlah;
-						$po = $row->id_purchasing;
-						$id_item = $row->id_item;
-						if($stok>=$butuh){
-							//echo "cek1";
-							$this->db->reconnect();	
-							$this->db->query("CALL sp_pengurangan_stok('$po','$id_item','$butuh')");
-							$this->db->query("CALL sp_input_detailProduksi('$data[idTransaksi]','$item[id]','$item[qty]','$item[price]')");
-								$butuh=$butuh-$stok;
-							//echo $butuh;
-							break;
-						}else{
-							
-							$this->db->reconnect();	
-							//echo "cek2";
-							
-							$this->db->query("CALL sp_pengurangan_stok('$po','$id_item','$item[qty]')");
-							$butuh=$butuh-$stok;
-							//echo $butuh;
-						}
-						if($butuh<=0){
-							break;
-						}
-				}
-			
-			}
-			else{
-				return 0;
-			}
 		}	
 		
 		$this->cart->destroy();
@@ -132,5 +100,34 @@ class Mproduksi extends CI_Model{
 			}
 		
 	}
+	//update status
+	 public function updateStatus($data){
+		 $this->db->reconnect();
+		 $query=$this->db->query("CALL sp_updateStatus_produksi('$data[idTransaksi]','$data[status]')");
+	 }
+	 //rincianProduksi
+	  public function rincianProduksi($id){
+		 $this->db->reconnect();
+			$query = $this->db->query("CALL sp_rincianProduksi('$id')");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+	 }
+	 //delete data
+	 public function deleteBom($id){
+		 $this->db->reconnect();
+		$query = $this->db->query("CALL sp_delete_bom('$id')");
+		$row=$query->row();
+		return $row->cek;
+			
+	 }
 }
 ?>

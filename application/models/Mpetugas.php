@@ -92,5 +92,23 @@
 				return 0;
 			}
 	}
+	public function cekAkses($id){
+		$this->db->reconnect();		
+		$query=$this->db->query("CALL sp_cek_akses('$id')");
+		$row=$query->row();
+		return $row->privilege;
+	}
+	public function getId($id){
+		$this->db->reconnect();		
+		$query=$this->db->query("CALL sp_get_userId('$id')");
+		$row=$query->row();
+		return $row->id_petugas;
+	}
+	public function ubahPassword($data){
+		  $this->db->reconnect();		
+		$query=$this->db->query("CALL sp_ubahPassword('$data[id_petugas]','$data[passwordLama]','$data[passwordBaru]')");
+		$row=$query->row();
+		return $row->id_petugas;
+	 }
 }
 ?>

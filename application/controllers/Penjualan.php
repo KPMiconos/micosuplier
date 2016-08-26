@@ -11,12 +11,21 @@ class Penjualan extends CI_Controller {
 	{
 		$cek=$this->session->userdata('username');
 		if($cek){
+			//data header
+			$email=$this->session->userdata('username');
+			$this->load->model('mpetugas');
+			$idPet=$this->mpetugas->getId($email);
+			$user['user']=$this->mpetugas->view_petugas($idPet);
+			$this->load->model('mgudang');
+			$user['limit']=$this->mgudang->hitungAlertStok();
+			$user['alert']=$this->mgudang->alertStok();
+			//
 			$this->load->model('mproduk');
 			$data['isi']=$this->mproduk->list_produk();
 			$this->load->model('mcustomer');
 			$data['customer']=$this->mcustomer->list_customer();
 			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/header',$user);
 			$this->load->view('dasboard/sidebar');
 			$this->load->view('dasboard/penjualan',$data);
 			$this->load->view('dasboard/footer');
@@ -81,10 +90,19 @@ class Penjualan extends CI_Controller {
 	{
 		$cek=$this->session->userdata('username');
 		if($cek){
+			//data header
+			$email=$this->session->userdata('username');
+			$this->load->model('mpetugas');
+			$idPet=$this->mpetugas->getId($email);
+			$user['user']=$this->mpetugas->view_petugas($idPet);
+			$this->load->model('mgudang');
+			$user['limit']=$this->mgudang->hitungAlertStok();
+			$user['alert']=$this->mgudang->alertStok();
+			//
 			$this->load->model('mpenjualan');
 			$data['isi']=$this->mpenjualan->list_penjualan();
 			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/header',$user);
 			$this->load->view('dasboard/sidebar');
 			$this->load->view('dasboard/listPenjualan',$data);
 			$this->load->view('dasboard/footer');
@@ -105,12 +123,12 @@ class Penjualan extends CI_Controller {
 				
 					echo '<tr>
 							
-							<td><a href="',base_url(),'supplier/viewProduk/',$row->id_item,'">',$row->nama_item,'</a></td>
+							<td><a href="',base_url(),'produk/viewProduk/',$row->id_item,'">',$row->nama_item,'</a></td>
 							<td>',$row->nama_tipe_item,'</td>
 							<td>',$row->nama_satuan,'</td>
 							<td>',$row->harga,'</td>
 							<td>',$row->jumlah,'</td>
-							<td>',$row->jumlah_keluar,'</td>
+							<td>',$row->keluar,'</td>
 						</tr>';
 				
 					

@@ -65,7 +65,11 @@
                         <p class="col-sm-6 pull-left">: <?php echo $baris->deskripsi ?></p>
                       </div>
 					<div class="box-footer">
-						<button data-toggle="modal" data-target="#myModal1" class="btn btn-primary">Edit</button>
+						<button data-toggle="modal" data-target="#myModal1" class="btn btn-primary"
+						<?php if($this->session->userdata('tamu')){
+								echo "disabled";
+							}?>
+						>Edit</button>
 					</div> 
                     </div>
 					<!-- Modal -->

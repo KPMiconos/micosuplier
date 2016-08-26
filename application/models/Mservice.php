@@ -16,6 +16,13 @@ class Mservice extends CI_Model{
 		$query=$this->db->query("CALL sp_input_solving('$data[id_service]','$data[tgl_solved]','$data[teknisi]','$data[penyelesaian]','$data[status]')");
 	
 	 }
+	 //update data
+	 public function updateService($data){
+		 $this->db->reconnect();
+		
+		$query=$this->db->query("CALL sp_updateService('$data[id_service]','$data[customer]','$data[subjek]','$data[keluhan]','$data[status]')");
+	
+	 }
 	public function list_service(){
 		$this->db->reconnect();
 			$query = $this->db->query("CALL sp_list_service()");
@@ -61,6 +68,36 @@ class Mservice extends CI_Model{
 				return 0;
 			}
 	}
+	public function view_produkService($id){
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_view_perProdukServ('$id')");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+	}
+	public function view_solving($id){
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_view_perSolving('$id')");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+	}
 	public function delete($id){
 		$this->db->reconnect();		
 		$query=$this->db->query("CALL sp_deleteService('$id')");
@@ -68,46 +105,13 @@ class Mservice extends CI_Model{
 	 public function addServProduk($data){
 		
 		$this->db->reconnect();
+		$this->db->query("CALL sp_input_produkService('$data[idTransaksi]','$data[idService]','$data[total]','$data[teknisi]')");
 		foreach($this->cart->contents() as $item){
 			$id=$item['id'];
-			$harga=$item['price'];
+			$total=$this->cart->total();
 			$idSuplier=$item['options']['idSuplier'];
+			$this->db->query("CALL sp_input_detailServProduk('$data[idTransaksi]','$item[id]','$item[qty]','$item[price]','$idSuplier')");
 			
-			$query = $this->db->query("CALL sp_cekStok('$id','$idSuplier','$harga')");
-			if ($query->num_rows() > 0)
-			{
-				$butuh=$item['qty'];
-				foreach ($query->result() as $row)
-				{
-						$stok = $row->jumlah;
-						$po = $row->id_purchasing;
-						$id_item = $row->id_item;
-						if($stok>=$butuh){
-							//echo "cek1";
-							$this->db->reconnect();	
-							$this->db->query("CALL sp_pengurangan_stok('$po','$id_item','$butuh')");
-							$this->db->query("CALL sp_input_detailServProduk('$data[idService]','$item[id]','$item[qty]','$item[price]')");
-								$butuh=$butuh-$stok;
-							//echo $butuh;
-							break;
-						}else{
-							
-							$this->db->reconnect();	
-							//echo "cek2";
-							
-							$this->db->query("CALL sp_pengurangan_stok('$po','$id_item','$butuh')");
-							$butuh=$butuh-$stok;
-							//echo $butuh;
-						}
-						if($butuh<=0){
-							break;
-						}
-				}
-			
-			}
-			else{
-				return 0;
-			}
 		}	
 		$this->cart->destroy();
 	 }

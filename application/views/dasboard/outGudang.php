@@ -21,7 +21,13 @@
             
               <div class="box">
                 <div class="box-header">
-                  <strong><h3 class="box-title" >#<?php echo $this->session->userdata('idSO'); ?></h3></strong>
+                  <strong><h3 class="box-title" >#<?php if($this->session->userdata('idSO')){
+					  echo $this->session->userdata('idSO');
+				  }else if($this->session->userdata('idPRO')){
+					  echo $this->session->userdata('idPRO');
+				  }else if($this->session->userdata('idSER')){
+					  echo $this->session->userdata('idSER');
+				  } ?></h3></strong>
                   <button class="btn btn-info btn-xs" data-toggle="collapse" data-target=".rinci"><li class="fa fa-list"></li>Rincian</button>
 				  <div class="box-tools">
 				 
@@ -36,7 +42,7 @@
 						
 						<?php
 							if(!empty($rincian)){
-							foreach($rincian as $baris){ ?>
+							foreach($rincian as $baris){ $idCustomer=$baris->id_customer;$kurir=$baris->kurir;?>
 							<tr>
 								<td>
 									Creator
@@ -106,7 +112,10 @@
 							foreach($isi as $baris){ ?>
 					<form method="POST" action="<?php echo base_url(),"gudang/addCartKeluar"?>" >
                     <tr>
-                      <td><?php echo $baris->nama_suplier ?></td>
+                      <td><?php echo $baris->nama_suplier;$kode=$baris->kode; if($kode==3){
+						  $idCustomer=$baris->id_customer;
+						  
+					  }?></td>
                       <td><?php echo $baris->nama_item ?></td>
                       <td>
 					  <?php echo $baris->nama_tipe_item ?>
@@ -152,11 +161,13 @@
               </div><!-- /.box -->
             
 			 </section>
+			
+			 <?php if($kode==1){ ?>
 			 <section class="col-lg-4 connectedSortable">
 			
 				<div class="box">
 					<div class="box-header">
-					<H3></H3>
+					<H3><?php echo $idCustomer; ?></H3>
 					</div>
 					 <div class="box-body">
 					  <form method="post" action="<?php echo base_url() ?>gudang/addDataKeluar">
@@ -167,8 +178,11 @@
                       <th>Jumlah</th>
 					  <th>Rusak</th>
 					   <th>Pilihan</th>
-					   
-                      <input type="hidden" name="idtransaksi" value="<?php echo $this->session->userdata('idSO')  ?>">
+					   <input type="hidden" name="kode" value="<?php echo $kode;  ?>">
+                      <input type="hidden" name="idSO" value="<?php echo $this->session->userdata('idSO')  ?>">
+					   <input type="hidden" name="idTransaksi" value="<?php echo "ISSUE",time()  ?>">
+					   <input type="hidden" name="idCustomer" value="<?php echo $idCustomer;  ?>">
+					   <input type="hidden" name="kurir" value="<?php echo $kurir;  ?>">
                     </tr>
 					 <?php foreach($this->cart->contents() as $item){ ?>
 					<tr>
@@ -216,6 +230,144 @@
 				
 			 
 			</section>
+			 <?php }else if($kode==2){ ?>
+				<section class="col-lg-4 connectedSortable">
+			
+				<div class="box">
+					<div class="box-header">
+					<H3><?php echo $kode; ?></H3>
+					</div>
+					 <div class="box-body">
+					  <form method="post" action="<?php echo base_url() ?>gudang/addDataKeluar">
+					 <table class="table table-hover">
+                    <tr>
+                      
+					  <th>Nama Produk</th>
+                      <th>Jumlah</th>
+					  <th>Rusak</th>
+					   <th>Pilihan</th>
+					   <input type="hidden" name="kode" value="<?php echo $kode;  ?>">
+                      <input type="hidden" name="idSO" value="<?php echo $this->session->userdata('idPRO')  ?>">
+					   <input type="hidden" name="idTransaksi" value="<?php echo "ISSUE",time()  ?>">
+					   <input type="hidden" name="idCustomer" value="<?php echo "Produksi";  ?>">
+					   <input type="hidden" name="kurir" value="">
+                    </tr>
+					 <?php foreach($this->cart->contents() as $item){ ?>
+					<tr>
+						 <td><?php echo $item['name'],$item['id']; ?></td>
+						<input type="hidden" name="id" value="<?php echo $item['id'] ?>">
+						 <td>
+                             <?php echo $item['qty'] ?>
+							 <input type="hidden" name="jumlah" value="<?php echo $item['qty'] ?>">
+                         </td>
+						<td>
+                            <?php echo $item['options']['defect']; ?>
+						  <input type="hidden" name="harga" value="<?php echo $item['price'] ?>">
+						   <input type="hidden" name="total" value="<?php echo $this->cart->total() ?>">
+						    <input type="hidden" name="idSuplier" value="<?php echo $baris->id_suplier ?>">
+                        </td>
+						<td>
+							<a href="<?php echo base_url(),"gudang/hapusKeluar/" ,$item['rowid']; ?>">Hapus</a>
+						</td>
+						<?php } ?>
+					</tr>
+					 <tr>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+							  </tr>
+							  
+					</table>
+					 <div class="form-group">
+                      <label for="exampleInputEmail1">Tanggal</label>
+                      <input name="tgl" type="text" class="form-control datepicker"  placeholder="Tanggal input " data-date-format="yyyy-mm-dd" >
+                    </div>
+					 <div class="box-footer">
+					 
+                    <button type="submit" class="btn btn-primary pull-right" onclick="return confirm('Pastikan kembali jumlah pengeluaran sesuai dengan permintaan!!!')">Submit</button>
+                  </div>
+					</form>
+					 </div>
+				</div>
+				
+			 
+			</section>
+			 <?php }else if($kode==3){ ?>
+				<section class="col-lg-4 connectedSortable">
+			
+				<div class="box">
+					<div class="box-header">
+					<H3><?php echo $kode; ?></H3>
+					</div>
+					 <div class="box-body">
+					  <form method="post" action="<?php echo base_url() ?>gudang/addDataKeluar">
+					 <table class="table table-hover">
+                    <tr>
+                      
+					  <th>Nama Produk</th>
+                      <th>Jumlah</th>
+					  <th>Rusak</th>
+					   <th>Pilihan</th>
+					   <input type="hidden" name="kode" value="<?php echo $kode;  ?>">
+                      <input type="hidden" name="idSO" value="<?php echo $this->session->userdata('idSER')  ?>">
+					   <input type="hidden" name="idTransaksi" value="<?php echo "ISSUE",time()  ?>">
+					   <input type="hidden" name="idCustomer" value="<?php echo $idCustomer;  ?>">
+					   <input type="hidden" name="kurir" value="">
+                    </tr>
+					 <?php foreach($this->cart->contents() as $item){ ?>
+					<tr>
+						 <td><?php echo $item['name'],$item['id']; ?></td>
+						<input type="hidden" name="id" value="<?php echo $item['id'] ?>">
+						 <td>
+                             <?php echo $item['qty'] ?>
+							 <input type="hidden" name="jumlah" value="<?php echo $item['qty'] ?>">
+                         </td>
+						<td>
+                            <?php echo $item['options']['defect']; ?>
+						  <input type="hidden" name="harga" value="<?php echo $item['price'] ?>">
+						   <input type="hidden" name="total" value="<?php echo $this->cart->total() ?>">
+						    <input type="hidden" name="idSuplier" value="<?php echo $baris->id_suplier ?>">
+                        </td>
+						<td>
+							<a href="<?php echo base_url(),"gudang/hapusKeluar/" ,$item['rowid']; ?>">Hapus</a>
+						</td>
+						<?php } ?>
+					</tr>
+					 <tr>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+							  </tr>
+							  
+					</table>
+					 <div class="form-group">
+                      <label for="exampleInputEmail1">Tanggal</label>
+                      <input name="tgl" type="text" class="form-control datepicker"  placeholder="Tanggal input " data-date-format="yyyy-mm-dd" >
+                    </div>
+					 <div class="box-footer">
+					 
+                    <button type="submit" class="btn btn-primary pull-right" onclick="return confirm('Pastikan kembali jumlah pengeluaran sesuai dengan permintaan!!!')">Submit</button>
+                  </div>
+					</form>
+					 </div>
+				</div>
+				
+			 
+			</section>
+			
+			 <?php }?>
 		  </div>
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->

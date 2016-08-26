@@ -45,12 +45,44 @@
 					<li class="list-group-item">
                       <b>Registered</b> <a class="pull-right"><?php echo $baris->tgl ?></a>
                     </li>
+					<li class="list-group-item text-center">
+                      <button class="btn btn-info btn-sm text-center" data-toggle="modal" data-target="#ubahPasswd">Rubah Password</button>
+                    </li>
                   </ul>
 
                   
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
-			  
+			  <!-- Modal -->
+				<div class="modal fade" id="ubahPasswd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Ubah Password</h4>
+					  </div>
+					  <div class="modal-body">
+					   <form action="<?php echo base_url() ?>petugas/ubahPassword" method="post" enctype="multipart/form-data">
+						
+						<div class="form-group">
+							<input type="hidden" name="id_petugas" value="<?php echo $baris->id_petugas ?>">
+								  <label >Password Lama</label>
+								  <input name="passwdLama" type="password" class="form-control"  placeholder="Password Lama" required>
+								</div>
+						<div class="form-group">
+								  <label for="exampleInputEmail1">Password Baru</label>
+								  <input name="passwdBaru" type="password" class="form-control"  placeholder="Password Baru" required>
+						</div>
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					   </form>
+					  </div>
+					  
+					</div>
+				  </div>
+				</div>
+           
 			<!-- Modal -->
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				  <div class="modal-dialog" role="document">
@@ -115,7 +147,11 @@
                         <p class="col-sm-6 pull-left">: <?php echo $baris->email ?></p>
                       </div>
                     <div class="box-footer">
-                    <button data-toggle="modal" data-target="#myModal1" class="btn btn-primary">Edit</button>
+                    <button data-toggle="modal" data-target="#myModal1" class="btn btn-primary"
+					<?php if($this->session->userdata('tamu')){
+								echo "disabled";
+							} ?>
+					>Edit</button>
 					
                   </div>
                   

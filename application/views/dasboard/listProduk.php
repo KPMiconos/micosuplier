@@ -59,32 +59,17 @@
                       <td><?php echo $baris->nama_item ?></td>
                       <td>
 					  <?php
-						if($baris->tipe=="1"){
-							echo "Raw";
-						}else if($baris->tipe=="2"){
-							echo "Semi-finish";
-						}else if($baris->tipe=="3"){
-							echo "Finish";
-						}
+						echo $baris->nama_tipe_item;
 						 
 						?>
 						</a></td>
 					   <td><span class="label label-success"> 
 					  <?php 
-						if($baris->satuan=="1"){
-							echo "Pcs";
-						} else if($baris->satuan=="2"){
-							echo "Kg";
-						}else if($baris->satuan=="3"){
-							echo "m";
-						}else if($baris->satuan=="4"){
-							echo "m2";
-						}else if($baris->satuan=="5"){
-							echo "m3";
-						}
+						echo $baris->nama_satuan
+						
 					  ?></span></td>
                       <td><?php echo $baris->hargaSatuan ?></td>
-                      <td style="width:200px;"><?php echo word_limiter($baris->deskripsi,10),"..." ?></td>
+                      <td style="width:200px;"><?php echo word_limiter($baris->deskripsi,10),"..."; ?></td>
 					  
 					  <td><?php 
 						if (empty($baris->jumlah)){
@@ -94,7 +79,7 @@
 						}?> </td>
 					  <td>
 					   <div class="btn-group btn-group-lg">
-							<a id="viewlist" style="cursor: pointer;" data-toggle="collapse" data-target=".row1<?php echo $baris->id_item; ?>" ><li class="fa   fa-list btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Lihat rincian"></li></a>
+							<a id="viewlist<?php echo $baris->id_item ?>" style="cursor: pointer;" data-toggle="collapse" data-target=".row1<?php echo $baris->id_item; ?>" ><li class="fa   fa-list btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Lihat rincian"></li></a>
 							<a  href="<?php echo base_url(),"produk/viewProduk/",$baris->id_item ?>"><li class="fa fa-eye btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="View"></li></a>
 							
 						</div>
@@ -117,7 +102,7 @@
 							</thead>
 							<tbody id="showdata<?php echo $baris->id_item ?>">
 							<script type="text/javascript">
-								$("#viewlist").click(function(){
+								$("#viewlist<?php echo $baris->id_item ?>").click(function(){
 									$("#showdata<?php echo $baris->id_item ?>").load("<?php echo base_url(),"gudang/rincianBarang/",$baris->id_item; ?>")
 								})
 							</script>

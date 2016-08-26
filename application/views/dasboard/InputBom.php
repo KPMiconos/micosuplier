@@ -55,30 +55,16 @@
                       <td><?php echo $baris->nama_item ?></td>
                       <td>
 					  <?php
-						if($baris->tipe=="1"){
-							echo "Raw";
-						}else if($baris->tipe=="2"){
-							echo "Semi-finish";
-						}else if($baris->tipe=="3"){
-							echo "Finish";
-						}
+						echo $baris->nama_tipe_item;
+						
 						 
 						?>
 						</a></td>
-                      <td><span class="label label-success"> 
+                      <td>
 					  <?php 
-						if($baris->satuan=="1"){
-							echo "Pcs";
-						} else if($baris->satuan=="2"){
-							echo "Kg";
-						}else if($baris->satuan=="3"){
-							echo "m";
-						}else if($baris->satuan=="4"){
-							echo "m2";
-						}else if($baris->satuan=="5"){
-							echo "m3";
-						}
-					  ?></span></td>
+						echo $baris->nama_satuan;
+						
+					  ?></td>
 					  
 						
                       <td> 
@@ -90,7 +76,11 @@
 						</div>
 					  <div class="btn-group">
 					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah">
-					   <input class="pull-right btn btn-primary" type="submit" value="Add" >
+					   <input  class="pull-right btn btn-primary" type="submit" value="Add" 
+					   <?php if(!$this->session->userdata('produksi')){
+								echo "disabled";
+							} ?>
+					   >
 						</div>
 					</td>
                     </tr>
@@ -111,6 +101,9 @@
 				<div class="box">
 					<div class="box-header">
 					<H3></H3>
+					<?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
 					</div>
 					 <div class="box-body">
 					  <form method="post" action="<?php echo base_url() ?>produksi/addDataBom">
@@ -165,7 +158,11 @@
 					</div>
 					 <div class="box-footer">
 					 
-                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                    <button type="submit" class="btn btn-primary pull-right"
+					<?php if(!$this->session->userdata('produksi')){
+								echo "disabled";
+							} ?>
+					>Submit</button>
                   </div>
 					</form>
 					 </div>

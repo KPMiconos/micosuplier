@@ -108,7 +108,11 @@
 						  </div>
 						  <?php $idSuplier=$baris->id_suplier; ?>
 						<div class="box-footer">
-							<button data-toggle="modal" data-target="#myModal1" class="btn btn-primary">Edit</button>
+							<button data-toggle="modal" data-target="#myModal1" class="btn btn-primary"
+							<?php if($this->session->userdata('tamu')){
+								echo "disabled";
+							} ?>
+							>Edit</button>
 						</div>
                       
                     </div>

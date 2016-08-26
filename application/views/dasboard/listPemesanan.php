@@ -20,7 +20,7 @@
             <div class="col-xs-12 col-lg-12">
               <div class="box">
                 <div class="box-header">
-                 <a href="<?php echo base_url() ?>admin/addPetugas"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
+                 <a href="<?php echo base_url() ?>pembelian/pemesanan"><i class="fa fa-user-plus fa-lg"></i> <strong><h2 class="box-title">Add</h2></strong></a>
                   <div class="box-tools">
                    <form method="post" action="<?php echo base_url() ?>admin/cariPetugas" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
@@ -77,18 +77,22 @@
 								<input type="hidden" name="status" value="1">
 								<button <?php if($baris->status!=0){
 									echo "disabled";
+								}else if(!$this->session->userdata('purchasing')){
+									echo "disabled";
 								} ?> type="submit" class="btn  btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Proses pemesanan" onclick="return confirm('Anda yakin ingin akan memproses pemesanan ini?')"><li class="fa fa-check-square-o"></li></button>
 							</form>
 							</div>
 							<div class="btn-group">
 								<div class="btn-group"><a data-toggle="tooltip" data-placement="top" title="Lihat rincian"><button id="viewlist<?php echo $baris->id_po ?>"  class="btn btn-info btn-sm" data-toggle="collapse" data-target=".row1<?php echo $baris->id_po; ?>"><li class="fa fa-eye" ></li></button></a></div>
-								<div class="btn-group"><a href="<?php echo base_url('pembelian/') ?>"><button  class="btn  btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ubah pembelian" ><li class="fa fa-pencil-square-o"   ></li></button></a></div>
+								<!--div class="btn-group"><a href="<?php echo base_url('pembelian/') ?>"><button  class="btn  btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ubah pembelian" ><li class="fa fa-pencil-square-o"   ></li></button></a></div-->
 							<div class="btn-group">
 							<form method="post" action="<?php echo base_url('pembelian/updateStatus'); ?>" enctype="multipart/form-data" >
 								
 								<input type="hidden" name="idTransaksi" value="<?php echo $baris->id_po; ?>">
 								<input type="hidden" name="status" value="4">
 								<button <?php if($baris->status!=1){
+									echo "disabled";
+								}else if(!$this->session->userdata('purchasing')){
 									echo "disabled";
 								} ?> type="submit" class="btn  btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Batalkan pemesanan" onclick="return confirm('Anda yakin ingin membatalkan pemesanan ini, jika sudah dibatalkan tidak dapat diproses kembali?')"><li class="fa fa-trash"></li></button>
 							</form>
@@ -111,6 +115,7 @@
 									<th>Satuan</th>
 									<th>Harga</th>
 									<th>Jumlah</th>
+									<th>Jumlah Masuk</th>
 									
 								</tr>
 							</thead>

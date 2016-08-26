@@ -22,22 +22,25 @@
               <div class="box box-primary">
                 <div class="box-header with-border">
 						<h3 class="box-title">Form Tambah Barang</h3>
+						<?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
 					</div><!-- /.box-header -->
                 <!-- form start -->
                 <form role="form" action="<?php echo base_url() ?>produk/addItem_act" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					<div class="form-group">
                       <label for="exampleInputEmail1">Id.Item</label>
-                      <input name="idItem" type="text" class="form-control" id="exampleInput" placeholder="ID item">
+                      <input name="idItem" type="text" class="form-control" id="exampleInput" placeholder="ID item" required>
                     </div>
 					 <div class="form-group">
                       <label for="exampleInputEmail1">Nama Barang</label>
-                      <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Barang">
+                      <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Barang" required>
                     </div>
 
 					<div class="form-group">
 						<label>Tipe</label>
-						<select name="tipe" class="form-control selecttree" style="width: 100%;">
+						<select name="tipe" class="form-control selecttree" style="width: 100%;" required>
 						  <option>-Pilih</option>
 						  <option value="1">Raw</option>
 						  <option value="2" >Semi-Finish</option>
@@ -46,7 +49,7 @@
 					</div>
 					<div class="form-group">
 						<label>Satuan</label>
-						<select name="satuan" class="form-control selecttree" style="width: 100%;">
+						<select name="satuan" class="form-control selecttree" style="width: 100%;" required>
 						  <option>-Pilih</option>
 						  <?php if(!empty($satuan)){
 							  foreach($satuan as $baris){s
@@ -61,11 +64,11 @@
 					
 					<div class="form-group">
                       <label for="exampleInputEmail1">Deskripsi</label>
-                       <textarea name="deskripsi" class="form-control" rows="3" placeholder="Deskripsi barang..."></textarea>
+                       <textarea name="deskripsi" class="form-control" rows="3" placeholder="Deskripsi barang..."></textarea required>
                     </div>
 					<div class="form-group">
 						<label for="exampleInputFile">Gmbar Barang</label>
-						<input name="filefoto" type="file" id="exampleInputFile">
+						<input name="filefoto" type="file" id="exampleInputFile" required>
 						<p class="help-block">Besar file maksimal 1 MB, format jpg,png,gif</p>
 					</div>
                   </div><!-- /.box-body -->

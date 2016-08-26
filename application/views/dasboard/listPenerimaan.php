@@ -59,16 +59,40 @@
 							if($baris->status=="1"){
 								echo "Ordered";
 							}else if($baris->status=="2"){
-								echo "Returning";
+								echo "Pengembalian";
 							}else if($baris->status=="3"){
-								echo "Completed";
+								echo "Selesai";
+							}else if($baris->status=="5"){
+								echo "Kirim hasil";
+							}else if($baris->status=="6"){
+								echo "Selesai";
 							}
 					  ?></span></td>
-                      
+                      <?php if($baris->kode==1){ ?>
 					  <td>
-					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"gudang/viewPO/",$baris->id_po?>"><button class="btn btn-primary"<?php
-							if($baris->status==2){
+					   <div class="btn-group">
+					   <a href="<?php echo base_url(),"gudang/viewPO/",$baris->id_po?>"><button class="btn btn-info"<?php
+							if($baris->status==2 or $baris->status==3 ){
+								echo "disabled";
+							}else if(!$this->session->userdata('gudang')){
+									echo "disabled";
+							}?> >
+							<li class="fa  <?php if($baris->status==2){
+								echo "fa-reply-all";
+							}else{
+								echo "fa-check-square-o";
+							} ?>" data-toggle="tooltip" data-placement="top" title="Proses penerimaan"></li></button></a>
+						
+						</div>
+						<div class="btn-group">
+						<button id="viewlist<?php echo $baris->id_po ?>"  class="btn btn-info btn-sm" data-toggle="collapse" data-target=".row1<?php echo $baris->id_po; ?>"><li class="fa fa-list"></li></button>
+						</div>
+					</td>
+					  <?php }else if($baris->kode==2){?>
+					   <td>
+					   <div class="btn-group">
+					   <a href="<?php echo base_url(),"gudang/viewPROIN/",$baris->id_po?>"><button class="btn btn-info"<?php
+							if($baris->status==2 or $baris->status==3 or $baris->status==6){
 								echo "disabled";
 							}?> ><li class="fa  <?php if($baris->status==2){
 								echo "fa-reply-all";
@@ -77,12 +101,78 @@
 							} ?>" data-toggle="tooltip" data-placement="top" title="Proses penerimaan"></li></button></a>
 						
 						</div>
+						<div class="btn-group">
+						<button id="viewlist<?php echo $baris->id_po ?>"  class="btn btn-info btn-sm" data-toggle="collapse" data-target=".row1<?php echo $baris->id_po; ?>"><li class="fa fa-list"></li></button>
+
+						</div>
 					</td>
+					  
+					  <?php }?>
 					 </tr>
-						  
-				
+					   <?php if($baris->kode==1){ ?>
+					  <tr class="collapse row1<?php echo $baris->id_po; ?>">
+						<td></td>
+						<td colspan="5">
+						<div class="box table-responsive">
+						<table  class="table table-hover border">
+							<thead>
+								<tr>
+			
+									<th>Nama Produk</th>
+									<th>Tipe</th>
+									<th>Satuan</th>
+									<th>Harga</th>
+									<th>Jumlah</th>
+									<th>Jumlah Masuk</th>
+									
+								</tr>
+							</thead>
+							<tbody id="showdata<?php echo $baris->id_po ?>">
+							<script type="text/javascript">
+								$("#viewlist<?php echo $baris->id_po ?>").click(function(){
+									$("#showdata<?php echo $baris->id_po ?>").load("<?php echo base_url(),"pembelian/rincianPemesanan/",$baris->id_po; ?>")
+									
+								})
+							</script>
+							</tbody>
+						</table>
+						</div>
+						</td>
+						
+					</tr>
+					<?php }else if($baris->kode==2){?>	  
+					 <tr class="collapse row1<?php echo $baris->id_po; ?>">
+						<td></td>
+						<td colspan="5">
+						<div class="box table-responsive">
+						<table  class="table table-hover border">
+							<thead>
+								<tr>
+			
+									<th>Nama Produk</th>
+									<th>Tipe</th>
+									<th>Satuan</th>
+									<th>Harga</th>
+									<th>Jumlah</th>
+									<th>Jumlah Masuk</th>
+									
+								</tr>
+							</thead>
+							<tbody id="showdata<?php echo $baris->id_po ?>">
+							<script type="text/javascript">
+								$("#viewlist<?php echo $baris->id_po ?>").click(function(){
+									$("#showdata<?php echo $baris->id_po ?>").load("<?php echo base_url(),"produksi/rincianProduksi/",$baris->id_po; ?>")
+									
+								})
+							</script>
+							</tbody>
+						</table>
+						</div>
+						</td>
+						
+					</tr>
             
-                   
+                    <?php }?>
 					<?php }}
 								else{
 									echo "Belum ada data Penerimaan";

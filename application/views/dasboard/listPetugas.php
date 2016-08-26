@@ -62,11 +62,33 @@
                       <td><?php echo $baris->hp?></td>
                       <td><?php echo $baris->jabatan?></td>
 					  <td style="width:150px">
-					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"petugas/deletePetugas/",$baris->id_petugas?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
-						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_petugas ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-						<a href="<?php echo base_url(),"petugas/viewPetugas/",$baris->id_petugas?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
-						
+					   <div class="btn-group">
+						<a href="<?php echo base_url(),"petugas/viewPetugas/",$baris->id_petugas?>">
+							<button class="btn btn-info btn-sm">
+								<li class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="View">
+								</li>
+							</button>
+						</a>
+						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_petugas ?>">
+							<button class="btn btn-info btn-sm"
+							<?php if($this->session->userdata('tamu')){
+								echo "disabled";
+							} ?>
+							>
+								<li class="fa fa-pencil-square-o " data-toggle="tooltip" data-placement="top" title="Edit">
+								</li>
+							</button>
+						</a> 
+						<a href="<?php echo base_url(),"petugas/deletePetugas/",$baris->id_petugas?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')">
+						<button class="btn btn-info btn-sm"
+						<?php if($this->session->userdata('tamu')){
+								echo "disabled";
+							} ?>
+						>
+							<li class="fa  fa-trash" data-toggle="tooltip" data-placement="top" title="Delete">
+							</li>
+						</button>
+					   </a>
 						</div>
 					</td>
 					<!-- Modal -->

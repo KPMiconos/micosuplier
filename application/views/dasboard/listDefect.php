@@ -63,15 +63,22 @@
                       <td> 
 					  <div>
 					  <input name="harga" class="form-control pull-left" type="hidden" value="<?php echo $baris->hargaSatuan ?>" >
+					  <input type="hidden" name="idDef" value="<?php echo $baris->id_def ?>" >
 					  <input type="hidden" name="idItem" value="<?php echo $baris->id_item ?>" >
 					  <input type="hidden" name="hargaSatuan" value="<?php echo $baris->hargaSatuan ?>" >
-						<input type="hidden" name="idPurchasing" value="<?php echo $baris->id_purchasing ?>" >
+						<input type="hidden" name="idRec" value="<?php echo $baris->id_rec ?>" >
+						<input type="hidden" name="idIssue" value="<?php echo $baris->id_issue ?>" >
 						
 						</div>
 					  <div class="btn-group">
 					  <?php if($baris->status=="1"){ ?>
 					   <input name="jumlah" class="form-control pull-left" type="text"  style="width:50px" data-toggle="tooltip" data-placement="top" title="Jumlah barang return">
-					   <input class="pull-right btn btn-primary" type="submit" value="Add" >
+					   <input class="pull-right btn btn-primary" type="submit" value="Add" 
+					   <?php if(!$this->session->userdata('gudang')){
+									echo "disabled";
+							}
+						?>
+					   >
 					  <?php }else if($baris->status=="0"){
 						  echo "Returned";
 						  }else if($baris->status=="2"){
@@ -82,13 +89,17 @@
 					</td>
 					<form method="post" action="<?php echo base_url(),"gudang/updateDefect"; ?>">
 					<td>
-						<input type="hidden" name="idTransaksi" value="<?php echo $baris->id_purchasing ?>">
+						<input type="hidden" name="idDef" value="<?php echo $baris->id_def ?>">
+						<input type="hidden" name="idRec" value="<?php echo $baris->id_rec ?>">
+						<input type="hidden" name="idIssue" value="<?php echo $baris->id_issue ?>">
 						<input type="hidden" name="idItem" value="<?php echo $baris->id_item ?>">
 						<input type="hidden" name="harga" value="<?php echo $baris->hargaSatuan ?>">
 					 <div class="btn-group">
 					   <button <?php if($baris->status=="0"){
 						   echo "disabled";
-					   } ?> type="submit" class="btn btn-xs btn-primary pull-right"><li class="fa  fa-trash btn " data-toggle="tooltip" data-placement="top" title="Delete"></li></button>
+					   }else if(!$this->session->userdata('gudang')){
+									echo "disabled";
+						} ?> type="submit" class="btn btn-xs btn-primary pull-right"><li class="fa  fa-trash btn " data-toggle="tooltip" data-placement="top" title="Delete"></li></button>
 						
 						</div>
 					</td>
@@ -98,7 +109,7 @@
                    
 					<?php }}
 						else{
-							echo "Belum ada data Petugas";
+							echo "Belum ada data";
 							}
 					?>
                   </table>

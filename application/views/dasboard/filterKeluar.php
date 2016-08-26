@@ -56,7 +56,7 @@
                       <th>Jumalh</th>
                       <th>Kurir</th>
 					  <th>Pengirim</th>
-					   <th>Keterangan</th>
+					  
                     </tr>
 					<?php
 						$i=0;
@@ -65,7 +65,7 @@
 							
                     <tr>
 						<td><?php echo $i; ?></td>
-                      <td><?php echo $baris->id_transaksi?></td>
+                      <td><?php echo $baris->id_so?></td>
 					  <td><?php echo $baris->tanggal?></td>
                       <td><?php echo $baris->nama_item?></td>
                       <td><?php 
@@ -74,16 +74,7 @@
                       <td><?php echo $baris->jumlah?></td>
 					  <td><?php echo $baris->kurir?></td>
                       <td><?php echo $baris->nama_petugas?></td>
-					  <td><?php
-						if($baris->penggunaan=="1"){
-							echo "Penjualan";
-							
-						}else if($baris->penggunaan=="2"){
-							echo "Penggantian/Garansi";
-						}
-						
-						?></td>
-					  <td>
+					  
 					  
 					</td>
 					 </tr>

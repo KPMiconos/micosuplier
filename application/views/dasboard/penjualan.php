@@ -55,17 +55,8 @@
 					  <td><img style="width:50px; hight:50px;" src="<?php echo base_url() ?>assets/images/produk/<?php echo $baris->link_photo ?>"></td>
 						 <td><?php echo $baris->nama_item ?></td>
                       <td><?php 
-						if($baris->satuan=="1"){
-							echo "Pcs";
-						} else if($baris->satuan=="2"){
-							echo "Kg";
-						}else if($baris->satuan=="3"){
-							echo "m";
-						}else if($baris->satuan=="4"){
-							echo "m2";
-						}else if($baris->satuan=="5"){
-							echo "m3";
-						}
+						echo $baris->nama_satuan;
+						
 					  ?></td>
 					    <td><?php 
 						if (empty($baris->jumlah)){
@@ -129,7 +120,11 @@ $(document).ready(function(){
 		+"<input type='hidden' name='nama' value='"+post.nama_item+"'>"
 		+"<input type='hidden' name='harga' value='"+post.hargaSatuan+"'>"
 		+"<input name='jumlah' class='form-control pull-left' type='text'  style='width:100px' data-toggle='tooltip' data-placement='top' title='Jumlah'>"
-		+"<input class='pull-right btn btn-primary' type='submit' value='Add'>"
+		+"<input class='pull-right btn btn-primary' type='submit' value='Add'<?php
+		if(!$this->session->userdata('marketing')){
+									echo "disabled";
+		}
+		?> >"
 		+"</div>"
 		+"</form>"
 		+"</td>"
@@ -250,7 +245,13 @@ $(document).ready(function(){
 					
 					 <div class="box-footer">
 					 
-                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                    <button type="submit" class="btn btn-primary pull-right"
+					<?php
+					if(!$this->session->userdata('marketing')){
+												echo "disabled";
+					}
+					?>
+					>Submit</button>
                   </div>
 					</form>
 					 </div>

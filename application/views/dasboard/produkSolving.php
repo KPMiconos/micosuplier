@@ -3,13 +3,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Add Penjualan
+            Add Produk Service
             
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Penjualan</a></li>
-            <li class="active">Add Penjualan</li>
+            <li class="active">Add Produk Service</li>
           </ol>
         </section>
       
@@ -21,7 +21,7 @@
             
               <div class="box">
                 <div class="box-header">
-                  <a href="<?php echo base_url() ?>pembelian/pemesanan"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
+                  <a href="#"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
                   <div class="box-tools">
 				  <form method="post" action="#" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
@@ -171,7 +171,7 @@ $(document).ready(function(){
               </div><!-- /.box -->
             
 			 </section>
- <section class="col-lg-4 connectedSortable">
+			<section class="col-lg-4 connectedSortable">
 			
 				<div class="box">
 					<div class="box-header">
@@ -187,6 +187,7 @@ $(document).ready(function(){
 					   <th>Pilihan</th>
 					   
                       <input type="hidden" name="idService" value="<?php echo $this->session->userdata('idService');  ?>">
+					  <input type="hidden" name="idTransaksi" value="<?php echo "SERV",time()  ?>">
                     </tr>
 					 <?php foreach($this->cart->contents() as $item){ ?>
 					<tr>

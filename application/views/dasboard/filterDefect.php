@@ -3,13 +3,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Laporan Barang Keluar
+            Laporan Barang Rusak
             
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Laporan</a></li>
-            <li class="active">Barang Keluar</li>
+            <li class="active">Barang Rusak</li>
           </ol>
         </section>
       
@@ -22,7 +22,7 @@
                 <div class="box-header">
                    <div class="row">
 					<div class="co-lg-12">
-                   <form method="post" action="<?php echo base_url(),"laporan/filterKeluar" ?>" enctype="multipart/form-data">
+                   <form method="post" action="<?php echo base_url(),"laporan/filterDefect" ?>" enctype="multipart/form-data">
 				   <div class="col-lg-1">
 						<label for="exampleInputEmail1">Filter</label>                   
 					</div>
@@ -36,10 +36,13 @@
 						 <button type="submit" class="btn btn-primary">Filter</button>
 					</div>
 					 </form>
-					 <div class="col-lg-1">
-						 <button type="submit" class="btn btn-info"><li class="fa fa-print"></li>Print</button>
-					</div>
 					 </form>
+					 <div class="col-lg-1">
+					 <form method="post" action="<?php echo base_url(),"laporan/exportDefect" ?>" enctype="multipart/form-data">
+					 <input name="tgl_awal" type="hidden" value="<?php echo $tgl_awal; ?>">
+					 <input name="tgl_akhir" type="hidden"  value="<?php echo $tgl_akhir; ?>"> 
+						 <button type="submit" class="btn btn-info"><li class="fa fa-print"></li>Print</button>
+					</form>
 					 </div>
                   </div>
                </div><!-- /.box-header -->
@@ -47,13 +50,13 @@
                   <table class="table table-hover">
                     <tr>
                       <th>No</th>
+					   
 					   <th>ID.Transaksi</th>
 					   <th>Tanggal</th>
                       <th>Nama Barang</th>
                       <th>Satuan</th>
                       <th>Jumalh</th>
-                      <th>Kurir</th>
-					  <th>Pengirim</th>
+                      
 					   
                     </tr>
 					<?php
@@ -63,15 +66,19 @@
 							
                     <tr>
 						<td><?php echo $i; ?></td>
-                      <td><?php echo $baris->id_so?></td>
+                      
+					  <td><?php if($baris->id_rec){
+						  echo $baris->id_rec;
+					  }else if($baris->id_issue){
+						echo $baris->id_issue;
+					  }?></td>
 					  <td><?php echo $baris->tanggal?></td>
                       <td><?php echo $baris->nama_item?></td>
                       <td><?php 
 						echo $baris->nama_satuan;
 					  ?></td>
                       <td><?php echo $baris->jumlah?></td>
-					  <td><?php echo $baris->kurir?></td>
-                      <td><?php echo $baris->nama_petugas?></td>
+					 
 					  
 					  <td>
 					  

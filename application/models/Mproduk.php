@@ -144,6 +144,57 @@ class MProduk extends CI_Model{
 				return 0;
 			}
 	}
+	//update
+	public function updateItem($data){
+		 $this->db->reconnect();		
+		$query=$this->db->query("CALL sp_updateItem('$data[idItem]','$data[nama]','$data[tipe]','$data[satuan]','$data[deskripsi]')");
+		$row=$query->row();
+		return $row->cek;
+	
+	 }
+	 public function updateSatuan($data){
+		 $this->db->reconnect();		
+		$query=$this->db->query("CALL sp_updateSatuan('$data[id]','$data[nama]','$data[kelas]','$data[deskripsi]')");
+		$row=$query->row();
+		return $row->cek;
+	
+	 }
+	 public function updateTipeItem($data){
+		 $this->db->reconnect();		
+		$query=$this->db->query("CALL sp_updateTipe('$data[id]','$data[nama]','$data[deskripsi]')");
+		$row=$query->row();
+		return $row->cek;
+	
+	 }
+	//delete item
+	public function delete($id){
+		$this->db->reconnect();
+		$query = $this->db->query("CALL sp_delete_item('$id')");
+		$row=$query->row();
+		return $row->cek;
+		
+	}
+	public function deleteSatuan($id){
+		$this->db->reconnect();
+		$query = $this->db->query("CALL sp_delete_satuan('$id')");
+		$row=$query->row();
+		return $row->cek;
+		
+	}
+	public function deleteTipe($id){
+		$this->db->reconnect();
+		$query = $this->db->query("CALL sp_delete_tipe('$id')");
+		$row=$query->row();
+		return $row->cek;
+		
+	}
+	public function cekItem($id){
+		$this->db->reconnect();
+		$query = $this->db->query("CALL sp_delete_tipe('$id')");
+		$row=$query->row();
+		return $row->cek;
+		
+	}
 }
 
 

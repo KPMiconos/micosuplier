@@ -66,7 +66,7 @@
 							
                     <tr>
 						<td><?php echo $i; ?></td>
-                      <td><?php echo $baris->id_po?></td>
+                      <td><?php echo $baris->id_rec?></td>
 					  <td><?php echo $baris->tanggal_receive?></td>
                       <td><?php echo $baris->nama_item?></td>
                       <td><?php 

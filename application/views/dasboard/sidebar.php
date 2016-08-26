@@ -5,10 +5,10 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="<?php echo base_url() ?>assets/images/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <img src="<?php echo base_url() ?>assets/images/default/logo.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p>MicoSuplier</p>
+              <p>PT.Miconos</p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -143,17 +143,18 @@
               <ul class="treeview-menu">
 				<li><a href="<?php echo base_url() ?>laporan/laporanMasuk"><i class="fa fa-circle-o"></i> Barang Masuk</a></li>
                 <li><a href="<?php echo base_url() ?>laporan/laporanKeluar"><i class="fa fa-circle-o"></i>Barang Keluar</a></li>
-				<li><a href="<?php echo base_url() ?>laporan/listPenjualan"><i class="fa fa-circle-o"></i>Barang Rusak</a></li>
-				<li><a href="<?php echo base_url() ?>admin/Report"><i class="fa fa-circle-o"></i>Penggantian</a></li>
+				<li><a href="<?php echo base_url() ?>laporan/laporanDefect"><i class="fa fa-circle-o"></i>Barang Rusak</a></li>
+				<li><a href="<?php echo base_url() ?>laporan/laporanService"><i class="fa fa-circle-o"></i>Penggantian</a></li>
                 
               </ul>
             </li>
+			<?php if($this->session->userdata('admin')){?>
            <li class="">
               <a href="<?php echo base_url() ?>petugas/privilege">
                 <i class="fa fa-expeditedssl"></i> <span>Privilege</span>
               </a>
             </li>
-             
+            <?php } ?>
            <li class="">
               <a href="<?php echo base_url() ?>admin/logout">
                 <i class="fa fa-power-off"></i> <span>Logout</span>

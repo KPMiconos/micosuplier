@@ -65,7 +65,11 @@
                         <p class="col-sm-6 pull-left">: <?php echo $baris->deskripsi ?></p>
                       </div>
 					<div class="box-footer">
-						<button data-toggle="modal" data-target="#myModal1" class="btn btn-primary">Edit</button>
+						<button data-toggle="modal" data-target="#myModal1" class="btn btn-primary"
+						<?php if($this->session->userdata('tamu')){
+								echo "disabled";
+							}?>
+						>Edit</button>
 					</div> 
                     </div>
 					<!-- Modal -->
@@ -77,12 +81,13 @@
 							<h4 class="modal-title" id="myModalLabel">Edit Data Item</h4>
 						  </div>
 						  <div class="modal-body">
-						   <form role="form" action="<?php echo base_url() ?>customer/updateCustomer" method="post" enctype="multipart/form-data">
+						   <form role="form" action="<?php echo base_url() ?>produk/updateItem" method="post" enctype="multipart/form-data">
 							  <div class="box-body">
 							  
 								<div class="form-group">
 								  <label for="exampleInputEmail1">ID.Item</label>
-								  <input name="ktp" type="text" class="form-control" id="exampleInput" placeholder="Nomor KTP" value="<?php echo $baris->id_item ?>" required>
+								  <input name="ktp" type="text" class="form-control" id="exampleInput" placeholder="Nomor KTP" value="<?php echo $baris->id_item ?>" disabled>
+								  <input name="idItem" type="hidden" value="<?php echo $baris->id_item ?>">
 								</div>
 								<div class="form-group">
 								  <label for="exampleInputEmail1">Nama Item</label>
@@ -90,16 +95,40 @@
 								</div>
 								
 								<div class="form-group">
-								  <label for="exampleInputPassword1">Jenis Item</label>
-								  <input name="alamat" type="text" class="form-control" id="exampleInput" placeholder="Alamat" value="<?php echo $baris->nama_tipe_item ?>" required>
+									<label>Satuan</label>
+									<select name="satuan" class="form-control selecttree" style="width: 100%;" required>
+									  <option>-Pilih</option>
+									  <?php if(!empty($satuan)){
+										  foreach($satuan as $baris1){s
+										 ?>
+									  <option <?php if($baris->satuan==$baris1->id_satuan){
+										  echo "selected";
+									  } ?> value="<?php echo $baris1->id_satuan; ?>"><?php echo $baris1->nama_satuan; ?></option>
+										  <?php } }else{
+											  echo "Data kosong";
+										  }?>
+									  
+									</select>
 								</div>
-								 <div class="form-group">
-								  <label for="exampleInputEmail1">Satuan</label>
-								  <input name="hp" type="text" class="form-control" id="exampleInput" placeholder="Nomor HP/Telephone" value="<?php echo $baris->nama_satuan ?>" required>
+								<div class="form-group">
+									<label>Tipe</label>
+									<select name="tipe" class="form-control selecttree" style="width: 100%;" required>
+									  <option>-Pilih</option>
+									  <?php if(!empty($tipe)){
+										  foreach($tipe as $baris2){s
+										 ?>
+									  <option <?php if($baris->tipe==$baris2->id_tipe_item){
+										  echo "selected";
+									  } ?> value="<?php echo $baris2->id_tipe_item; ?>"><?php echo $baris2->nama_tipe_item; ?></option>
+										  <?php } }else{
+											  echo "Data kosong";
+										  }?>
+									  
+									</select>
 								</div>
 								 <div class="form-group">
 								  <label for="exampleInputEmail1">Deskripsi</label>
-								  <input name="email" type="text" class="form-control" id="exampleInput" placeholder="Email" value="<?php echo $baris->deskripsi ?>" required>
+								  <input name="deskripsi" type="text" class="form-control" id="exampleInput" placeholder="Email" value="<?php echo $baris->deskripsi ?>" required>
 								</div>
 
 							  </div><!-- /.box-body -->

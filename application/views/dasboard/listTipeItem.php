@@ -36,6 +36,9 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
+				<?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
                   <table class="table table-hover">
                     <tr>
                       <th>ID</th>
@@ -55,9 +58,19 @@
                       
 					  <td style="width:150px">
 					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"produk/deleteTipe/",$baris->id_tipe_item?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
-						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_tipe_item ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-						<a href="<?php echo base_url(),"produk/viewTipe/",$baris->id_tipe_item?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_tipe_item ?>">
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" >
+								<li class="fa fa-pencil-square-o  " >
+								</li>
+							</button>
+						</a>
+					   <a href="<?php echo base_url(),"produk/deleteTipe/",$baris->id_tipe_item?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')">
+						<button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Delete">
+							<li class="fa  fa-trash " >
+							</li>
+						</button>
+						</a>
+						
 						
 						</div>
 					  </td>
@@ -69,20 +82,21 @@
 						<div class="modal-content">
 						  <div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">Form Data Satuan</h4>
+							<h4 class="modal-title" id="myModalLabel">Form Edit Data Satuan</h4>
 						  </div>
 						  <div class="modal-body">
 						   <!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>produk/addTipeItem" method="post" enctype="multipart/form-data">
+							<form role="form" action="<?php echo base_url() ?>produk/updateTipeItem" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					
 					<div class="form-group">
-								  <label for="exampleInputEmail1">Nama Tipe</label>
-								  <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Satuan"  required>
+						<label for="exampleInputEmail1">Nama Tipe</label>
+						<input name="id" type="hidden" value="<?php echo $baris->id_tipe_item?>">
+						<input name="nama" type="text" class="form-control" value="<?php echo $baris->nama_tipe_item ?>" placeholder="Nama Satuan"  required>
 					</div>
 					<div class="form-group">
                       <label for="exampleInputPassword1">Deskripsi</label>
-                      <input name="deskripsi" type="text" class="form-control" id="exampleInput" placeholder="Deskripsi Satuan"  required>
+                      <input name="deskripsi" type="text" class="form-control" value="<?php echo $baris->deskripsi ?>" placeholder="Deskripsi Satuan"  required>
                     </div>
 					
                   </div><!-- /.box-body -->
@@ -124,7 +138,7 @@
 						  </div>
 						  <div class="modal-body">
 						   <!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>gudang/addTipeItem" method="post" enctype="multipart/form-data">
+				<form role="form" action="<?php echo base_url() ?>produk/addTipeItem" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					
 					<div class="form-group">

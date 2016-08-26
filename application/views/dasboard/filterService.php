@@ -3,13 +3,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Laporan Barang Keluar
+            Laporan Barang Untuk Service
             
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Laporan</a></li>
-            <li class="active">Barang Keluar</li>
+            <li class="active">Keluar Service</li>
           </ol>
         </section>
       
@@ -22,7 +22,7 @@
                 <div class="box-header">
                    <div class="row">
 					<div class="co-lg-12">
-                   <form method="post" action="<?php echo base_url(),"laporan/filterKeluar" ?>" enctype="multipart/form-data">
+                   <form method="post" action="<?php echo base_url(),"laporan/filterService" ?>" enctype="multipart/form-data">
 				   <div class="col-lg-1">
 						<label for="exampleInputEmail1">Filter</label>                   
 					</div>
@@ -37,9 +37,11 @@
 					</div>
 					 </form>
 					 <div class="col-lg-1">
+					 <form method="post" action="<?php echo base_url(),"laporan/exportService" ?>" enctype="multipart/form-data">
+					 <input name="tgl_awal" type="hidden" value="<?php echo $tgl_awal; ?>">
+					 <input name="tgl_akhir" type="hidden"  value="<?php echo $tgl_akhir; ?>"> 
 						 <button type="submit" class="btn btn-info"><li class="fa fa-print"></li>Print</button>
-					</div>
-					 </form>
+					</form>
 					 </div>
                   </div>
                </div><!-- /.box-header -->
@@ -49,11 +51,12 @@
                       <th>No</th>
 					   <th>ID.Transaksi</th>
 					   <th>Tanggal</th>
+					   <th>Teknisi</th>
+					   <th>customer</th>
                       <th>Nama Barang</th>
                       <th>Satuan</th>
-                      <th>Jumalh</th>
-                      <th>Kurir</th>
-					  <th>Pengirim</th>
+                      <th>Jumalah</th>
+                      
 					   
                     </tr>
 					<?php
@@ -63,24 +66,22 @@
 							
                     <tr>
 						<td><?php echo $i; ?></td>
-                      <td><?php echo $baris->id_so?></td>
+                      <td><?php echo $baris->id_produkService?></td>
 					  <td><?php echo $baris->tanggal?></td>
+					  <td><?php echo $baris->nama_petugas?></td>
+					  <td><?php echo $baris->nama_customer?></td>
                       <td><?php echo $baris->nama_item?></td>
                       <td><?php 
 						echo $baris->nama_satuan;
 					  ?></td>
-                      <td><?php echo $baris->jumlah?></td>
-					  <td><?php echo $baris->kurir?></td>
-                      <td><?php echo $baris->nama_petugas?></td>
+                      <td><?php echo $baris->jumlah," item"?></td>
+					
+                      
 					  
 					  <td>
 					  
 					</td>
 					 </tr>
-						  
-				
-            
-                   
 					<?php }}
 								else{
 									?>

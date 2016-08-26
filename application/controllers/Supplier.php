@@ -12,8 +12,17 @@ class Supplier extends CI_Controller {
 	{
 		$cek=$this->session->userdata('username');
 		if($cek){
+			//data header
+			$email=$this->session->userdata('username');
+			$this->load->model('mpetugas');
+			$idPet=$this->mpetugas->getId($email);
+			$user['user']=$this->mpetugas->view_petugas($idPet);
+			$this->load->model('mgudang');
+			$user['limit']=$this->mgudang->hitungAlertStok();
+			$user['alert']=$this->mgudang->alertStok();
+			//
 			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/header',$user);
 			$this->load->view('dasboard/sidebar');
 			$this->load->view('dasboard/inputSupplier');
 			$this->load->view('dasboard/footer');
@@ -77,6 +86,15 @@ class Supplier extends CI_Controller {
 	public function viewSupplier($id){
 		$cek=$this->session->userdata('username');
 		if($cek){
+			//data header
+			$email=$this->session->userdata('username');
+			$this->load->model('mpetugas');
+			$idPet=$this->mpetugas->getId($email);
+			$user['user']=$this->mpetugas->view_petugas($idPet);
+			$this->load->model('mgudang');
+			$user['limit']=$this->mgudang->hitungAlertStok();
+			$user['alert']=$this->mgudang->alertStok();
+			//
 			$this->load->model('msupplier');
 			$this->load->model('mproduk');
 			$this->load->model('mproduk');
@@ -84,7 +102,7 @@ class Supplier extends CI_Controller {
 			$data['produk']=$this->mproduk->list_produk_perSuplier($id);
 			$data['barang']=$this->mproduk->list_item();
 			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/header',$user);
 			$this->load->view('dasboard/sidebar');
 			$this->load->view('dasboard/viewSupplier',$data);
 			$this->load->view('dasboard/footer');
@@ -145,11 +163,20 @@ class Supplier extends CI_Controller {
 	public function cariSuplier(){
 		$cek=$this->session->userdata('username');
 		if($cek){
+			//data header
+			$email=$this->session->userdata('username');
+			$this->load->model('mpetugas');
+			$idPet=$this->mpetugas->getId($email);
+			$user['user']=$this->mpetugas->view_petugas($idPet);
+			$this->load->model('mgudang');
+			$user['limit']=$this->mgudang->hitungAlertStok();
+			$user['alert']=$this->mgudang->alertStok();
+			//
 			$word=$this->input->post('cari');
 			$this->load->model('msupplier');
 			$data['isi']=$this->msupplier->list_cariSupplier($word);
 			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/header',$user);
 			$this->load->view('dasboard/sidebar');
 			$this->load->view('dasboard/listSupplier',$data);
 			$this->load->view('dasboard/footer');

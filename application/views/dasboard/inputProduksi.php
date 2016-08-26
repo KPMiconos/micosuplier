@@ -20,9 +20,9 @@
             <div class="col-xs-12 col-lg-12">
               <div class="box">
                 <div class="box-header">
-                  <a href="<?php echo base_url() ?>gudang/additem"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
+                  <a href="<?php echo base_url() ?>produksi/addBom"><i class="fa fa-plus"></i> <h3 class="box-title">Add</h3></a>
                   <div class="box-tools">
-				  <form method="post" action="<?php echo base_url() ?>gudang/cariProduk" enctype="multipart/form-data">
+				  <form method="post" action="#" enctype="multipart/form-data">
                     <div class="input-group" style="width: 150px;">
 					
                       <input type="text" name="cari" class="form-control input-sm pull-right" placeholder="Search">
@@ -44,7 +44,7 @@
                       <th>Tipe</th>
 					  <th>Satuan</th>
                       
-                      <th>Supplier</th>
+                      <th>Deskripsi</th>
 					  
 					  <th >Action</th>
 					  
@@ -59,30 +59,15 @@
                       <td><?php echo $baris->nama_item ?></td>
                       <td>
 					  <?php
-						if($baris->tipe=="1"){
-							echo "Raw";
-						}else if($baris->tipe=="2"){
-							echo "Semi-finish";
-						}else if($baris->tipe=="3"){
-							echo "Finish";
-						}
-						 
+						echo $baris->nama_tipe_item
+							
 						?>
 						</a></td>
-					   <td><span class="label label-success"> 
+					   <td>
 					  <?php 
-						if($baris->satuan=="1"){
-							echo "Pcs";
-						} else if($baris->satuan=="2"){
-							echo "Kg";
-						}else if($baris->satuan=="3"){
-							echo "m";
-						}else if($baris->satuan=="4"){
-							echo "m2";
-						}else if($baris->satuan=="5"){
-							echo "m3";
-						}
-					  ?></span></td>
+						echo $baris->nama_satuan;
+						
+					  ?></td>
                       
                       <td style="width:200px;"><?php echo word_limiter($baris->deskripsi,10),"..." ?></td>
 					  
@@ -91,7 +76,11 @@
 					  <form method="post" action="<?php echo base_url(),"produksi/addBahanProduksi" ?>">
 					   <div class="btn-group">
 					   <input name="id_produk"  type="hidden" value="<?php echo $baris->id_item?>">
-					   <input class="btn btn-primary" type="submit" value="Produksi" >
+					   <input class="btn btn-primary" type="submit" value="Produksi" 
+					   <?php if(!$this->session->userdata('produksi')){
+								echo "disabled";
+							} ?>
+					   >
 						</div>
 					  </td>
                     </tr>

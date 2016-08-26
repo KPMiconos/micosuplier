@@ -49,7 +49,7 @@
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
                     <tr>
-                      <td><?php echo $baris->id_transaksi?></td>
+                      <td><?php echo $baris->id_so?></td>
 					  <td><?php echo date('d/m/Y',strtotime($baris->tanggal))?></td>
                       <td><?php echo $baris->nama_petugas?></td>
                       <td><?php echo $baris->nama_customer?></td>
@@ -64,10 +64,16 @@
 								echo "Completed";
 							}
 					  ?></span></td>
-                      
+                      <?php if($baris->kode==1){?>
 					  <td>
-					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"gudang/viewSO/",$baris->id_transaksi?>"><button class="btn btn-primary" >
+					   <div class="btn-group">
+					   <a href="<?php echo base_url(),"gudang/viewSO/",$baris->id_so?>"><button class="btn btn-info" <?php
+							if($baris->status==3){
+								echo "disabled";
+							}else if(!$this->session->userdata('gudang')){
+									echo "disabled";
+							}
+							?> >
 					   <li class="fa  <?php if($baris->status==2){
 								echo "fa-reply-all";
 							}else{
@@ -75,15 +81,152 @@
 							} ?>" data-toggle="tooltip" data-placement="top" title="Proses penerimaan"></li></button></a>
 						
 						</div>
+						<div class="btn-group">
+						<button id="viewlist<?php echo $baris->id_so ?>"  class="btn btn-info btn-sm" data-toggle="collapse" data-target=".row1<?php echo $baris->id_so; ?>"><li class="fa fa-list"></li></button>
+						</div>
 					</td>
+					  <?php }else if($baris->kode==2){?>
+						 <td>
+					   <div class="btn-group btn-group">
+					   <a href="<?php echo base_url(),"gudang/viewPRO/",$baris->id_so?>"><button class="btn btn-info" <?php
+							if($baris->status==3){
+								echo "disabled";
+							}else if(!$this->session->userdata('gudang')){
+									echo "disabled";
+							}?> >
+					   <li class="fa  <?php if($baris->status==2){
+								echo "fa-reply-all";
+							}else{
+								echo "fa-check-square-o";
+							} ?>" data-toggle="tooltip" data-placement="top" title="Proses penerimaan"></li></button></a>
+						
+						</div>
+						<div class="btn-group">
+						<button id="viewlist<?php echo $baris->id_so ?>"  class="btn btn-info btn-sm" data-toggle="collapse" data-target=".row1<?php echo $baris->id_so; ?>"><li class="fa fa-list"></li></button>
+						</div>
+					</td>
+					  <?php }else if($baris->kode==3){ ?>
+						 <td>
+					   <div class="btn-group btn-group">
+					   <a href="<?php echo base_url(),"gudang/viewSER/",$baris->id_so?>"><button class="btn btn-info" <?php
+							if($baris->status==3){
+								echo "disabled";
+							}?> >
+					   <li class="fa  <?php if($baris->status==2){
+								echo "fa-reply-all";
+							}else{
+								echo "fa-check-square-o";
+							} ?>" data-toggle="tooltip" data-placement="top" title="Proses penerimaan"></li></button></a>
+						
+						</div>
+						<div class="btn-group">
+						<button id="viewlist<?php echo $baris->id_so ?>"  class="btn btn-info btn-sm" data-toggle="collapse" data-target=".row1<?php echo $baris->id_so; ?>"><li class="fa fa-list"></li></button>
+						</div>
+					</td>
+					  <?php }?>
 					 </tr>
-						  
-				
+					
+					 </tr>
+					   <?php if($baris->kode==1){ ?>
+					  <tr class="collapse row1<?php echo $baris->id_so; ?>">
+						<td></td>
+						<td colspan="5">
+						<div class="box table-responsive">
+						<table  class="table table-hover border">
+							<thead>
+								<tr>
+			
+									<th>Nama Produk</th>
+									<th>Tipe</th>
+									<th>Satuan</th>
+									<th>Harga</th>
+									<th>Jumlah</th>
+									<th>Jumlah Keluar</th>
+									
+								</tr>
+							</thead>
+							<tbody id="showdata<?php echo $baris->id_so ?>">
+							<script type="text/javascript">
+								$("#viewlist<?php echo $baris->id_so ?>").click(function(){
+									$("#showdata<?php echo $baris->id_so ?>").load("<?php echo base_url(),"penjualan/rincianPenjualan/",$baris->id_so; ?>")
+									
+								})
+							</script>
+							</tbody>
+						</table>
+						</div>
+						</td>
+						
+					</tr>
+					<?php }else if($baris->kode==2){?>	  
+					 <tr class="collapse row1<?php echo $baris->id_so; ?>">
+						<td></td>
+						<td colspan="5">
+						<div class="box table-responsive">
+						<table  class="table table-hover border">
+							<thead>
+								<tr>
+			
+									<th>Nama Produk</th>
+									<th>Tipe</th>
+									<th>Satuan</th>
+									<th>Harga</th>
+									<th>Jumlah</th>
+									<th>Jumlah Keluar</th>
+									
+								</tr>
+							</thead>
+							<tbody id="showdata<?php echo $baris->id_so ?>">
+							<script type="text/javascript">
+								$("#viewlist<?php echo $baris->id_so ?>").click(function(){
+									$("#showdata<?php echo $baris->id_so ?>").load("<?php echo base_url(),"produksi/rincianProduksi/",$baris->id_so; ?>")
+									
+								})
+							</script>
+							</tbody>
+						</table>
+						</div>
+						</td>
+						
+					</tr>
             
-                   
+                    <?php }else if($baris->kode==3){?>  
+					 <tr class="collapse row1<?php echo $baris->id_so; ?>">
+						<td></td>
+						<td colspan="5">
+						<div class="box table-responsive">
+						<table  class="table table-hover border">
+							<thead>
+								<tr>
+			
+									<th>Nama Produk</th>
+									<th>Tipe</th>
+									<th>Satuan</th>
+									<th>Harga</th>
+									<th>Jumlah</th>
+									<th>Jumlah Keluar</th>
+									
+								</tr>
+							</thead>
+							<tbody id="showdata<?php echo $baris->id_so ?>">
+							<script type="text/javascript">
+								$("#viewlist<?php echo $baris->id_so ?>").click(function(){
+									$("#showdata<?php echo $baris->id_so ?>").load("<?php echo base_url(),"produksi/rincianProduksi/",$baris->id_so; ?>")
+									
+								})
+							</script>
+							</tbody>
+						</table>
+						</div>
+						</td>
+						
+					</tr>
+            
+            
+					<?php }?>
 					<?php }}
 								else{
-									echo "Belum ada data Penerimaan";
+									echo "Belum ada data Pengeluaran";
 								}
 
 							?>

@@ -47,7 +47,7 @@
                     <tr>
                       <td><?php echo $baris->id_service?></td>
                       <td><strong><?php echo $baris->subject?></strong></td>
-                      <td><?php echo $baris->keluhan?></td>
+                      <td><?php echo  word_limiter($baris->keluhan,5);?></td>
                       <td><?php echo $baris->tgl_open?></td>
                       <td><span class="label label-success"><?php
 
@@ -79,15 +79,15 @@
 						<div class="modal-content">
 						  <div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">Edit Data Service</h4>
+							<h4 class="modal-title" id="myModalLabel">Edit Data Service#<?php echo $baris->id_service ?></h4>
 						  </div>
 						  <div class="modal-body" >
 							<!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>service/addService_act" method="post" enctype="multipart/form-data">
+							<form role="form" action="<?php echo base_url() ?>service/updateService" method="post" enctype="multipart/form-data">
 							  <div class="box-body">
 								 <div class="form-group">
 								  <label for="exampleInputEmail1">Tanggal</label>
-								  <input value="<?php echo $baris->tgl_open ?>" name="tgl_open" type="text" class="form-control datepicker"  placeholder="Tanggal input Keluhan" data-date-format="yyyy-mm-dd" >
+								  <input value="<?php echo $baris->tgl_open ?>" name="tgl_open" type="text" class="form-control datepicker"  disabled data-date-format="yyyy-mm-dd" >
 								</div>
 								
 								<div class="form-group">
@@ -105,7 +105,7 @@
 									</select>
 									</div>
 								</div>
-								
+								<input name="id_service" type="hidden" value="<?php echo $baris->id_service ?>">
 								<div class="form-group">
 								  <label for="exampleInputPassword1">Keluhan</label>
 								  <input value="<?php echo $baris->subject ?>" name="subjek" type="text" class="form-control" id="exampleInput" placeholder="Subjek Keluhan" required>

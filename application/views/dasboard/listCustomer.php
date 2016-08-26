@@ -35,29 +35,58 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
+				 <?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
                   <table class="table table-hover">
                     <tr>
                       <th>ID</th>
                       <th>Nama</th>
                       <th>Email</th>
                       <th>No.Hp</th>
-                      <th>Alamat</th>
+                      <th>Jabatan</th>
 					  <th>Action</th>
                     </tr>
 					<?php
 							if(!empty($isi)){
 							foreach($isi as $baris){ ?>
                     <tr>
-                      <td><a href="<?php echo base_url(),"customer/viewCustomer/",$baris->id_customer  ?>"><?php echo "M1607",$baris->id_customer  ?></a></td>
+                      <td><a href="<?php echo base_url(),"customer/viewCustomer/",$baris->id_customer  ?>"><?php echo $baris->id_customer  ?></a></td>
                       <td><?php echo $baris->nama  ?></td>
                       <td><?php echo $baris->email  ?></td>
-                      <td><span class="label label-success"><?php echo $baris->hp  ?></span></td>
-                      <td><?php echo $baris->alamat  ?></td>
+                      <td><?php echo $baris->hp  ?></td>
+                      <td><?php echo $baris->jabatan  ?></td>
 					  <td style="width:150px">
-					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"customer/deleteCustomer/",$baris->id_customer?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
-						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_customer ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-						<a href="<?php echo base_url(),"customer/viewCustomer/",$baris->id_customer?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+					   <div class="btn-group">
+					   
+					   <a href="<?php echo base_url(),"customer/viewCustomer/",$baris->id_customer?>">
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="View">
+								<li class="fa fa-eye" >
+								</li>
+							</button>
+						</a>
+						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_customer ?>">
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Edit"
+							<?php if($this->session->userdata('tamu')){
+								echo "disabled";
+							}?>
+							>
+							
+								<li class="fa fa-pencil-square-o" >
+								</li>
+							</button>
+						</a>
+						<a href="<?php echo base_url(),"customer/deleteCustomer/",$baris->id_customer?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')">
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Delete"
+							<?php if($this->session->userdata('tamu')){
+								echo "disabled";
+							}?>
+							>
+							
+								<li class="fa  fa-trash" >
+								</li>
+							</button>
+					   </a>
 						
 						</div>
 					  </td>
@@ -73,7 +102,7 @@
 						  </div>
 						  <div class="modal-body">
 						   <!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>admin/updateCustomer" method="post" enctype="multipart/form-data">
+							<form role="form" action="<?php echo base_url() ?>customer/updateCustomer" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					 <div class="form-group">
 									<label>Institusi</label>
@@ -88,7 +117,8 @@
 					</div>
 					<div class="form-group">
 								  <label for="exampleInputEmail1">No.KTP</label>
-								  <input name="ktp" type="text" class="form-control" id="exampleInput" placeholder="Nomor KTP" value="<?php echo $baris->id_customer ?>" required>
+								  <input name="ktp" type="text" class="form-control" id="exampleInput" placeholder="Nomor KTP" value="<?php echo $baris->id_customer ?>" disabled>
+								  <input name="ktp" type="hidden" value="<?php echo $baris->id_customer ?>">
 								</div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nama</label>

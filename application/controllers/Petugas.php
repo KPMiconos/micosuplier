@@ -8,8 +8,17 @@ class Petugas extends CI_Controller {
 	{
 		$cek=$this->session->userdata('username');
 		if($cek){
+			//data header
+			$email=$this->session->userdata('username');
+			$this->load->model('mpetugas');
+			$idPet=$this->mpetugas->getId($email);
+			$user['user']=$this->mpetugas->view_petugas($idPet);
+			$this->load->model('mgudang');
+			$user['limit']=$this->mgudang->hitungAlertStok();
+			$user['alert']=$this->mgudang->alertStok();
+			//
 			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/header',$user);
 			$this->load->view('dasboard/sidebar');
 			$this->load->view('dasboard/inputPetugas');
 			$this->load->view('dasboard/footer');
@@ -21,10 +30,19 @@ class Petugas extends CI_Controller {
 	public function privilege(){
 		$cek=$this->session->userdata('username');
 		if($cek){
+			//data header
+			$email=$this->session->userdata('username');
+			$this->load->model('mpetugas');
+			$idPet=$this->mpetugas->getId($email);
+			$user['user']=$this->mpetugas->view_petugas($idPet);
+			$this->load->model('mgudang');
+			$user['limit']=$this->mgudang->hitungAlertStok();
+			$user['alert']=$this->mgudang->alertStok();
+			//
 			$this->load->model('mpetugas');
 			$data['isi']=$this->mpetugas->list_petugas();
 			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/header',$user);
 			$this->load->view('dasboard/sidebar');
 			$this->load->view('dasboard/privilege',$data);
 			$this->load->view('dasboard/footer');
@@ -50,15 +68,43 @@ class Petugas extends CI_Controller {
 			redirect('home');
 		}
 	}
+	public function ubahPassword(){
+		$cek=$this->session->userdata('username');
+		if($cek){
+			$data = array(
+					'id_petugas' => $this->input->post('id_petugas'),
+					'passwordLama' => $this->input->post('passwordLama'),
+					'passwordBaru' => $this->input->post('passwordBaru')
+				);
+			//echo $data['id_petugas'],$data['privilege'];
+			$id=$data['id_petugas'];
+			$this->load->model('mpetugas');
+			$query=$this->mpetugas->ubahPassword($data);
+			
+			redirect('petugas/viewPetugas/'.$id);
+		}else{
+			
+			redirect('home');
+		}
+	}
 	//list data
 	public function listPetugas()
 	{
 		$cek=$this->session->userdata('username');
 		if($cek){
+			//data header
+			$email=$this->session->userdata('username');
+			$this->load->model('mpetugas');
+			$idPet=$this->mpetugas->getId($email);
+			$user['user']=$this->mpetugas->view_petugas($idPet);
+			$this->load->model('mgudang');
+			$user['limit']=$this->mgudang->hitungAlertStok();
+			$user['alert']=$this->mgudang->alertStok();
+			//
 			$this->load->model('mpetugas');
 			$data['isi']=$this->mpetugas->list_petugas();
 			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/header',$user);
 			$this->load->view('dasboard/sidebar');
 			$this->load->view('dasboard/listPetugas',$data);
 			$this->load->view('dasboard/footer');
@@ -71,12 +117,21 @@ class Petugas extends CI_Controller {
 	public function viewPetugas($id){
 		$cek=$this->session->userdata('username');
 		if($cek){
+			//data header
+			$email=$this->session->userdata('username');
+			$this->load->model('mpetugas');
+			$idPet=$this->mpetugas->getId($email);
+			$user['user']=$this->mpetugas->view_petugas($idPet);
+			$this->load->model('mgudang');
+			$user['limit']=$this->mgudang->hitungAlertStok();
+			$user['alert']=$this->mgudang->alertStok();
+			//
 			$this->load->model('mpetugas');
 			//$this->load->model('produk');
 			$data['isi']=$this->mpetugas->view_petugas($id);
 			//$data['produk']=$this->produk->list_produk_perSuplier($id);
 			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/header',$user);
 			$this->load->view('dasboard/sidebar');
 			$this->load->view('dasboard/viewPetugas',$data);
 			$this->load->view('dasboard/footer');
@@ -140,11 +195,20 @@ class Petugas extends CI_Controller {
 	public function cariPetugas(){
 		$cek=$this->session->userdata('username');
 		if($cek){
+			//data header
+			$email=$this->session->userdata('username');
+			$this->load->model('mpetugas');
+			$idPet=$this->mpetugas->getId($email);
+			$user['user']=$this->mpetugas->view_petugas($idPet);
+			$this->load->model('mgudang');
+			$user['limit']=$this->mgudang->hitungAlertStok();
+			$user['alert']=$this->mgudang->alertStok();
+			//
 			$word=$this->input->post('cari');
 			$this->load->model('mpetugas');
 			$data['isi']=$this->mpetugas->list_cariPetugas($word);
 			$this->load->view('dasboard/head');
-			$this->load->view('dasboard/header');
+			$this->load->view('dasboard/header',$user);
 			$this->load->view('dasboard/sidebar');
 			$this->load->view('dasboard/listPetugas',$data);
 			$this->load->view('dasboard/footer');
@@ -245,6 +309,7 @@ class Petugas extends CI_Controller {
 			redirect('home');
 		}
 	}
+	
 
 }
 ?>

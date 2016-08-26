@@ -36,6 +36,9 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
+					<?php if($this->session->flashdata('pesan')){
+					  echo $this->session->flashdata('pesan');
+				  } ?>
                   <table class="table table-hover">
                     <tr>
                       <th>ID</th>
@@ -55,10 +58,21 @@
                       <td><?php echo $baris->deskripsi_satuan  ?></td>
                       
 					  <td style="width:150px">
-					   <div class="btn-group btn-group-lg">
-					   <a href="<?php echo base_url(),"produk/deleteSatuan/",$baris->id_satuan?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><li class="fa  fa-trash btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Delete"></li></a>
-						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_satuan ?>"><li class="fa fa-pencil-square-o btn btn-primary pull-right " data-toggle="tooltip" data-placement="top" title="Edit"></li></a>
-						<a href="<?php echo base_url(),"produk/viewSatuan/",$baris->id_satuan?>"><li class="fa fa-eye btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View"></li></a>
+					   <div class="btn-group">
+					  
+						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal<?php echo $baris->id_satuan ?>">
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+								<li class="fa fa-pencil-square-o" >
+								</li>
+							</button>
+						</a>
+						 <a href="<?php echo base_url(),"produk/deleteSatuan/",$baris->id_satuan?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')">
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Delete">
+								<li class="fa  fa-trash" >
+								</li>
+							</button>
+						</a>
+						
 						
 						</div>
 					  </td>
@@ -74,20 +88,21 @@
 						  </div>
 						  <div class="modal-body">
 						   <!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>produk/addSatuan" method="post" enctype="multipart/form-data">
+				<form role="form" action="<?php echo base_url() ?>produk/updateSatuan" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					
 					<div class="form-group">
-								  <label for="exampleInputEmail1">Nama Satuan</label>
-								  <input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Satuan"  required>
+						<label for="exampleInputEmail1">Nama Satuan</label>
+						<input name="nama" type="text" class="form-control" id="exampleInput" placeholder="Nama Satuan" value="<?php echo $baris->nama_satuan; ?>" required>
+						<input name="id" type="hidden" value="<?php echo $baris->id_satuan; ?>">
 					</div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Kelas</label>
-                      <input name="kelas" type="text" class="form-control" id="exampleInput" placeholder="Kelas Satuan"  required>
+                      <input name="kelas" type="text" class="form-control" id="exampleInput" placeholder="Kelas Satuan" value="<?php echo $baris->kelompok_satuan; ?>"  required>
                     </div>
 					<div class="form-group">
                       <label for="exampleInputPassword1">Deskripsi</label>
-                      <input name="deskripsi" type="text" class="form-control" id="exampleInput" placeholder="Deskripsi Satuan"  required>
+                      <input name="deskripsi" type="text" class="form-control" id="exampleInput" placeholder="Deskripsi Satuan" value="<?php echo $baris->deskripsi_satuan; ?>" required>
                     </div>
 					
                   </div><!-- /.box-body -->
@@ -129,7 +144,7 @@
 						  </div>
 						  <div class="modal-body">
 						   <!-- form start -->
-							<form role="form" action="<?php echo base_url() ?>gudang/addSatuan" method="post" enctype="multipart/form-data">
+				<form role="form" action="<?php echo base_url() ?>produk/addSatuan" method="post" enctype="multipart/form-data">
                   <div class="box-body">
 					
 					<div class="form-group">

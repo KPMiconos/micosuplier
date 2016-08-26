@@ -9,10 +9,11 @@ class Mgudang extends CI_Model{
 	 
 	 public function addGudang($data){
 		
-		$this->db->reconnect();		
-		$query=$this->db->query("CALL sp_input_penerimaan('$data[idTransaksi]','$data[idPO]','$data[idPenerima]','$data[tgl]','$data[idSuplier]','$data[total]','$data[kurir]')");
+		$this->db->reconnect();	
+			//echo $data['idTran'];
+		$query=$this->db->query("CALL sp_input_penerimaan('$data[idTransaksi]','$data[idTran]','$data[idPenerima]','$data[tgl]','$data[idSuplier]','$data[total]','$data[kurir]','$data[kode]')");
 		foreach($this->cart->contents() as $item){
-			$this->db->query("CALL sp_input_gudang('$data[idPO]','$item[id]','$item[qty]','$item[price]')");
+			$this->db->query("CALL sp_input_gudang('$data[idTransaksi]','$data[idTran]','$item[id]','$item[qty]','$item[price]','$data[kode]')");
 				
 		}	
 		$this->cart->destroy();
@@ -21,30 +22,41 @@ class Mgudang extends CI_Model{
 	  public function keluarGudang($data){
 		
 		$this->db->reconnect();		
-		$query=$this->db->query("CALL sp_input_keluarGudang('$data[idTransaksi]','$data[tgl]')");
+		$query=$this->db->query("CALL sp_input_keluarGudang('$data[idTransaksi]','$data[idSO]','$data[email]','$data[idCustomer]','$data[total]','$data[tgl]','$data[kurir]','$data[kode]')");
 		foreach($this->cart->contents() as $item){
 			$id=$item['id'];
 			$harga=$item['price'];
 			$idSuplier=$item['options']['idSuplier'];
 			$defect=$item['options']['defect'];
-			
-			
+			$kode=$data['kode'];
+			$this->db->reconnect();	
 			$query = $this->db->query("CALL sp_cekStok('$id','$idSuplier','$harga')");
 			if ($query->num_rows() > 0)
 			{
-				$butuh=$item['qty'];
+				$butuh=$item['qty']+$item['options']['defect'];
 				foreach ($query->result() as $row)
 				{
 						$stok = $row->jumlah;
-						$po = $row->id_purchasing;
+						$po = $row->id_rec;
 						$id_item = $row->id_item;
+						
+						
 						if($stok>=$butuh){
 							//echo "cek1";
 							$this->db->reconnect();	
 							$this->db->query("CALL sp_pengurangan_stok('$po','$id_item','$butuh')");
-							$this->db->query("CALL sp_input_detailKeluarGudang('$data[idTransaksi]','$item[id]','$item[qty]','$idSuplier')");
+							$query = $this->db->query("CALL sp_detail_pengeluaran('$data[idTransaksi]','$item[id]','$item[qty]','$item[price]','$idSuplier','$po','$kode')");
+							
 							if($defect>0){
-								$this->db->query("CALL sp_input_defect('$data[idTransaksi]','$item[id]','$defect','$item[price]','1')");
+								if($kode==1){
+									$this->db->query("CALL sp_input_defect('$data[idTransaksi]','$item[id]','$defect','$item[price]','2')");
+								}else if($kode==2){
+									$this->db->query("CALL sp_input_defect('$data[idTransaksi]','$item[id]','$defect','$item[price]','3')");
+								}else if($kode==3){
+									$this->db->query("CALL sp_input_defect('$data[idTransaksi]','$item[id]','$defect','$item[price]','4')");
+								}
+									
+								
 							}
 							$butuh=$butuh-$stok;
 							//echo $butuh;
@@ -151,6 +163,54 @@ class Mgudang extends CI_Model{
 			}
 		
 	}
+	public function viewPRO($id){
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_viewPRO('$id')");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+		
+	}
+	public function viewPROIN($id){
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_viewPROIN('$id')");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+		
+	}
+	public function viewSER($id){
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_viewSER('$id')");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+		
+	}
 	public function rincianViewSO($id){
 		$this->db->reconnect();
 			$query = $this->db->query("CALL sp_rincian_viewSO('$id')");
@@ -175,7 +235,7 @@ class Mgudang extends CI_Model{
 	 //return produk
 	 public function returnDefect($data){
 		 $this->db->reconnect();		
-		$query=$this->db->query("CALL sp_returning_defect('$data[idPurchasing]','$data[idItem]','$data[jumlah]','$data[hargaSatuan]')");
+		$query=$this->db->query("CALL sp_returning_defect('$data[idDef]','$data[idRec]','$data[idItem]','$data[jumlah]','$data[hargaSatuan]','$data[idIssue]')");
 	
 	 }
 	 //update defet
@@ -199,5 +259,48 @@ class Mgudang extends CI_Model{
 			}
 		
 	}
+	public function alertStok(){
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_alert_stok()");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+		
+	}
+	public function hitungAlertStok(){
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_alert_stok()");
+			return $query->num_rows();
+			
+		
+	}
+	public function stokGudang($id){
+		$this->db->reconnect();
+			$query = $this->db->query("CALL sp_stok_gudang('$id')");
+			if ($query->num_rows() > 0)
+			{
+			foreach ($query->result() as $row)
+			{
+					$hasil[] = $row;
+			}
+			return $hasil;
+			}
+			else{
+				return 0;
+			}
+		
+	}
+	public function ubahPassword($data){
+		  $this->db->reconnect();		
+		$query=$this->db->query("CALL sp_ubahPassword('$data[id_petugas]','$data[passwordLama]','$data[passwordBaru]')");
+	 }
 }
 ?>

@@ -198,7 +198,7 @@ $(document).ready(function(){
                          </td>
 						<td>
                             <?php echo "Rp ",$item['price'] ?>
-							
+							<input type="hidden" name="id_produk" value="<?php echo $this->session->userdata('id_produk'); ?>">
 							<input type="hidden" name="idSuplier" value="<?php echo $item['options']['idSuplier'] ?>">
 						  <input type="hidden" name="harga" value="<?php echo $item['price'] ?>">
 						   <input type="hidden" name="total" value="<?php echo $this->cart->total() ?>">
